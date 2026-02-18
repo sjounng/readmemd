@@ -10,7 +10,7 @@ export default function Tabs({
   onTabChange: (i: number) => void;
 }) {
   return (
-    <div className="flex gap-1 border-b border-[var(--border)] mb-6">
+    <div className="flex gap-1 border-b border-(--border) mb-6">
       {tabs.map((t, i) => (
         <button
           key={t}

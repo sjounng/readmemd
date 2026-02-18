@@ -4,5 +4,7 @@ export { default as CodeBlock } from "./CodeBlock";
 export { default as Callout } from "./Callout";
 export { default as StepItem } from "./StepItem";
 export { default as Tabs } from "./Tabs";
-export { default as WeekNav } from "./WeekNav";
+export { default as Navbar } from "./Navbar";
 export { default as WeekHero } from "./WeekHero";
+export { default as Tag } from "./Tag";
+export { default as SlidePresentation, useSlideNavigation } from "./SlidePresentation";

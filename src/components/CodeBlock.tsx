@@ -2,7 +2,7 @@ export default function CodeBlock({ children, title }: { children: string; title
   return (
     <div className="code-block">
       {title && (
-        <div className="px-4 py-2 border-b border-[var(--border)] text-xs text-[var(--text-muted)] font-mono">
+        <div className="px-4 py-2 border-b border-(--border) text-xs text-(--text-muted) font-mono">
           {title}
         </div>
       )}
