@@ -12,6 +12,9 @@
   --border: rgba(255, 255, 255, 0.08);
   --text-sub: rgba(255, 255, 255, 0.7);
   --text-muted: rgba(255, 255, 255, 0.4);
+  --callout-info-bg: rgba(0, 180, 216, 0.05);
+  --callout-tip-bg: rgba(16, 185, 129, 0.05);
+  --callout-warn-bg: rgba(245, 158, 11, 0.05);
 }
 
 @theme inline {
@@ -97,4 +100,19 @@ html {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+/* Slide fade-in animation */
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.slide-fade-in {
+  animation: slideFadeIn 0.35s ease-out;
 }
