@@ -16,10 +16,10 @@ export default function Navbar({
   navItems?: NavItem[];
 }) {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent border-b border-(--border)">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-(--bg-primary)/80 backdrop-blur-sm border-b border-(--border)">
       <div className="px-8 md:px-16 py-6 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Link href="/" className="text-sm font-extrabold tracking-widest text-white hover:opacity-80 transition-opacity">
+          <Link href="/" className="text-sm font-extrabold tracking-widest text-(--foreground) hover:opacity-80 transition-opacity">
             {TEAM_NAME.split(" ")[0].toUpperCase()}
           </Link>
           {weekNum != null && (

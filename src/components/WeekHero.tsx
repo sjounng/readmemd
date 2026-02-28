@@ -5,13 +5,12 @@ interface TocItem {
 }
 
 export default function WeekHero({
-  weekNum,
   title,
   subtitle,
   description,
   tocItems,
 }: {
-  weekNum: number;
+  weekNum?: number;
   title: string;
   subtitle?: string;
   description: string;

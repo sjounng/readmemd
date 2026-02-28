@@ -36,13 +36,13 @@ export const TECH_STACK = [
     name: "Nest.js",
     role: "백엔드",
     desc: "TypeScript 기반 서버 프레임워크. API를 만듭니다.",
-    color: "border-t-emerald-500",
+    color: "border-t-violet-500",
   },
   {
     name: "PostgreSQL",
     role: "데이터베이스",
     desc: "관계형 DB. 데이터를 저장하고 조회합니다.",
-    color: "border-t-amber-500",
+    color: "border-t-sky-500",
   },
 ];
 
@@ -68,14 +68,14 @@ export const RESTAURANT_METAPHOR = [
     metaphor: "식당의 주방",
     desc: "주문을 받아 요리를 만드는 곳",
     tech: "Nest.js",
-    color: "border-t-emerald-500",
+    color: "border-t-violet-500",
   },
   {
     role: "데이터베이스",
     metaphor: "냉장고",
     desc: "재료(데이터)를 보관하는 곳",
     tech: "PostgreSQL",
-    color: "border-t-amber-500",
+    color: "border-t-sky-500",
   },
 ];
 
@@ -124,29 +124,166 @@ export const COMMIT_TIMELINE = [
 
 /* ── Section 4: GitHub ── */
 
+export const GITHUB_SIGNUP_STEPS = [
+  { num: 1, title: "github.com 접속 후 Sign up 클릭" },
+  { num: 2, title: "이메일 주소 입력" },
+  { num: 3, title: "비밀번호 설정" },
+  { num: 4, title: "사용자 이름(username) 설정", desc: "GitHub URL에 표시됩니다. 예: github.com/username" },
+  { num: 5, title: "이메일 인증 완료" },
+];
+
+export const GH_CLI_AUTH_STEPS = [
+  { num: 1, title: "GitHub.com 선택" },
+  { num: 2, title: "HTTPS 선택" },
+  { num: 3, title: "Authenticate Git with your GitHub credentials? → Y" },
+  { num: 4, title: "Login with a web browser 선택" },
+  { num: 5, title: "브라우저에서 one-time code 입력 후 Authorize" },
+];
+
 export const GITHUB_REPO_STEPS = [
   { num: 1, title: "github.com에 접속 & 로그인" },
   { num: 2, title: "오른쪽 상단 '+' 버튼 → New repository" },
   { num: 3, title: "Repository name 입력", desc: "예: my-first-repo" },
   { num: 4, title: "Public 선택" },
-  { num: 5, title: "Create repository 클릭" },
+  { num: 5, title: "초기화 옵션 모두 체크 해제", desc: "Add a README file, .gitignore, license 체크하지 않습니다. 로컬에서 직접 올릴 것이기 때문입니다." },
+  { num: 6, title: "Create repository 클릭" },
 ];
 
 export const FIRST_PUSH_STEPS = [
-  { cmd: "mkdir my-first-repo", desc: "프로젝트 폴더 생성" },
-  { cmd: "cd my-first-repo", desc: "폴더로 이동" },
-  { cmd: "git init", desc: "Git 저장소 초기화" },
-  { cmd: 'echo "# My First Repo" > README.md', desc: "README 파일 생성" },
-  { cmd: "git add README.md", desc: "변경사항 스테이징" },
-  { cmd: 'git commit -m "first commit"', desc: "커밋 생성" },
-  { cmd: "git remote add origin <URL>", desc: "원격 저장소 연결" },
-  { cmd: "git push -u origin main", desc: "GitHub에 Push!" },
+  { cmd: "$ mkdir my-first-repo", desc: "프로젝트 폴더 생성" },
+  { cmd: "$ cd my-first-repo", desc: "폴더로 이동" },
+  { cmd: "$ git init", desc: "Git 저장소 초기화" },
+  { cmd: '$ echo "# My First Repo" > README.md', desc: "README 파일 생성" },
+  { cmd: "$ git add README.md", desc: "변경사항 스테이징" },
+  { cmd: '$ git commit -m "first commit"', desc: "커밋 생성" },
+  { cmd: "$ git remote add origin <URL>", desc: "원격 저장소 연결" },
+  { cmd: "$ git push -u origin main", desc: "GitHub에 Push!" },
 ];
 
 export const GIT_WORKFLOW_ZONES = [
   { title: "Working Directory", sub: "작업 폴더" },
   { title: "Staging Area", sub: "준비 영역" },
   { title: "Repository", sub: "저장소 (Local)" },
+];
+
+/* ── Tech Details (각 기술 상세) ── */
+
+export const TECH_DETAILS = [
+  {
+    name: "Next.js",
+    role: "프론트엔드",
+    tagline: "React 기반 풀스택 프레임워크",
+    accentText: "text-(--accent)",
+    borderTop: "border-t-(--accent)",
+    calloutType: "info" as const,
+    features: [
+      {
+        title: "파일 기반 라우팅",
+        desc: "app/page.tsx 파일 하나가 페이지 하나입니다. URL 설정 없이 폴더 구조만으로 라우팅이 결정됩니다.",
+      },
+      {
+        title: "서버 컴포넌트 지원",
+        desc: "서버에서 데이터를 미리 불러온 뒤 완성된 HTML을 브라우저에 전달합니다. 첫 화면 로딩이 빠릅니다.",
+      },
+      {
+        title: "React 컴포넌트 조립",
+        desc: "버튼·카드·헤더 같은 UI 조각(컴포넌트)을 만들고 조립해 화면을 완성합니다. 재사용성이 높습니다.",
+      },
+    ],
+    studyGoal: "로그인 화면, 메인 페이지, 게시글 목록 등 사용자가 실제로 보는 화면(UI)을 직접 만들어봅니다.",
+    codeTitle: "프로젝트 폴더 구조",
+    codeContent: `my-app/
+  └── app/
+       ├── page.tsx          →  "/"  (메인 페이지)
+       ├── about/
+       │    └── page.tsx     →  "/about"
+       └── posts/[id]/
+            └── page.tsx     →  "/posts/123"`,
+  },
+  {
+    name: "Nest.js",
+    role: "백엔드",
+    tagline: "TypeScript 기반 서버 프레임워크",
+    accentText: "text-violet-500",
+    borderTop: "border-t-violet-500",
+    calloutType: "tip" as const,
+    features: [
+      {
+        title: "모듈 / 컨트롤러 / 서비스 구조",
+        desc: "역할에 따라 코드를 체계적으로 나눠 관리합니다. 프로젝트가 커져도 구조가 흔들리지 않습니다.",
+      },
+      {
+        title: "REST API 개발",
+        desc: "GET /posts, POST /login 같은 API 엔드포인트를 만들어 프론트엔드와 통신합니다.",
+      },
+      {
+        title: "TypeScript 기반",
+        desc: "타입을 명시해 런타임 오류를 미리 방지합니다. 코드 자동완성도 훨씬 강력해집니다.",
+      },
+    ],
+    studyGoal: "프론트엔드 요청을 받아 데이터를 처리하고, 데이터베이스와 연결하는 API 서버를 만들어봅니다.",
+    codeTitle: "폴더 구조",
+    codeContent: `src/
+  ├── app.module.ts          (앱 루트 모듈)
+  ├── users/
+  │    ├── users.module.ts
+  │    ├── users.controller.ts  ← GET /users, POST /users
+  │    └── users.service.ts     ← 비즈니스 로직
+  └── posts/
+       └── ...`,
+  },
+  {
+    name: "PostgreSQL",
+    role: "데이터베이스",
+    tagline: "오픈소스 관계형 데이터베이스",
+    accentText: "text-sky-500",
+    borderTop: "border-t-sky-500",
+    calloutType: "warn" as const,
+    features: [
+      {
+        title: "테이블 구조",
+        desc: "엑셀 시트처럼 행(Row)과 열(Column)으로 데이터를 체계적으로 저장합니다.",
+      },
+      {
+        title: "SQL 언어",
+        desc: "SELECT, INSERT, UPDATE, DELETE 명령어로 데이터를 읽고, 추가하고, 수정하고, 삭제합니다.",
+      },
+      {
+        title: "Prisma ORM 연동",
+        desc: "SQL을 직접 쓰지 않고 TypeScript 코드로 DB를 편하게 다룰 수 있도록 도와줍니다.",
+      },
+    ],
+    studyGoal: "회원 정보, 게시글, 댓글 등 서비스의 모든 데이터를 저장하고 조회합니다.",
+    codeTitle: "SQL 예시",
+    codeContent: `-- 사용자 테이블 생성
+CREATE TABLE users (
+  id       SERIAL PRIMARY KEY,
+  username VARCHAR(50),
+  email    VARCHAR(100)
+);
+
+-- 데이터 조회
+SELECT * FROM users WHERE id = 1;`,
+  },
+] as const;
+
+/* ── Mac / Windows 설치 ── */
+
+export const ENV_OS_TABS = ["Mac", "Windows"];
+
+export const MAC_HOMEBREW_CMD =
+  '$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"';
+
+export const MAC_HOMEBREW_PATH_CMD =
+  `$ (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile\n$ eval "$(/opt/homebrew/bin/brew shellenv)"`;
+
+/* ── VS Code 추천 확장 ── */
+
+export const VSCODE_EXTENSIONS = [
+  { name: "ESLint", desc: "코드의 문법 오류와 스타일 문제를 실시간으로 감지합니다" },
+  { name: "Prettier", desc: "저장할 때마다 코드를 자동으로 정렬해줍니다" },
+  { name: "Tailwind CSS IntelliSense", desc: "Tailwind 클래스를 자동완성해줍니다 (나중에 사용)" },
+  { name: "GitLens", desc: "각 줄이 언제·누가 수정했는지 인라인으로 확인할 수 있습니다" },
 ];
 
 /* ── Summary ── */

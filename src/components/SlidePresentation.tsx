@@ -5,6 +5,7 @@ import {
   useEffect,
   useCallback,
   useRef,
+  useMemo,
   Children,
   isValidElement,
   createContext,
@@ -33,17 +34,21 @@ export default function SlidePresentation({ children }: SlidePresentationProps) 
   const [animating, setAnimating] = useState(false);
 
   // Build id → slide index map from data-slide-id props
-  const idToIndexRef = useRef(new Map<string, number>());
-  const map = new Map<string, number>();
-  slides.forEach((child, i) => {
-    if (isValidElement(child)) {
-      const ids = (child.props as Record<string, unknown>)["data-slide-id"];
-      if (typeof ids === "string") {
-        ids.split(" ").forEach((id) => map.set(id, i));
+  const idToIndex = useMemo(() => {
+    const map = new Map<string, number>();
+    slides.forEach((child, i) => {
+      if (isValidElement(child)) {
+        const ids = (child.props as Record<string, unknown>)["data-slide-id"];
+        if (typeof ids === "string") {
+          ids.split(" ").forEach((id) => map.set(id, i));
+        }
       }
-    }
-  });
-  idToIndexRef.current = map;
+    });
+    return map;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [children]);
+  const idToIndexRef = useRef(idToIndex);
+  useEffect(() => { idToIndexRef.current = idToIndex; }, [idToIndex]);
 
   const goTo = useCallback(
     (index: number) => {
