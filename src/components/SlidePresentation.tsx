@@ -24,21 +24,12 @@ const SLIDE_CLASS: Record<NavDir, string> = {
   up:    "slide-from-top",
 };
 
-/* ── Context for slide navigation ── */
-const SlideContext = createContext<{
-  goToSlideById: (id: string) => void;
-}>({ goToSlideById: () => {} });
-
-export function useSlideNavigation() {
-  return useContext(SlideContext);
-}
+/* ── Context ── */
+const SlideContext = createContext<{ goToSlideById: (id: string) => void }>({ goToSlideById: () => {} });
+export function useSlideNavigation() { return useContext(SlideContext); }
 
 /* ── Component ── */
-interface SlidePresentationProps {
-  children: ReactNode;
-}
-
-export default function SlidePresentation({ children }: SlidePresentationProps) {
+export default function SlidePresentation({ children }: { children: ReactNode }) {
   const slides = Children.toArray(children);
   const total = slides.length;
   const [current, setCurrent] = useState(0);
@@ -46,16 +37,15 @@ export default function SlidePresentation({ children }: SlidePresentationProps) 
   const [animating, setAnimating] = useState(false);
   const blobX = useRef(0);
   const blobY = useRef(0);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
 
-  // Build id → slide index map from data-slide-id props
+  /* ── id → index map ── */
   const idToIndex = useMemo(() => {
     const map = new Map<string, number>();
     slides.forEach((child, i) => {
       if (isValidElement(child)) {
         const ids = (child.props as Record<string, unknown>)["data-slide-id"];
-        if (typeof ids === "string") {
-          ids.split(" ").forEach((id) => map.set(id, i));
-        }
+        if (typeof ids === "string") ids.split(" ").forEach((id) => map.set(id, i));
       }
     });
     return map;
@@ -64,44 +54,41 @@ export default function SlidePresentation({ children }: SlidePresentationProps) 
   const idToIndexRef = useRef(idToIndex);
   useEffect(() => { idToIndexRef.current = idToIndex; }, [idToIndex]);
 
-  const moveBlobsH = useCallback((blobDir: -1 | 1) => {
+  /* ── Blob movement ── */
+  const moveBlobs = useCallback((axis: "h" | "v", dir: -1 | 1) => {
     const blobs = document.getElementById("bg-blobs");
     if (!blobs) return;
-    blobX.current += blobDir * 20;
-    const vw = window.innerWidth;
-    if (blobX.current <= -vw || blobX.current >= vw) {
-      const jump = blobX.current <= -vw ? vw : -vw;
-      blobs.style.transition = "none";
-      blobs.style.transform = `translateX(${blobX.current - blobDir * 20 + jump}px) translateY(${blobY.current}px)`;
-      blobs.getBoundingClientRect();
-      blobs.style.transition = BLOB_TRANSITION;
-      blobX.current += jump;
+    if (axis === "h") {
+      blobX.current += dir * 60;
+      const vw = window.innerWidth;
+      if (blobX.current <= -vw || blobX.current >= vw) {
+        const jump = blobX.current <= -vw ? vw : -vw;
+        blobs.style.transition = "none";
+        blobs.style.transform = `translateX(${blobX.current - dir * 60 + jump}px) translateY(${blobY.current}px)`;
+        blobs.getBoundingClientRect();
+        blobs.style.transition = BLOB_TRANSITION;
+        blobX.current += jump;
+      }
+    } else {
+      blobY.current += dir * 60;
     }
     blobs.style.transform = `translateX(${blobX.current}px) translateY(${blobY.current}px)`;
   }, []);
 
-  const moveBlobsV = useCallback((blobDir: -1 | 1) => {
-    const blobs = document.getElementById("bg-blobs");
-    if (!blobs) return;
-    blobY.current += blobDir * 20;
-    blobs.style.transform = `translateX(${blobX.current}px) translateY(${blobY.current}px)`;
-  }, []);
-
+  /* ── goTo ── */
   const goTo = useCallback(
     (index: number, dir: NavDir = "right") => {
       if (index < 0 || index >= total || index === current || animating) return;
-
-      if (dir === "right") moveBlobsH(-1);
-      else if (dir === "left") moveBlobsH(1);
-      else if (dir === "down") moveBlobsV(-1);
-      else moveBlobsV(1);
-
+      if (dir === "right") moveBlobs("h", -1);
+      else if (dir === "left") moveBlobs("h", 1);
+      else if (dir === "down") moveBlobs("v", -1);
+      else moveBlobs("v", 1);
       setSlideDir(dir);
       setAnimating(true);
       setCurrent(index);
       setTimeout(() => setAnimating(false), 350);
     },
-    [total, current, animating, moveBlobsH, moveBlobsV]
+    [total, current, animating, moveBlobs]
   );
 
   const goToSlideById = useCallback(
@@ -115,12 +102,11 @@ export default function SlidePresentation({ children }: SlidePresentationProps) 
   const next = useCallback((dir: NavDir = "right") => goTo(current + 1, dir), [goTo, current]);
   const prev = useCallback((dir: NavDir = "left") => goTo(current - 1, dir), [goTo, current]);
 
-  // Keyboard navigation
+  /* ── Keyboard ── */
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
       const tag = (e.target as HTMLElement).tagName;
       if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
-
       switch (e.key) {
         case "ArrowRight": e.preventDefault(); next("right"); break;
         case "ArrowLeft":  e.preventDefault(); prev("left");  break;
@@ -130,12 +116,36 @@ export default function SlidePresentation({ children }: SlidePresentationProps) 
         case "ArrowUp":    e.preventDefault(); prev("up");    break;
       }
     }
-
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
   }, [next, prev]);
 
-  // Intercept hash anchor clicks (e.g. href="#ot")
+  /* ── Touch swipe ── */
+  useEffect(() => {
+    function onTouchStart(e: TouchEvent) {
+      touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+    function onTouchEnd(e: TouchEvent) {
+      if (!touchStart.current) return;
+      const dx = e.changedTouches[0].clientX - touchStart.current.x;
+      const dy = e.changedTouches[0].clientY - touchStart.current.y;
+      touchStart.current = null;
+      const threshold = 50;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > threshold) {
+        dx < 0 ? next("right") : prev("left");
+      } else if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > threshold) {
+        dy < 0 ? next("down") : prev("up");
+      }
+    }
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    return () => {
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [next, prev]);
+
+  /* ── Hash anchor intercept ── */
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       const anchor = (e.target as HTMLElement).closest("a[href^='#']");
@@ -146,7 +156,6 @@ export default function SlidePresentation({ children }: SlidePresentationProps) 
         goToSlideById(id);
       }
     }
-
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
   }, [goToSlideById]);
@@ -158,7 +167,7 @@ export default function SlidePresentation({ children }: SlidePresentationProps) 
         <div className="flex-1 flex items-center justify-center">
           <div
             key={current}
-            className={`${SLIDE_CLASS[slideDir]} w-full max-w-5xl mx-auto px-6 pt-24 pb-12`}
+            className={`${SLIDE_CLASS[slideDir]} w-full max-w-5xl mx-auto px-4 md:px-6 pt-20 md:pt-24 pb-16 md:pb-12`}
           >
             {slides[current]}
           </div>
@@ -166,24 +175,25 @@ export default function SlidePresentation({ children }: SlidePresentationProps) 
 
         {/* Bottom bar */}
         <div className="fixed bottom-0 left-0 right-0 z-50 bg-(--bg-primary)/90 backdrop-blur-sm border-t border-(--border)">
-          <div className="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
-            {/* Prev button */}
+          <div className="max-w-5xl mx-auto px-4 md:px-6 py-3 flex items-center justify-between">
+
+            {/* Prev */}
             <button
               onClick={() => prev("left")}
               disabled={current === 0}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors
-                disabled:opacity-30 disabled:cursor-not-allowed
-                hover:bg-(--bg-card) text-(--text-sub)"
+              className="flex items-center gap-1.5 px-2 md:px-3 py-1.5 rounded-lg text-sm transition-colors
+                disabled:opacity-30 disabled:cursor-not-allowed hover:bg-(--bg-card) text-(--text-sub)"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="15 18 9 12 15 6" />
               </svg>
-              Prev
+              <span className="hidden md:inline">Prev</span>
             </button>
 
             {/* Indicator */}
             <div className="flex items-center gap-3">
-              <div className="flex gap-1.5">
+              {/* Dots — desktop only */}
+              <div className="hidden md:flex gap-1.5">
                 {slides.map((_, i) => (
                   <button
                     key={i}
@@ -196,20 +206,20 @@ export default function SlidePresentation({ children }: SlidePresentationProps) 
                   />
                 ))}
               </div>
-              <span className="text-xs text-(--text-muted) font-mono ml-2">
+              {/* Number — always visible */}
+              <span className="text-xs text-(--text-muted) font-mono">
                 {current + 1} / {total}
               </span>
             </div>
 
-            {/* Next button */}
+            {/* Next */}
             <button
               onClick={() => next("right")}
               disabled={current === total - 1}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors
-                disabled:opacity-30 disabled:cursor-not-allowed
-                hover:bg-(--bg-card) text-(--text-sub)"
+              className="flex items-center gap-1.5 px-2 md:px-3 py-1.5 rounded-lg text-sm transition-colors
+                disabled:opacity-30 disabled:cursor-not-allowed hover:bg-(--bg-card) text-(--text-sub)"
             >
-              Next
+              <span className="hidden md:inline">Next</span>
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="9 18 15 12 9 6" />
               </svg>

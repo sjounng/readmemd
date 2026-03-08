@@ -27,7 +27,7 @@ function rnd(min: number, max: number) {
 }
 
 function generateBlobs(): Blob[] {
-  const count = 5 + Math.floor(Math.random() * 3); // 5–7개
+  const count = 9 + Math.floor(Math.random() * 4); // 9–12개
   const used = new Set<number>();
   return Array.from({ length: count }, (_, i) => {
     // 같은 색 연속 방지
@@ -37,10 +37,10 @@ function generateBlobs(): Blob[] {
     if (used.size >= COLORS.length) used.clear();
 
     const [r, g, b] = COLORS[colorIdx];
-    const opacity = rnd(0.15, 0.28).toFixed(2);
-    const size = Math.round(rnd(280, 650));
-    const top  = Math.round(rnd(-20, 85));   // -20vh ~ 85vh
-    const left = Math.round(rnd(-15, 80));   // -15vw ~ 80vw
+    const opacity = rnd(0.13, 0.28).toFixed(2);
+    const size = Math.round(rnd(300, 700));
+    const top  = Math.round(rnd(-60, 130));  // -60vh ~ 130vh (화면 밖 포함)
+    const left = Math.round(rnd(-40, 120));  // -40vw ~ 120vw (화면 밖 포함)
     return { id: i, color: `rgba(${r},${g},${b},${opacity})`, size, top: `${top}vh`, left: `${left}vw` };
   });
 }
