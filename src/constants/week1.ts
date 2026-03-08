@@ -16,13 +16,14 @@ export const MENTOR = {
   name: "송준우",
   department: "정보시스템학과 3학년",
   github: "sjounng",
+  email: "jwsong0595@hanyang.ac.kr",
 };
 
 export const STUDY_INFO = {
   title: "README.md",
   goal: "프론트엔드부터 백엔드, 데이터베이스까지 직접 만들어보는 풀스택 웹 개발 입문",
-  target: "웹 개발을 처음 시작하는 분",
-  format: "이론 설명 + 실습 위주 (8주 과정)",
+  target: "웹 개발을 처음 시작하는 분, 어려움을 느끼시는 분",
+  format: "구조 설명 + 실습 위주 (9주 과정)",
 };
 
 export const TECH_STACK = [
@@ -89,12 +90,20 @@ export const VSCODE_STEPS = [
   { num: 3, title: "확장 프로그램", desc: "왼쪽 사이드바에서 확장 프로그램 탭을 확인합니다" },
 ];
 
-export const TERMINAL_COMMANDS = [
+export const TERMINAL_COMMANDS_MAC = [
   { cmd: "cd 폴더이름", desc: "해당 폴더로 이동", ex: "cd my-project" },
   { cmd: "cd ..", desc: "상위 폴더로 이동", ex: "cd .." },
-  { cmd: "ls / dir", desc: "현재 폴더 파일 목록 확인", ex: "ls (Mac) / dir (Win)" },
+  { cmd: "ls", desc: "현재 폴더 파일 목록 확인", ex: "ls" },
   { cmd: "mkdir 이름", desc: "새 폴더 만들기", ex: "mkdir my-project" },
   { cmd: "pwd", desc: "현재 위치 확인", ex: "pwd" },
+];
+
+export const TERMINAL_COMMANDS_WIN = [
+  { cmd: "cd 폴더이름", desc: "해당 폴더로 이동", ex: "cd my-project" },
+  { cmd: "cd ..", desc: "상위 폴더로 이동", ex: "cd .." },
+  { cmd: "dir", desc: "현재 폴더 파일 목록 확인", ex: "dir" },
+  { cmd: "mkdir 이름", desc: "새 폴더 만들기", ex: "mkdir my-project" },
+  { cmd: "cd", desc: "현재 위치 확인 (인수 없이 입력)", ex: "cd" },
 ];
 
 /* ── Section 3: Git ── */
@@ -175,7 +184,7 @@ export const TECH_DETAILS = [
     tagline: "React 기반 풀스택 프레임워크",
     accentText: "text-(--accent)",
     borderTop: "border-t-(--accent)",
-    calloutType: "info" as const,
+    calloutType: "tip" as const,
     features: [
       {
         title: "파일 기반 라우팅",
@@ -238,7 +247,7 @@ export const TECH_DETAILS = [
     tagline: "오픈소스 관계형 데이터베이스",
     accentText: "text-sky-500",
     borderTop: "border-t-sky-500",
-    calloutType: "warn" as const,
+    calloutType: "tip" as const,
     features: [
       {
         title: "테이블 구조",
@@ -284,6 +293,62 @@ export const VSCODE_EXTENSIONS = [
   { name: "Prettier", desc: "저장할 때마다 코드를 자동으로 정렬해줍니다" },
   { name: "Tailwind CSS IntelliSense", desc: "Tailwind 클래스를 자동완성해줍니다 (나중에 사용)" },
   { name: "GitLens", desc: "각 줄이 언제·누가 수정했는지 인라인으로 확인할 수 있습니다" },
+];
+
+/* ── Git 베스트 프랙티스 ── */
+
+export const COMMIT_TYPES = [
+  { type: "feat",     desc: "새로운 기능 추가",               color: "text-(--accent)" },
+  { type: "fix",      desc: "버그 수정",                      color: "text-red-400" },
+  { type: "docs",     desc: "문서 수정 (README 등)",           color: "text-sky-400" },
+  { type: "style",    desc: "포맷팅, 세미콜론 등 (기능 무관)", color: "text-violet-400" },
+  { type: "refactor", desc: "기능 변경 없는 코드 개선",        color: "text-yellow-400" },
+  { type: "chore",    desc: "빌드 설정, 패키지 관리",          color: "text-(--text-muted)" },
+];
+
+export const GIT_FLOW_BRANCHES = [
+  {
+    name: "main",
+    role: "배포 브랜치",
+    desc: "실제 서비스에 배포되는 안정적인 코드만 존재합니다. 직접 커밋하지 않습니다.",
+    color: "border-l-4 border-(--accent)",
+    badge: "bg-(--accent)/10 text-(--accent)",
+  },
+  {
+    name: "develop",
+    role: "개발 통합 브랜치",
+    desc: "다음 배포를 위한 기능들이 모이는 브랜치입니다. feature 브랜치의 기준점입니다.",
+    color: "border-l-4 border-violet-500",
+    badge: "bg-violet-500/10 text-violet-400",
+  },
+  {
+    name: "feature/*",
+    role: "기능 개발 브랜치",
+    desc: "새 기능 하나당 브랜치 하나를 만듭니다. develop에서 분기하고 develop으로 병합합니다.",
+    color: "border-l-4 border-sky-500",
+    badge: "bg-sky-500/10 text-sky-400",
+  },
+  {
+    name: "release/*",
+    role: "배포 준비 브랜치",
+    desc: "배포 직전 QA·버전 태깅 등을 처리합니다. main과 develop 양쪽에 병합합니다.",
+    color: "border-l-4 border-yellow-500",
+    badge: "bg-yellow-500/10 text-yellow-400",
+  },
+  {
+    name: "hotfix/*",
+    role: "긴급 수정 브랜치",
+    desc: "배포 중인 main에서 발생한 버그를 즉시 수정합니다. main과 develop에 병합합니다.",
+    color: "border-l-4 border-red-500",
+    badge: "bg-red-500/10 text-red-400",
+  },
+];
+
+export const GITHUB_FLOW_STEPS = [
+  { num: 1, title: "브랜치 생성", cmd: "$ git checkout -b feature/login",           desc: "main에서 기능 단위 브랜치를 만듭니다." },
+  { num: 2, title: "작업 & 커밋", cmd: '$ git commit -m "feat: 로그인 기능 추가"',   desc: "Conventional Commits 형식으로 커밋합니다." },
+  { num: 3, title: "Push",         cmd: "$ git push origin feature/login",            desc: "브랜치를 원격 저장소에 올립니다." },
+  { num: 4, title: "PR → Merge",   cmd: null,                                         desc: "GitHub에서 PR 열고 리뷰 후 main에 병합합니다." },
 ];
 
 /* ── Summary ── */

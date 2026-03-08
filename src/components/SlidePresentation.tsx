@@ -13,6 +13,17 @@ import {
   type ReactNode,
 } from "react";
 
+type NavDir = "right" | "left" | "up" | "down";
+
+const BLOB_TRANSITION = "transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+
+const SLIDE_CLASS: Record<NavDir, string> = {
+  right: "slide-from-right",
+  left:  "slide-from-left",
+  down:  "slide-from-bottom",
+  up:    "slide-from-top",
+};
+
 /* ── Context for slide navigation ── */
 const SlideContext = createContext<{
   goToSlideById: (id: string) => void;
@@ -31,7 +42,10 @@ export default function SlidePresentation({ children }: SlidePresentationProps) 
   const slides = Children.toArray(children);
   const total = slides.length;
   const [current, setCurrent] = useState(0);
+  const [slideDir, setSlideDir] = useState<NavDir>("right");
   const [animating, setAnimating] = useState(false);
+  const blobX = useRef(0);
+  const blobY = useRef(0);
 
   // Build id → slide index map from data-slide-id props
   const idToIndex = useMemo(() => {
@@ -50,26 +64,56 @@ export default function SlidePresentation({ children }: SlidePresentationProps) 
   const idToIndexRef = useRef(idToIndex);
   useEffect(() => { idToIndexRef.current = idToIndex; }, [idToIndex]);
 
+  const moveBlobsH = useCallback((blobDir: -1 | 1) => {
+    const blobs = document.getElementById("bg-blobs");
+    if (!blobs) return;
+    blobX.current += blobDir * 20;
+    const vw = window.innerWidth;
+    if (blobX.current <= -vw || blobX.current >= vw) {
+      const jump = blobX.current <= -vw ? vw : -vw;
+      blobs.style.transition = "none";
+      blobs.style.transform = `translateX(${blobX.current - blobDir * 20 + jump}px) translateY(${blobY.current}px)`;
+      blobs.getBoundingClientRect();
+      blobs.style.transition = BLOB_TRANSITION;
+      blobX.current += jump;
+    }
+    blobs.style.transform = `translateX(${blobX.current}px) translateY(${blobY.current}px)`;
+  }, []);
+
+  const moveBlobsV = useCallback((blobDir: -1 | 1) => {
+    const blobs = document.getElementById("bg-blobs");
+    if (!blobs) return;
+    blobY.current += blobDir * 20;
+    blobs.style.transform = `translateX(${blobX.current}px) translateY(${blobY.current}px)`;
+  }, []);
+
   const goTo = useCallback(
-    (index: number) => {
+    (index: number, dir: NavDir = "right") => {
       if (index < 0 || index >= total || index === current || animating) return;
+
+      if (dir === "right") moveBlobsH(-1);
+      else if (dir === "left") moveBlobsH(1);
+      else if (dir === "down") moveBlobsV(-1);
+      else moveBlobsV(1);
+
+      setSlideDir(dir);
       setAnimating(true);
       setCurrent(index);
       setTimeout(() => setAnimating(false), 350);
     },
-    [total, current, animating]
+    [total, current, animating, moveBlobsH, moveBlobsV]
   );
 
   const goToSlideById = useCallback(
     (id: string) => {
       const index = idToIndexRef.current.get(id);
-      if (index !== undefined) goTo(index);
+      if (index !== undefined) goTo(index, index > current ? "right" : "left");
     },
-    [goTo]
+    [goTo, current]
   );
 
-  const next = useCallback(() => goTo(current + 1), [goTo, current]);
-  const prev = useCallback(() => goTo(current - 1), [goTo, current]);
+  const next = useCallback((dir: NavDir = "right") => goTo(current + 1, dir), [goTo, current]);
+  const prev = useCallback((dir: NavDir = "left") => goTo(current - 1, dir), [goTo, current]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -78,18 +122,12 @@ export default function SlidePresentation({ children }: SlidePresentationProps) 
       if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
 
       switch (e.key) {
+        case "ArrowRight": e.preventDefault(); next("right"); break;
+        case "ArrowLeft":  e.preventDefault(); prev("left");  break;
         case " ":
-        case "ArrowRight":
-        case "ArrowDown":
-          e.preventDefault();
-          next();
-          break;
+        case "ArrowDown":  e.preventDefault(); next("down");  break;
         case "Backspace":
-        case "ArrowLeft":
-        case "ArrowUp":
-          e.preventDefault();
-          prev();
-          break;
+        case "ArrowUp":    e.preventDefault(); prev("up");    break;
       }
     }
 
@@ -120,7 +158,7 @@ export default function SlidePresentation({ children }: SlidePresentationProps) 
         <div className="flex-1 flex items-center justify-center">
           <div
             key={current}
-            className="slide-fade-in w-full max-w-5xl mx-auto px-6 py-12"
+            className={`${SLIDE_CLASS[slideDir]} w-full max-w-5xl mx-auto px-6 pt-24 pb-12`}
           >
             {slides[current]}
           </div>
@@ -131,7 +169,7 @@ export default function SlidePresentation({ children }: SlidePresentationProps) 
           <div className="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
             {/* Prev button */}
             <button
-              onClick={prev}
+              onClick={() => prev("left")}
               disabled={current === 0}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors
                 disabled:opacity-30 disabled:cursor-not-allowed
@@ -149,7 +187,7 @@ export default function SlidePresentation({ children }: SlidePresentationProps) 
                 {slides.map((_, i) => (
                   <button
                     key={i}
-                    onClick={() => goTo(i)}
+                    onClick={() => goTo(i, i > current ? "right" : "left")}
                     className={`rounded-full transition-all duration-300 ${
                       i === current
                         ? "w-6 h-2 bg-(--accent)"
@@ -165,7 +203,7 @@ export default function SlidePresentation({ children }: SlidePresentationProps) 
 
             {/* Next button */}
             <button
-              onClick={next}
+              onClick={() => next("right")}
               disabled={current === total - 1}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors
                 disabled:opacity-30 disabled:cursor-not-allowed

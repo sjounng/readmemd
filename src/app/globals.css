@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
-:root {
+:root,
+[data-theme="light"] {
   --background: #F9FAFB;
   --foreground: #111827;
   --accent: #6366F1;
-  --accent-glow: rgba(99, 102, 241, 0.15);
+  --accent-glow: rgba(99, 102, 241, 0.25);
   --bg-primary: #F9FAFB;
   --bg-card: rgba(55, 48, 163, 0.04);
   --bg-code: rgba(99, 102, 241, 0.06);
@@ -15,6 +16,22 @@
   --callout-info-bg: rgba(99, 102, 241, 0.06);
   --callout-tip-bg: rgba(139, 92, 246, 0.06);
   --callout-warn-bg: rgba(14, 165, 233, 0.06);
+}
+
+[data-theme="dark"] {
+  --background: #0B0B14;
+  --foreground: #E8EAED;
+  --accent: #6366F1;
+  --accent-glow: rgba(99, 102, 241, 0.3);
+  --bg-primary: #0B0B14;
+  --bg-card: rgba(99, 102, 241, 0.07);
+  --bg-code: rgba(99, 102, 241, 0.10);
+  --border: rgba(255, 255, 255, 0.08);
+  --text-sub: rgba(232, 234, 237, 0.65);
+  --text-muted: rgba(232, 234, 237, 0.38);
+  --callout-info-bg: rgba(99, 102, 241, 0.08);
+  --callout-tip-bg: rgba(139, 92, 246, 0.08);
+  --callout-warn-bg: rgba(14, 165, 233, 0.08);
 }
 
 @theme inline {
@@ -43,7 +60,7 @@ body {
 
 /* Code block */
 .code-block {
-  background: rgba(55, 48, 163, 0.04);
+  background: var(--bg-code);
   border: 1px solid var(--border);
   border-radius: 12px;
   font-family: var(--font-mono), monospace;
@@ -95,24 +112,39 @@ html {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(17, 24, 39, 0.15);
+  background: var(--border);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(17, 24, 39, 0.3);
+  background: var(--text-muted);
 }
 
-/* Slide fade-in animation */
-@keyframes slideFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* 다크모드에서 타이틀 이미지 반전 */
+[data-theme="dark"] .title-img {
+  filter: invert(1);
 }
-.slide-fade-in {
-  animation: slideFadeIn 0.35s ease-out;
+
+/* 테마 전환 트랜지션 */
+body {
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
+
+/* Dropdown slide-down animation */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Directional slide animations */
+@keyframes slideFromRight  { from { opacity: 0; transform: translateX(48px);  } to { opacity: 1; transform: translateX(0); } }
+@keyframes slideFromLeft   { from { opacity: 0; transform: translateX(-48px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slideFromBottom { from { opacity: 0; transform: translateY(32px);  } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideFromTop    { from { opacity: 0; transform: translateY(-32px); } to { opacity: 1; transform: translateY(0); } }
+
+.slide-from-right  { animation: slideFromRight  0.35s ease-out; }
+.slide-from-left   { animation: slideFromLeft   0.35s ease-out; }
+.slide-from-bottom { animation: slideFromBottom 0.35s ease-out; }
+.slide-from-top    { animation: slideFromTop    0.35s ease-out; }
+
+/* Legacy alias */
+.slide-fade-in { animation: slideFromBottom 0.35s ease-out; }

@@ -8,3 +8,4 @@ export { default as Navbar } from "./Navbar";
 export { default as WeekHero } from "./WeekHero";
 export { default as Tag } from "./Tag";
 export { default as SlidePresentation, useSlideNavigation } from "./SlidePresentation";
+export { default as BlobBackground } from "./BlobBackground";

@@ -24,7 +24,8 @@ import {
   RESTAURANT_METAPHOR,
   VSCODE_STEPS,
   VSCODE_EXTENSIONS,
-  TERMINAL_COMMANDS,
+  TERMINAL_COMMANDS_MAC,
+  TERMINAL_COMMANDS_WIN,
   FILE_VERSION_EXAMPLES,
   GIT_BENEFITS,
   COMMIT_TIMELINE,
@@ -33,6 +34,9 @@ import {
   GITHUB_REPO_STEPS,
   FIRST_PUSH_STEPS,
   GIT_WORKFLOW_ZONES,
+  COMMIT_TYPES,
+  GIT_FLOW_BRANCHES,
+  GITHUB_FLOW_STEPS,
   WEEK1_SUMMARY,
   ENV_OS_TABS,
   MAC_HOMEBREW_CMD,
@@ -160,6 +164,7 @@ export default function Week1Content() {
             <div>
               <h4 className="text-xl font-bold mb-1">{MENTOR.name}</h4>
               <p className="text-sm text-(--text-sub) mb-2">{MENTOR.department}</p>
+              <p className="text-sm text-(--text-sub) mb-2">{MENTOR.email}</p>
               <a
                 href={`https://github.com/${MENTOR.github}`}
                 target="_blank"
@@ -228,7 +233,7 @@ export default function Week1Content() {
           ))}
         </div>
         <Callout type="info">
-          손님(사용자)이 메뉴를 고르면 홀(프론트)이 주방(백엔드)에 전달하고, 주방은 냉장고(DB)에서 재료를 꺼내 요리(데이터)를 만들어 돌려줍니다.
+          손님(사용자)이 메뉴를 고르면 홀(프론트)이 주방(백엔드)에 전달하고, 주방은 냉장고(DB)에서 재료(데이터)를 꺼내 요리를 만들어 돌려줍니다.
         </Callout>
       </div>
 
@@ -332,34 +337,43 @@ export default function Week1Content() {
         <h3 className="text-xl font-bold mb-2">터미널 명령어</h3>
         <p className="text-(--text-sub) mb-2 text-sm">
           터미널(Terminal)은 텍스트로 컴퓨터에 명령을 내리는 도구입니다. VS Code에서{" "}
-          <code className="px-1.5 py-0.5 rounded bg-(--bg-code) text-(--accent) text-sm">Ctrl + `</code>{" "}
-          을 누르면 내장 터미널이 열립니다. (Mac은 동일)
+          <code className="px-1.5 py-0.5 rounded bg-(--bg-code) text-(--accent) text-sm">Ctrl + Shift + ` / Cmd + Shift + `</code>{" "}
+          을 누르면 내장 터미널이 열립니다.
         </p>
         <p className="text-(--text-sub) mb-6 text-sm">
           처음엔 낯설지만 개발자에게 터미널은 필수 도구입니다. 아래 5가지 명령어만 알아도 충분히 시작할 수 있습니다.
         </p>
-        <div className="overflow-x-auto mb-6">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="bg-(--accent) text-white">
-                <th className="px-4 py-3 text-left rounded-tl-lg">명령어</th>
-                <th className="px-4 py-3 text-left">설명</th>
-                <th className="px-4 py-3 text-left rounded-tr-lg">예시</th>
-              </tr>
-            </thead>
-            <tbody>
-              {TERMINAL_COMMANDS.map((c, i) => (
-                <tr key={c.cmd} className={i % 2 === 0 ? "bg-(--bg-card)" : "bg-(--bg-primary)"}>
-                  <td className="px-4 py-3 font-mono text-(--accent)">{c.cmd}</td>
-                  <td className="px-4 py-3 text-(--text-sub)">{c.desc}</td>
-                  <td className="px-4 py-3 font-mono text-(--text-muted) text-xs">{c.ex}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <Card className="mb-6">
+          <Tabs tabs={ENV_OS_TABS} activeTab={osTab} onTabChange={setOsTab} />
+          {(() => {
+            const cmds: { cmd: string; desc: string; ex: string }[] = osTab === 0 ? [...TERMINAL_COMMANDS_MAC] : [...TERMINAL_COMMANDS_WIN];
+            return (
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-(--accent) text-white">
+                      <th className="px-4 py-3 text-left rounded-tl-lg">명령어</th>
+                      <th className="px-4 py-3 text-left">설명</th>
+                      <th className="px-4 py-3 text-left rounded-tr-lg">예시</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {cmds.map((c, i) => (
+                      <tr key={c.cmd} className={i % 2 === 0 ? "bg-(--bg-card)" : "bg-(--bg-primary)"}>
+                        <td className="px-4 py-3 font-mono text-(--accent)">{c.cmd}</td>
+                        <td className="px-4 py-3 text-(--text-sub)">{c.desc}</td>
+                        <td className="px-4 py-3 font-mono text-(--text-muted) text-xs">{c.ex}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
+          })()}
+        </Card>
         <h4 className="font-bold mb-3">직접 따라해보세요</h4>
-        <CodeBlock title="Terminal">{`# 바탕화면으로 이동
+        {osTab === 0 ? (
+          <CodeBlock title="Terminal (Mac)">{`# 바탕화면으로 이동
 $ cd Desktop
 
 # 새 폴더 만들기
@@ -370,6 +384,19 @@ $ cd my-first-repo
 
 # 현재 위치 확인
 $ pwd`}</CodeBlock>
+        ) : (
+          <CodeBlock title="Terminal (Windows)">{`# 바탕화면으로 이동
+> cd Desktop
+
+# 새 폴더 만들기
+> mkdir my-first-repo
+
+# 폴더로 이동
+> cd my-first-repo
+
+# 현재 위치 확인
+> cd`}</CodeBlock>
+        )}
       </div>
 
       {/* ── Slide 13: Homebrew (Mac) ── */}
@@ -572,6 +599,38 @@ $ git log --oneline                   # 커밋 이력 확인`}</CodeBlock>
         </Callout>
       </div>
 
+      {/* ── Slide: 커밋 메시지 작성법 — Conventional Commits ── */}
+      <div>
+        <h3 className="text-xl font-bold mb-1">커밋 메시지 작성법</h3>
+        <p className="text-sm text-(--text-muted) mb-6">Conventional Commits 컨벤션</p>
+        <p className="text-(--text-sub) mb-4 text-sm">
+          팀에서 커밋 메시지 형식을 통일하면 히스토리가 읽기 쉬워지고, 자동으로 CHANGELOG를 생성할 수도 있습니다.
+          Conventional Commits는 가장 널리 쓰이는 커밋 메시지 규칙입니다.
+        </p>
+        <CodeBlock title="형식">{`type(scope): 설명
+
+$ git commit -m "feat: 로그인 기능 추가"
+$ git commit -m "fix(auth): 토큰 만료 오류 수정"
+$ git commit -m "docs: README 업데이트"
+$ git commit -m "style: 코드 들여쓰기 정리"`}</CodeBlock>
+        <div className="mt-4 rounded-lg border border-(--border) overflow-hidden mb-4">
+          <div className="px-4 py-2 bg-(--accent) text-white text-xs font-bold tracking-widest">TYPE</div>
+          {COMMIT_TYPES.map((t, i) => (
+            <div
+              key={t.type}
+              className={`flex items-baseline gap-4 px-4 py-2.5 text-sm ${i % 2 === 0 ? "bg-(--bg-card)" : "bg-(--bg-primary)"}`}
+            >
+              <code className={`font-mono font-bold w-20 shrink-0 ${t.color}`}>{t.type}</code>
+              <span className="text-(--text-sub)">{t.desc}</span>
+            </div>
+          ))}
+        </div>
+        <Callout type="tip">
+          <code className="text-(--accent)">scope</code>는 생략 가능합니다. 어떤 범위가 변경됐는지 명시할 때만 씁니다.{" "}
+          예: <code className="text-(--text-muted)">fix(login): ...</code>
+        </Callout>
+      </div>
+
       {/* ── Slide 16: Git 핵심 개념 – Branch ── */}
       <div>
         <h3 className="text-xl font-bold mb-1">핵심 개념 3 — Branch (브랜치)</h3>
@@ -601,6 +660,120 @@ $ git log --oneline                   # 커밋 이력 확인`}</CodeBlock>
         </Card>
         <Callout type="warn">
           지금은 <strong>main</strong> 브랜치 하나만 사용합니다. 브랜치는 협업 세션에서 자세히 다룰 예정입니다.
+        </Callout>
+      </div>
+
+      {/* ── Slide: Git Flow ── */}
+      <div>
+        <h3 className="text-xl font-bold mb-1">브랜치 전략 1 — Git Flow</h3>
+        <p className="text-sm text-(--text-muted) mb-4">역할별 브랜치를 엄격히 분리하는 전략. 명확한 배포 주기가 있는 중대형 프로젝트에 적합합니다.</p>
+        <Card className="py-6 px-2 mb-4 overflow-x-auto">
+          <svg viewBox="0 0 700 230" className="w-full h-auto min-w-130">
+            {/* ── labels ── */}
+            <text x="5" y="24"  fill="#EF4444" fontSize="10" fontFamily="monospace" fontWeight="bold">hotfix/*</text>
+            <text x="5" y="69"  fill="#6366F1" fontSize="10" fontFamily="monospace" fontWeight="bold">main</text>
+            <text x="5" y="114" fill="#F59E0B" fontSize="10" fontFamily="monospace" fontWeight="bold">release/*</text>
+            <text x="5" y="159" fill="#8B5CF6" fontSize="10" fontFamily="monospace" fontWeight="bold">develop</text>
+            <text x="5" y="204" fill="#0EA5E9" fontSize="10" fontFamily="monospace" fontWeight="bold">feature/*</text>
+
+            {/* ── main ── */}
+            <line x1="78" y1="65" x2="655" y2="65" stroke="#6366F1" strokeWidth="3" />
+            {[78, 375, 415, 555, 625].map((x) => (
+              <circle key={x} cx={x} cy={65} r={7} fill="#6366F1" />
+            ))}
+
+            {/* ── develop ── */}
+            <line x1="78" y1="155" x2="655" y2="155" stroke="#8B5CF6" strokeWidth="2.5" />
+            {[78, 108, 208, 240, 375, 555, 625].map((x) => (
+              <circle key={x} cx={x} cy={155} r={6} fill="#8B5CF6" />
+            ))}
+
+            {/* ── feature: (108,155)→(125,200) branch, (162,200)→(208,155) merge ── */}
+            <path d="M108,155 C108,178 125,178 125,200" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeDasharray="5,3" />
+            <line x1="125" y1="200" x2="162" y2="200" stroke="#0EA5E9" strokeWidth="2" strokeDasharray="5,3" />
+            <path d="M162,200 C162,178 208,178 208,155" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeDasharray="5,3" />
+            {[125, 162].map((x) => (
+              <circle key={x} cx={x} cy={200} r={5} fill="#0EA5E9" />
+            ))}
+
+            {/* ── release: (240,155)→(257,110) branch, (355,110)→(375,65) & (375,155) merge ── */}
+            <path d="M240,155 C240,133 257,133 257,110" fill="none" stroke="#F59E0B" strokeWidth="2" strokeDasharray="5,3" />
+            <line x1="257" y1="110" x2="355" y2="110" stroke="#F59E0B" strokeWidth="2" strokeDasharray="5,3" />
+            <path d="M355,110 C355,88  375,88  375,65"  fill="none" stroke="#F59E0B" strokeWidth="2" strokeDasharray="5,3" />
+            <path d="M355,110 C355,133 375,133 375,155" fill="none" stroke="#F59E0B" strokeWidth="2" strokeDasharray="5,3" />
+            {[257, 305, 355].map((x) => (
+              <circle key={x} cx={x} cy={110} r={5} fill="#F59E0B" />
+            ))}
+
+            {/* ── hotfix: (415,65)→(432,20) branch, (522,20)→(555,65) & (555,155) merge ── */}
+            <path d="M415,65 C415,43  432,43  432,20"  fill="none" stroke="#EF4444" strokeWidth="2" strokeDasharray="5,3" />
+            <line x1="432" y1="20" x2="522" y2="20" stroke="#EF4444" strokeWidth="2" strokeDasharray="5,3" />
+            <path d="M522,20 C522,43  555,43  555,65"  fill="none" stroke="#EF4444" strokeWidth="2" strokeDasharray="5,3" />
+            <path d="M522,20 C522,88  555,88  555,155" fill="none" stroke="#EF4444" strokeWidth="1.5" strokeDasharray="3,3" />
+            {[432, 478, 522].map((x) => (
+              <circle key={x} cx={x} cy={20} r={5} fill="#EF4444" />
+            ))}
+          </svg>
+        </Card>
+        <div className="space-y-2">
+          {GIT_FLOW_BRANCHES.map((b) => (
+            <div key={b.name} className={`flex items-start gap-3 px-4 py-2.5 rounded-lg bg-(--bg-card) ${b.color}`}>
+              <span className={`text-xs font-bold font-mono px-2 py-0.5 rounded shrink-0 mt-0.5 ${b.badge}`}>{b.name}</span>
+              <div>
+                <p className="text-sm font-semibold">{b.role}</p>
+                <p className="text-xs text-(--text-muted) mt-0.5">{b.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Slide: GitHub Flow ── */}
+      <div>
+        <h3 className="text-xl font-bold mb-1">브랜치 전략 2 — GitHub Flow</h3>
+        <p className="text-sm text-(--text-muted) mb-4">main + feature 브랜치만 사용하는 단순한 전략. 빠른 배포와 소규모 팀에 적합합니다.</p>
+        <Card className="py-6 px-2 mb-4 overflow-x-auto">
+          <svg viewBox="0 0 620 145" className="w-full h-auto min-w-115">
+            {/* labels */}
+            <text x="5" y="49"  fill="#6366F1" fontSize="10" fontFamily="monospace" fontWeight="bold">main</text>
+            <text x="5" y="114" fill="#0EA5E9" fontSize="10" fontFamily="monospace" fontWeight="bold">feature/*</text>
+
+            {/* ── main ── */}
+            <line x1="68" y1="45" x2="590" y2="45" stroke="#6366F1" strokeWidth="3" />
+            {[68, 100, 388, 445].map((x) => (
+              <circle key={x} cx={x} cy={45} r={7} fill="#6366F1" />
+            ))}
+            <text x="388" y="33" textAnchor="middle" fill="#6366F1" fontSize="9" fontFamily="monospace">merge</text>
+            <text x="445" y="33" textAnchor="middle" fill="#6366F1" fontSize="9" fontFamily="monospace">배포</text>
+
+            {/* ── feature: (100,45)→(122,110) branch, (346,110)→(388,45) merge ── */}
+            <path d="M100,45 C100,78 122,78 122,110"  fill="none" stroke="#0EA5E9" strokeWidth="2" strokeDasharray="5,3" />
+            <line x1="122" y1="110" x2="346" y2="110" stroke="#0EA5E9" strokeWidth="2" strokeDasharray="5,3" />
+            <path d="M346,110 C346,78 388,78 388,45" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeDasharray="5,3" />
+            {[122, 178, 234, 290, 346].map((x) => (
+              <circle key={x} cx={x} cy={110} r={5} fill="#0EA5E9" />
+            ))}
+            <text x="346" y="130" textAnchor="middle" fill="#0EA5E9" fontSize="9" fontFamily="monospace">Pull Request</text>
+          </svg>
+        </Card>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+          {GITHUB_FLOW_STEPS.map((s) => (
+            <div key={s.num} className="rounded-lg border border-(--border) bg-(--bg-card) p-3">
+              <span className="w-5 h-5 rounded-full bg-(--accent) text-white text-xs font-bold inline-flex items-center justify-center mb-2">
+                {s.num}
+              </span>
+              <p className="text-sm font-semibold leading-tight">{s.title}</p>
+              <p className="text-xs text-(--text-muted) mt-1">{s.desc}</p>
+              {s.cmd && (
+                <code className="block mt-2 text-xs font-mono text-(--accent) bg-(--bg-primary) px-2 py-1 rounded break-all">
+                  {s.cmd.replace(/^\$ /, "")}
+                </code>
+              )}
+            </div>
+          ))}
+        </div>
+        <Callout type="info">
+          <strong>이 스터디에서는 GitHub Flow를 사용합니다.</strong> 규칙이 단순해서 팀 프로젝트를 처음 시작할 때 익히기 좋습니다.
         </Callout>
       </div>
 
@@ -660,12 +833,12 @@ $ git config --list`}</CodeBlock>
           <Card className="border-t-2 border-t-(--accent)">
             <p className="text-xs font-bold text-(--accent) tracking-widest mb-2">LOCAL TOOL</p>
             <h4 className="text-2xl font-bold mb-2">Git</h4>
-            <p className="text-(--text-sub) text-sm">내 컴퓨터에서 버전을 관리하는 <strong className="text-(--foreground)">도구</strong>. 인터넷 없이도 사용 가능합니다.</p>
+            <p className="text-(--text-sub) text-sm">내 컴퓨터에서 버전을 관리하는 <strong className="text-foreground">도구</strong>. 인터넷 없이도 사용 가능합니다.</p>
           </Card>
           <Card className="border-t-2 border-t-violet-500">
             <p className="text-xs font-bold text-violet-500 tracking-widest mb-2">ONLINE SERVICE</p>
             <h4 className="text-2xl font-bold mb-2">GitHub</h4>
-            <p className="text-(--text-sub) text-sm">온라인에 코드를 올리고 공유하는 <strong className="text-(--foreground)">서비스</strong>. 팀원들과 협업할 수 있습니다.</p>
+            <p className="text-(--text-sub) text-sm">온라인에 코드를 올리고 공유하는 <strong className="text-foreground">서비스</strong>. 팀원들과 협업할 수 있습니다.</p>
           </Card>
         </div>
         <Callout type="info">
@@ -755,7 +928,7 @@ $ git config --list`}</CodeBlock>
       <div>
         <h3 className="text-xl font-bold mb-2">GitHub 레포지토리 생성</h3>
         <p className="text-(--text-sub) mb-4 text-sm">
-          로컬에서 직접 파일을 올릴 것이기 때문에 <strong className="text-(--foreground)">아무것도 없는 빈 레포지토리</strong>를 만들어야 합니다.
+          로컬에서 직접 파일을 올릴 것이기 때문에 <strong className="text-foreground">아무것도 없는 빈 레포지토리</strong>를 만들어야 합니다.
         </p>
         <Card className="mb-4">
           <div className="space-y-4">
@@ -772,17 +945,22 @@ $ git config --list`}</CodeBlock>
       {/* ── Slide 실습: README.md 올리기 ── */}
       <div>
         <h3 className="text-xl font-bold mb-2">실습: README.md 올리기</h3>
-        <p className="text-(--text-sub) mb-4 text-sm">
+        <p className="text-(--text-sub) mb-6 text-sm">
           터미널에서 아래 명령어를 순서대로 입력합니다. 마지막 <code className="px-1.5 py-0.5 rounded bg-(--bg-code) text-(--accent) text-sm">git push</code>가 성공하면 GitHub에서 README.md가 보입니다.
         </p>
-        <div className="space-y-2 mb-4">
+        <div className="space-y-3 mb-6">
           {FIRST_PUSH_STEPS.map((s, i) => (
-            <StepItem key={i} num={i + 1} title={s.desc} />
+            <div key={i} className="rounded-lg border border-(--border) overflow-hidden">
+              <div className="flex items-center gap-3 px-4 py-2.5 bg-(--bg-card)">
+                <span className="w-5 h-5 rounded-full bg-(--accent) text-white text-xs font-bold flex items-center justify-center shrink-0">
+                  {i + 1}
+                </span>
+                <span className="text-sm font-medium">{s.desc}</span>
+              </div>
+              <CodeBlock>{s.cmd}</CodeBlock>
+            </div>
           ))}
         </div>
-        <CodeBlock title="Terminal">
-          {FIRST_PUSH_STEPS.map((s) => s.cmd).join("\n")}
-        </CodeBlock>
         <Callout type="tip">
           <code className="text-(--accent)">&lt;URL&gt;</code> 자리에는 방금 복사한 레포지토리 주소를 붙여넣으세요.
           <br />예: <code className="text-(--text-muted)">https://github.com/username/my-first-repo.git</code>

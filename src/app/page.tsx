@@ -6,9 +6,6 @@ import { weeks } from "@/constants/weeks";
 export default function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden">
-      {/* Background effects */}
-      <div className="bg-blob" style={{ top: "-200px", right: "-100px" }} />
-      <div className="bg-blob" style={{ bottom: "-200px", left: "-200px" }} />
 
       {/* Hero */}
       <main className="relative z-10 flex flex-col px-8 md:px-16 pt-28 md:pt-32">
@@ -36,7 +33,7 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-extrabold">목차</h2>
           </div>
 
-          <div className="space-y-4 max-h-120 overflow-y-auto pr-2">
+          <div className="space-y-4 max-h-120 overflow-y-auto py-2 pr-2">
             {weeks.map((week) => (
               <div key={week.num} className="group">
                 {week.available ? (

@@ -14,11 +14,10 @@ function CopyButton({ text }: { text: string }) {
   return (
     <div className="relative shrink-0">
       {copied && (
-        <div className="absolute bottom-full right-0 mb-2 pointer-events-none select-none">
-          <div className="px-2.5 py-1 rounded-md bg-(--accent) text-white text-xs font-sans whitespace-nowrap shadow-lg">
+        <div className="fixed bottom-20 right-6 z-[200] pointer-events-none select-none">
+          <div className="px-3 py-1.5 rounded-md bg-(--accent) text-white text-xs font-sans whitespace-nowrap shadow-lg">
             Copied!
           </div>
-          <div className="w-2 h-2 bg-(--accent) rotate-45 ml-auto mr-1 -mt-1" />
         </div>
       )}
       <button
