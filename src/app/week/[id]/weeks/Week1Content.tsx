@@ -644,7 +644,7 @@ $ git commit -m "style: 코드 들여쓰기 정리"`}</CodeBlock>
             {[30, 130, 350, 450, 570].map((x) => (
               <circle key={x} cx={x} cy={70} r={8} fill="#6366F1" />
             ))}
-            <text x="570" y="95" textAnchor="middle" fill="#6366F1" fontSize="14" fontFamily="monospace">main</text>
+            <text x="570" y="95" textAnchor="middle" fill="#6366F1" fontSize="14" fontFamily="'JetBrains Mono', monospace">main</text>
             <path
               d="M130,70 Q180,30 230,30 L370,30 Q420,30 450,70"
               fill="none"
@@ -655,7 +655,7 @@ $ git commit -m "style: 코드 들여쓰기 정리"`}</CodeBlock>
             {[230, 300, 370].map((x) => (
               <circle key={x} cx={x} cy={30} r={6} fill="#0ea5e9" />
             ))}
-            <text x="265" y="20" fill="#0ea5e9" fontSize="12" fontFamily="monospace">feature/login</text>
+            <text x="265" y="20" fill="#0ea5e9" fontSize="12" fontFamily="'JetBrains Mono', monospace">feature/login</text>
           </svg>
         </Card>
         <Callout type="warn">
@@ -670,11 +670,11 @@ $ git commit -m "style: 코드 들여쓰기 정리"`}</CodeBlock>
         <Card className="py-6 px-2 mb-4 overflow-x-auto">
           <svg viewBox="0 0 700 230" className="w-full h-auto min-w-130">
             {/* ── labels ── */}
-            <text x="5" y="24"  fill="#EF4444" fontSize="10" fontFamily="monospace" fontWeight="bold">hotfix/*</text>
-            <text x="5" y="69"  fill="#6366F1" fontSize="10" fontFamily="monospace" fontWeight="bold">main</text>
-            <text x="5" y="114" fill="#F59E0B" fontSize="10" fontFamily="monospace" fontWeight="bold">release/*</text>
-            <text x="5" y="159" fill="#8B5CF6" fontSize="10" fontFamily="monospace" fontWeight="bold">develop</text>
-            <text x="5" y="204" fill="#0EA5E9" fontSize="10" fontFamily="monospace" fontWeight="bold">feature/*</text>
+            <text x="5" y="24"  fill="#EF4444" fontSize="10" fontFamily="'JetBrains Mono', monospace" fontWeight="bold">hotfix/*</text>
+            <text x="5" y="69"  fill="#6366F1" fontSize="10" fontFamily="'JetBrains Mono', monospace" fontWeight="bold">main</text>
+            <text x="5" y="114" fill="#F59E0B" fontSize="10" fontFamily="'JetBrains Mono', monospace" fontWeight="bold">release/*</text>
+            <text x="5" y="159" fill="#8B5CF6" fontSize="10" fontFamily="'JetBrains Mono', monospace" fontWeight="bold">develop</text>
+            <text x="5" y="204" fill="#0EA5E9" fontSize="10" fontFamily="'JetBrains Mono', monospace" fontWeight="bold">feature/*</text>
 
             {/* ── main ── */}
             <line x1="78" y1="65" x2="655" y2="65" stroke="#6366F1" strokeWidth="3" />
@@ -735,16 +735,16 @@ $ git commit -m "style: 코드 들여쓰기 정리"`}</CodeBlock>
         <Card className="py-6 px-2 mb-4 overflow-x-auto">
           <svg viewBox="0 0 620 145" className="w-full h-auto min-w-115">
             {/* labels */}
-            <text x="5" y="49"  fill="#6366F1" fontSize="10" fontFamily="monospace" fontWeight="bold">main</text>
-            <text x="5" y="114" fill="#0EA5E9" fontSize="10" fontFamily="monospace" fontWeight="bold">feature/*</text>
+            <text x="5" y="49"  fill="#6366F1" fontSize="10" fontFamily="'JetBrains Mono', monospace" fontWeight="bold">main</text>
+            <text x="5" y="114" fill="#0EA5E9" fontSize="10" fontFamily="'JetBrains Mono', monospace" fontWeight="bold">feature/*</text>
 
             {/* ── main ── */}
             <line x1="68" y1="45" x2="590" y2="45" stroke="#6366F1" strokeWidth="3" />
             {[68, 100, 388, 445].map((x) => (
               <circle key={x} cx={x} cy={45} r={7} fill="#6366F1" />
             ))}
-            <text x="388" y="33" textAnchor="middle" fill="#6366F1" fontSize="9" fontFamily="monospace">merge</text>
-            <text x="445" y="33" textAnchor="middle" fill="#6366F1" fontSize="9" fontFamily="monospace">배포</text>
+            <text x="388" y="33" textAnchor="middle" fill="#6366F1" fontSize="9" fontFamily="'JetBrains Mono', monospace">merge</text>
+            <text x="445" y="33" textAnchor="middle" fill="#6366F1" fontSize="9" fontFamily="'JetBrains Mono', monospace">배포</text>
 
             {/* ── feature: (100,45)→(122,110) branch, (346,110)→(388,45) merge ── */}
             <path d="M100,45 C100,78 122,78 122,110"  fill="none" stroke="#0EA5E9" strokeWidth="2" strokeDasharray="5,3" />
@@ -753,7 +753,7 @@ $ git commit -m "style: 코드 들여쓰기 정리"`}</CodeBlock>
             {[122, 178, 234, 290, 346].map((x) => (
               <circle key={x} cx={x} cy={110} r={5} fill="#0EA5E9" />
             ))}
-            <text x="346" y="130" textAnchor="middle" fill="#0EA5E9" fontSize="9" fontFamily="monospace">Pull Request</text>
+            <text x="346" y="130" textAnchor="middle" fill="#0EA5E9" fontSize="9" fontFamily="'JetBrains Mono', monospace">Pull Request</text>
           </svg>
         </Card>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
