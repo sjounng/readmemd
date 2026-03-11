@@ -850,7 +850,7 @@ export default function Week2Content() {
               <p className="text-sm text-(--text-muted)">{pm.full}</p>
               <p className="text-base text-(--text-sub)">{pm.desc}</p>
               {pm.installCmd && (
-                <CodeBlock language="bash" className="text-xs">{pm.installCmd}</CodeBlock>
+                <CodeBlock className="text-xs">{pm.installCmd}</CodeBlock>
               )}
               <div className="grid grid-cols-2 gap-2 mt-auto pt-2 border-t border-(--border)">
                 <div>
@@ -912,11 +912,11 @@ export default function Week2Content() {
         <div className="grid md:grid-cols-2 gap-4 mb-6">
           <div>
             <p className="text-base font-semibold text-(--text-muted) mb-2">JavaScript</p>
-            <CodeBlock language="typescript">{TS_JS_COMPARE.js}</CodeBlock>
+            <CodeBlock>{TS_JS_COMPARE.js}</CodeBlock>
           </div>
           <div>
             <p className="text-base font-semibold text-(--accent) mb-2">TypeScript</p>
-            <CodeBlock language="typescript">{TS_JS_COMPARE.ts}</CodeBlock>
+            <CodeBlock>{TS_JS_COMPARE.ts}</CodeBlock>
           </div>
         </div>
 
@@ -932,7 +932,7 @@ export default function Week2Content() {
         </div>
 
         <h3 className="text-xl font-semibold mb-3">interface — 객체 타입 정의</h3>
-        <CodeBlock language="typescript">{TS_INTERFACE_EXAMPLE}</CodeBlock>
+        <CodeBlock>{TS_INTERFACE_EXAMPLE}</CodeBlock>
       </div>
 
       {/* ── 03. React 기초 (표지) ── */}
@@ -961,16 +961,16 @@ export default function Week2Content() {
         <Callout type="tip" className="mb-3">
           JSX는 JavaScript 안에서 HTML처럼 UI를 작성하는 문법입니다. React 컴포넌트의 반환값으로 사용합니다.
         </Callout>
-        <CodeBlock language="tsx" className="mb-6">{JSX_EXAMPLE}</CodeBlock>
+        <CodeBlock className="mb-6">{JSX_EXAMPLE}</CodeBlock>
 
         <h3 className="text-xl font-semibold mb-3">Props — 데이터 전달</h3>
-        <CodeBlock language="tsx" className="mb-6">{PROPS_EXAMPLE}</CodeBlock>
+        <CodeBlock className="mb-6">{PROPS_EXAMPLE}</CodeBlock>
 
         <h3 className="text-xl font-semibold mb-3">State — 상태 관리</h3>
         <Callout type="info" className="mb-3">
           <code>useState</code>로 선언한 값이 바뀌면 React가 자동으로 화면을 다시 그립니다.
         </Callout>
-        <CodeBlock language="tsx">{STATE_EXAMPLE}</CodeBlock>
+        <CodeBlock>{STATE_EXAMPLE}</CodeBlock>
       </div>
 
       {/* ── 04. Tailwind CSS (표지) ── */}
@@ -988,11 +988,11 @@ export default function Week2Content() {
         <div className="grid md:grid-cols-2 gap-4 mb-6">
           <div>
             <p className="text-base font-semibold text-(--text-muted) mb-2">기존 방식</p>
-            <CodeBlock language="css">{TAILWIND_VS_CSS.css}</CodeBlock>
+            <CodeBlock>{TAILWIND_VS_CSS.css}</CodeBlock>
           </div>
           <div>
             <p className="text-base font-semibold text-(--accent) mb-2">Tailwind</p>
-            <CodeBlock language="tsx">{TAILWIND_VS_CSS.tailwind}</CodeBlock>
+            <CodeBlock>{TAILWIND_VS_CSS.tailwind}</CodeBlock>
           </div>
         </div>
 
@@ -1024,7 +1024,7 @@ export default function Week2Content() {
       <div>
         <h3 className="text-3xl font-bold mb-6">반응형 & 상태 변형</h3>
         <h4 className="text-lg font-semibold mb-2">반응형 — 접두사로 화면 크기별 적용</h4>
-        <CodeBlock language="tsx" className="mb-5">{TAILWIND_RESPONSIVE_EXAMPLE}</CodeBlock>
+        <CodeBlock className="mb-5">{TAILWIND_RESPONSIVE_EXAMPLE}</CodeBlock>
 
         <h4 className="text-lg font-semibold mb-3">상태 변형 — 콜론으로 조건 지정</h4>
         <div className="rounded-xl overflow-hidden border border-(--border) divide-y divide-(--border)">
@@ -1055,7 +1055,7 @@ export default function Week2Content() {
           {CREATE_NEXTAPP_STEPS.map((step) => (
             <StepItem key={step.num} num={step.num} title={step.title}>
               {step.cmd && (
-                <CodeBlock language="bash" className="mt-2">{step.cmd}</CodeBlock>
+                <CodeBlock className="mt-2">{step.cmd}</CodeBlock>
               )}
               {step.desc && (
                 <p className="text-base text-(--text-sub) mt-1">{step.desc}</p>
@@ -1066,7 +1066,7 @@ export default function Week2Content() {
 
         <div className="mt-8 p-5 rounded-xl bg-(--bg-card) border border-(--border)">
           <p className="text-base text-(--text-muted) mb-2">생성 명령어</p>
-          <CodeBlock language="bash">{"$ npx create-next-app@latest 프로젝트이름 --typescript --tailwind"}</CodeBlock>
+          <CodeBlock>{"$ npx create-next-app@latest 프로젝트이름 --typescript --tailwind"}</CodeBlock>
         </div>
       </div>
 
@@ -1086,7 +1086,7 @@ export default function Week2Content() {
       {/* ── 05. 생성된 폴더 구조 ── */}
       <div>
         <h3 className="text-3xl font-bold mb-6">생성된 폴더 구조</h3>
-        <CodeBlock language="bash">{NEXTAPP_FOLDER_STRUCTURE}</CodeBlock>
+        <CodeBlock>{NEXTAPP_FOLDER_STRUCTURE}</CodeBlock>
       </div>
 
       {/* ── 06. 페이지 구조 만들기 (표지) ── */}
