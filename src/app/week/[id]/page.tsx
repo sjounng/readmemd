@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import Week1Content from "./weeks/Week1Content";
+import Week2Content from "./weeks/Week2Content";
 
 /* ── 주차별 콘텐츠 매핑 ── */
 const weekContentMap: Record<string, React.ComponentType> = {
   "1": Week1Content,
-  // "2": Week2Content, ← 주차 추가 시 여기에 등록
+  "2": Week2Content,
   // "3": Week3Content,
 };
 

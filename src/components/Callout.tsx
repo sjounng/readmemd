@@ -29,7 +29,7 @@ export default function Callout({ children, type = "info" }: { children: React.R
   return (
     <div className={`flex items-start gap-3 border-l-4 rounded-r-lg px-5 py-4 my-4 ${colors[type]}`}>
       {icons[type]}
-      <div>{children}</div>
+      <div className="text-base">{children}</div>
     </div>
   );
 }
