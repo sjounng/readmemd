@@ -14,7 +14,7 @@ export default function WeekHero({
   title: string;
   subtitle?: string;
   description: string;
-  tocItems: TocItem[];
+  tocItems?: TocItem[];
 }) {
   return (
     <section className="pt-28 pb-12">
@@ -27,22 +27,24 @@ export default function WeekHero({
           </>
         )}
       </h1>
-      <p className="text-lg text-(--text-sub) max-w-2xl mb-8">{description}</p>
+      <p className="text-xl text-(--text-sub) max-w-2xl mb-8">{description}</p>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {tocItems.map((item) => (
-          <a
-            key={item.num}
-            href={item.href}
-            className="group flex items-center gap-3 p-4 rounded-lg bg-(--bg-card) border border-(--border) hover:border-(--accent) transition-colors"
-          >
-            <span className="text-2xl font-bold text-(--accent) font-mono">{item.num}</span>
-            <span className="text-sm font-medium group-hover:text-(--accent) transition-colors">
-              {item.title}
-            </span>
-          </a>
-        ))}
-      </div>
+      {tocItems && tocItems.length > 0 && (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {tocItems.map((item) => (
+            <a
+              key={item.num}
+              href={item.href}
+              className="group flex items-center gap-3 p-4 rounded-lg bg-(--bg-card) border border-(--border) hover:border-(--accent) transition-colors"
+            >
+              <span className="text-2xl font-bold text-(--accent) font-mono">{item.num}</span>
+              <span className="text-base font-medium group-hover:text-(--accent) transition-colors">
+                {item.title}
+              </span>
+            </a>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

@@ -20,16 +20,16 @@ const icons = {
   ),
 };
 
-export default function Callout({ children, type = "info" }: { children: React.ReactNode; type?: "info" | "tip" | "warn" }) {
+export default function Callout({ children, type = "info", className }: { children: React.ReactNode; type?: "info" | "tip" | "warn"; className?: string }) {
   const colors = {
     info: "border-(--accent) bg-(--callout-info-bg)",
     tip: "border-violet-500 bg-(--callout-tip-bg)",
     warn: "border-sky-500 bg-(--callout-warn-bg)",
   };
   return (
-    <div className={`flex items-start gap-3 border-l-4 rounded-r-lg px-5 py-4 my-4 ${colors[type]}`}>
+    <div className={`flex items-start gap-3 border-l-4 rounded-r-lg px-5 py-4 my-4 ${colors[type]}${className ? ` ${className}` : ""}`}>
       {icons[type]}
-      <div>{children}</div>
+      <div className="text-base">{children}</div>
     </div>
   );
 }

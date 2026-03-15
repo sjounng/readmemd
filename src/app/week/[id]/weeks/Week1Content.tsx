@@ -114,10 +114,10 @@ export default function Week1Content() {
       {/* ── Slide 2: OT – 강의 소개 ── */}
       <div data-slide-id="ot">
         <SectionTitle num="00" title="OT" id="ot" />
-        <h3 className="text-xl font-bold mb-4">강의 소개</h3>
+        <h3 className="text-2xl font-bold mb-4">강의 소개</h3>
         <Card className="mb-6">
           <h4 className="text-2xl font-bold text-(--accent) mb-3">{STUDY_INFO.title}</h4>
-          <p className="text-(--text-sub) mb-6">{STUDY_INFO.goal}</p>
+          <p className="text-lg text-(--text-sub) mb-6">{STUDY_INFO.goal}</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="flex items-start gap-3">
               <svg className="w-5 h-5 text-(--accent) shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -127,8 +127,8 @@ export default function Week1Content() {
                 <path d="M16 3.13a4 4 0 0 1 0 7.75" />
               </svg>
               <div>
-                <p className="font-semibold text-sm">대상</p>
-                <p className="text-sm text-(--text-sub)">{STUDY_INFO.target}</p>
+                <p className="font-semibold text-base">대상</p>
+                <p className="text-base text-(--text-sub)">{STUDY_INFO.target}</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
@@ -139,8 +139,8 @@ export default function Week1Content() {
                 <line x1="3" x2="21" y1="10" y2="10" />
               </svg>
               <div>
-                <p className="font-semibold text-sm">진행 방식</p>
-                <p className="text-sm text-(--text-sub)">{STUDY_INFO.format}</p>
+                <p className="font-semibold text-base">진행 방식</p>
+                <p className="text-base text-(--text-sub)">{STUDY_INFO.format}</p>
               </div>
             </div>
           </div>
@@ -152,7 +152,7 @@ export default function Week1Content() {
 
       {/* ── Slide 3: 멘토 소개 ── */}
       <div>
-        <h3 className="text-xl font-bold mb-4">멘토 소개</h3>
+        <h3 className="text-2xl font-bold mb-4">멘토 소개</h3>
         <Card className="mb-6">
           <div className="flex items-center gap-5">
             <div className="w-16 h-16 rounded-full bg-(--accent) flex items-center justify-center shrink-0">
@@ -162,14 +162,14 @@ export default function Week1Content() {
               </svg>
             </div>
             <div>
-              <h4 className="text-xl font-bold mb-1">{MENTOR.name}</h4>
-              <p className="text-sm text-(--text-sub) mb-2">{MENTOR.department}</p>
-              <p className="text-sm text-(--text-sub) mb-2">{MENTOR.email}</p>
+              <h4 className="text-2xl font-bold mb-1">{MENTOR.name}</h4>
+              <p className="text-base text-(--text-sub) mb-2">{MENTOR.department}</p>
+              <p className="text-base text-(--text-sub) mb-2">{MENTOR.email}</p>
               <a
                 href={`https://github.com/${MENTOR.github}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-(--accent) hover:underline"
+                className="inline-flex items-center gap-2 text-base text-(--accent) hover:underline"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z" />
@@ -187,10 +187,10 @@ export default function Week1Content() {
       {/* ── Slide 4: 01 웹 서비스 이해 – 요청 흐름 ── */}
       <div data-slide-id="web">
         <SectionTitle num="01" title="웹 서비스 이해하기" id="web" />
-        <p className="text-(--text-sub) mb-2 text-lg">
+        <p className="text-(--text-sub) mb-2 text-xl">
           브라우저에 주소를 입력하면 어떤 일이 벌어질까요?
         </p>
-        <p className="text-(--text-sub) mb-8 text-sm">
+        <p className="text-(--text-sub) mb-8 text-base">
           우리가 naver.com을 입력하는 순간, 요청은 프론트엔드 → 백엔드 → 데이터베이스 순서로 흘러갔다가 결과를 역순으로 돌려줍니다.
         </p>
         <div className="flex flex-col md:flex-row gap-4 mb-6">
@@ -200,8 +200,8 @@ export default function Week1Content() {
                 <div className="flex justify-center mb-2">
                   <FlowIcon type={item.icon} />
                 </div>
-                <h3 className="font-bold text-(--accent) mb-1">{item.label}</h3>
-                <p className="text-sm text-(--text-sub)">{item.desc}</p>
+                <h3 className="text-lg font-bold text-(--accent) mb-1">{item.label}</h3>
+                <p className="text-base text-(--text-sub)">{item.desc}</p>
               </Card>
               {i < 3 && (
                 <div className="hidden md:block text-(--accent) text-2xl mt-2">→</div>
@@ -216,17 +216,17 @@ export default function Week1Content() {
 
       {/* ── Slide 5: 식당 비유 ── */}
       <div>
-        <h3 className="text-xl font-bold mb-2">식당에 비유하면?</h3>
-        <p className="text-(--text-sub) mb-6 text-sm">
+        <h3 className="text-2xl font-bold mb-2">식당에 비유하면?</h3>
+        <p className="text-(--text-sub) mb-6 text-base">
           웹 서비스의 구조를 식당에 빗대어 생각하면 훨씬 이해하기 쉽습니다.
         </p>
         <div className="grid md:grid-cols-3 gap-4 mb-6">
           {RESTAURANT_METAPHOR.map((r) => (
             <Card key={r.role} className={`border-t-2 ${r.color}`}>
-              <h4 className="font-bold text-lg mb-1">{r.role}</h4>
-              <p className="text-(--accent) font-semibold text-sm mb-2">= {r.metaphor}</p>
-              <p className="text-sm text-(--text-sub) mb-3">{r.desc}</p>
-              <span className="inline-block px-2.5 py-1 text-xs rounded bg-(--bg-primary) border border-(--border) text-(--text-muted)">
+              <h4 className="font-bold text-xl mb-1">{r.role}</h4>
+              <p className="text-(--accent) font-semibold text-base mb-2">= {r.metaphor}</p>
+              <p className="text-base text-(--text-sub) mb-3">{r.desc}</p>
+              <span className="inline-block px-2.5 py-1 text-sm rounded bg-(--bg-primary) border border-(--border) text-(--text-muted)">
                 {r.tech}
               </span>
             </Card>
@@ -239,13 +239,13 @@ export default function Week1Content() {
 
       {/* ── Slide 6: 사용하는 기술 개요 ── */}
       <div>
-        <h3 className="text-xl font-bold mb-4">사용하는 기술</h3>
+        <h3 className="text-2xl font-bold mb-4">사용하는 기술</h3>
         <div className="grid md:grid-cols-3 gap-4 mb-6">
           {TECH_STACK.map((tech) => (
             <Card key={tech.name} className={`border-t-2 ${tech.color}`}>
-              <p className="text-xs font-bold text-(--text-muted) tracking-widest mb-2">{tech.role}</p>
-              <h4 className="text-xl font-bold mb-2">{tech.name}</h4>
-              <p className="text-sm text-(--text-sub)">{tech.desc}</p>
+              <p className="text-sm font-bold text-(--text-muted) tracking-widest mb-2">{tech.role}</p>
+              <h4 className="text-2xl font-bold mb-2">{tech.name}</h4>
+              <p className="text-base text-(--text-sub)">{tech.desc}</p>
             </Card>
           ))}
         </div>
@@ -258,18 +258,18 @@ export default function Week1Content() {
       {TECH_DETAILS.map((tech) => (
         <div key={tech.name}>
           <div className="flex items-center gap-3 mb-4">
-            <span className={`text-xs font-bold tracking-widest px-2.5 py-1 rounded border ${tech.borderTop} text-(--text-muted)`}>
+            <span className={`text-sm font-bold tracking-widest px-2.5 py-1 rounded border ${tech.borderTop} text-(--text-muted)`}>
               {tech.role}
             </span>
           </div>
           <h3 className={`text-3xl font-extrabold mb-1 ${tech.accentText}`}>{tech.name}</h3>
-          <p className="text-(--text-sub) mb-6">{tech.tagline}</p>
+          <p className="text-lg text-(--text-sub) mb-6">{tech.tagline}</p>
 
           <div className="grid md:grid-cols-3 gap-4 mb-6">
             {tech.features.map((f) => (
               <Card key={f.title} className={`border-t-2 ${tech.borderTop}`}>
-                <h4 className="font-bold mb-2">{f.title}</h4>
-                <p className="text-sm text-(--text-sub)">{f.desc}</p>
+                <h4 className="text-lg font-bold mb-2">{f.title}</h4>
+                <p className="text-base text-(--text-sub)">{f.desc}</p>
               </Card>
             ))}
           </div>
@@ -285,17 +285,17 @@ export default function Week1Content() {
       {/* ── Slide 10: 02 개발 환경 – VS Code 설치 ── */}
       <div data-slide-id="env">
         <SectionTitle num="02" title="개발 환경 세팅" id="env" />
-        <h3 className="text-xl font-bold mb-2">VS Code</h3>
-        <p className="text-(--text-sub) mb-4 text-sm">
+        <h3 className="text-2xl font-bold mb-2">VS Code</h3>
+        <p className="text-(--text-sub) mb-4 text-base">
           Visual Studio Code는 개발자들이 가장 많이 사용하는 무료 코드 편집기입니다. 문법 강조, 자동완성, Git 연동 등 개발에 필요한 기능이 기본으로 들어있습니다.
         </p>
         <Card className="mb-6">
-          <h4 className="font-bold text-(--accent) mb-3">다운로드</h4>
+          <h4 className="text-lg font-bold text-(--accent) mb-3">다운로드</h4>
           <a
             href="https://code.visualstudio.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-(--bg-primary) border border-(--border) text-sm hover:border-(--accent) transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-(--bg-primary) border border-(--border) text-base hover:border-(--accent) transition-colors"
           >
             <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -305,7 +305,7 @@ export default function Week1Content() {
             https://code.visualstudio.com
           </a>
         </Card>
-        <h4 className="font-bold mb-3">설치 후 확인할 것</h4>
+        <h4 className="text-lg font-bold mb-3">설치 후 확인할 것</h4>
         <div className="space-y-3">
           {VSCODE_STEPS.map((s) => (
             <StepItem key={s.num} num={s.num} title={s.title} desc={s.desc} />
@@ -315,14 +315,14 @@ export default function Week1Content() {
 
       {/* ── Slide 11: VS Code 추천 확장 프로그램 ── */}
       <div>
-        <h3 className="text-xl font-bold mb-6">VS Code 추천 확장 프로그램</h3>
+        <h3 className="text-2xl font-bold mb-6">VS Code 추천 확장 프로그램</h3>
         <div className="grid md:grid-cols-2 gap-3 mb-6">
           {VSCODE_EXTENSIONS.map((ext) => (
             <div key={ext.name} className="flex items-start gap-3 p-3 rounded-lg bg-(--bg-card) border border-(--border)">
               <div className="shrink-0 w-2 h-2 rounded-full bg-(--accent) mt-2" />
               <div>
-                <p className="font-semibold text-sm">{ext.name}</p>
-                <p className="text-xs text-(--text-sub) mt-0.5">{ext.desc}</p>
+                <p className="font-semibold text-base">{ext.name}</p>
+                <p className="text-sm text-(--text-sub) mt-0.5">{ext.desc}</p>
               </div>
             </div>
           ))}
@@ -334,13 +334,13 @@ export default function Week1Content() {
 
       {/* ── Slide 12: 터미널 명령어 ── */}
       <div>
-        <h3 className="text-xl font-bold mb-2">터미널 명령어</h3>
-        <p className="text-(--text-sub) mb-2 text-sm">
+        <h3 className="text-2xl font-bold mb-2">터미널 명령어</h3>
+        <p className="text-(--text-sub) mb-2 text-base">
           터미널(Terminal)은 텍스트로 컴퓨터에 명령을 내리는 도구입니다. VS Code에서{" "}
-          <code className="px-1.5 py-0.5 rounded bg-(--bg-code) text-(--accent) text-sm">Ctrl + Shift + ` / Cmd + Shift + `</code>{" "}
+          <code className="px-1.5 py-0.5 rounded bg-(--bg-code) text-(--accent) text-base">Ctrl + Shift + ` / Cmd + Shift + `</code>{" "}
           을 누르면 내장 터미널이 열립니다.
         </p>
-        <p className="text-(--text-sub) mb-6 text-sm">
+        <p className="text-(--text-sub) mb-6 text-base">
           처음엔 낯설지만 개발자에게 터미널은 필수 도구입니다. 아래 5가지 명령어만 알아도 충분히 시작할 수 있습니다.
         </p>
         <Card className="mb-6">
@@ -349,7 +349,7 @@ export default function Week1Content() {
             const cmds: { cmd: string; desc: string; ex: string }[] = osTab === 0 ? [...TERMINAL_COMMANDS_MAC] : [...TERMINAL_COMMANDS_WIN];
             return (
               <div className="overflow-x-auto">
-                <table className="w-full text-sm">
+                <table className="w-full text-base">
                   <thead>
                     <tr className="bg-(--accent) text-white">
                       <th className="px-4 py-3 text-left rounded-tl-lg">명령어</th>
@@ -362,7 +362,7 @@ export default function Week1Content() {
                       <tr key={c.cmd} className={i % 2 === 0 ? "bg-(--bg-card)" : "bg-(--bg-primary)"}>
                         <td className="px-4 py-3 font-mono text-(--accent)">{c.cmd}</td>
                         <td className="px-4 py-3 text-(--text-sub)">{c.desc}</td>
-                        <td className="px-4 py-3 font-mono text-(--text-muted) text-xs">{c.ex}</td>
+                        <td className="px-4 py-3 font-mono text-(--text-muted) text-sm">{c.ex}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -371,7 +371,7 @@ export default function Week1Content() {
             );
           })()}
         </Card>
-        <h4 className="font-bold mb-3">직접 따라해보세요</h4>
+        <h4 className="text-lg font-bold mb-3">직접 따라해보세요</h4>
         {osTab === 0 ? (
           <CodeBlock title="Terminal (Mac)">{`# 바탕화면으로 이동
 $ cd Desktop
@@ -401,15 +401,15 @@ $ pwd`}</CodeBlock>
 
       {/* ── Slide 13: Homebrew (Mac) ── */}
       <div>
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-(--bg-card) border border-(--accent) text-xs font-bold text-(--accent) mb-4">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-(--bg-card) border border-(--accent) text-sm font-bold text-(--accent) mb-4">
           <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M9 12l2 2 4-4" />
             <path d="M12 3a9 9 0 1 0 0 18A9 9 0 0 0 12 3z" />
           </svg>
           Mac 전용
         </div>
-        <h3 className="text-xl font-bold mb-2">Homebrew</h3>
-        <p className="text-(--text-sub) mb-6 text-sm">
+        <h3 className="text-2xl font-bold mb-2">Homebrew</h3>
+        <p className="text-(--text-sub) mb-6 text-base">
           Homebrew는 macOS의 패키지 관리자입니다. Node.js, Git 같은 개발 도구를 명령어 한 줄로 설치하고 관리할 수 있습니다.
           <br /><br />
           Windows는 각 도구를 공식 사이트에서 직접 설치하면 됩니다.
@@ -431,18 +431,18 @@ $ pwd`}</CodeBlock>
 
       {/* ── Slide 13: Node.js 소개 ── */}
       <div>
-        <h3 className="text-xl font-bold mb-2">Node.js</h3>
-        <p className="text-(--text-sub) mb-6 text-sm">
+        <h3 className="text-2xl font-bold mb-2">Node.js</h3>
+        <p className="text-(--text-sub) mb-6 text-base">
           Node.js는 JavaScript를 브라우저 밖(서버, 터미널)에서도 실행할 수 있게 해주는 런타임입니다. Next.js 같은 프레임워크를 설치하고 실행할 때 반드시 필요합니다.
         </p>
         <div className="grid md:grid-cols-2 gap-4 mb-6">
           <Card className="border-t-2 border-t-(--accent)">
-            <h4 className="font-bold mb-2">Node.js</h4>
-            <p className="text-sm text-(--text-sub)">JavaScript 런타임. 브라우저 없이 JS 코드를 실행할 수 있습니다. Next.js, Nest.js 등 모든 JS 프레임워크의 기반입니다.</p>
+            <h4 className="text-lg font-bold mb-2">Node.js</h4>
+            <p className="text-base text-(--text-sub)">JavaScript 런타임. 브라우저 없이 JS 코드를 실행할 수 있습니다. Next.js, Nest.js 등 모든 JS 프레임워크의 기반입니다.</p>
           </Card>
           <Card className="border-t-2 border-t-violet-500">
-            <h4 className="font-bold mb-2">npm</h4>
-            <p className="text-sm text-(--text-sub)">Node Package Manager. Node.js를 설치하면 자동으로 함께 설치됩니다. 외부 라이브러리를 설치할 때 사용합니다.</p>
+            <h4 className="text-lg font-bold mb-2">npm</h4>
+            <p className="text-base text-(--text-sub)">Node Package Manager. Node.js를 설치하면 자동으로 함께 설치됩니다. 외부 라이브러리를 설치할 때 사용합니다.</p>
           </Card>
         </div>
         <Callout type="info">
@@ -452,23 +452,23 @@ $ pwd`}</CodeBlock>
 
       {/* ── Slide 14: Node.js 설치 ── */}
       <div>
-        <h3 className="text-xl font-bold mb-4">Node.js 설치</h3>
+        <h3 className="text-2xl font-bold mb-4">Node.js 설치</h3>
         <Card className="mb-4">
           <Tabs tabs={ENV_OS_TABS} activeTab={osTab} onTabChange={setOsTab} />
           {osTab === 0 && (
             <div>
-              <p className="text-sm text-(--text-sub) mb-3">Homebrew가 설치된 상태에서 아래 명령어를 실행합니다. npm은 자동으로 함께 설치됩니다.</p>
+              <p className="text-base text-(--text-sub) mb-3">Homebrew가 설치된 상태에서 아래 명령어를 실행합니다. npm은 자동으로 함께 설치됩니다.</p>
               <CodeBlock>{`$ brew install node`}</CodeBlock>
             </div>
           )}
           {osTab === 1 && (
             <div>
-              <p className="text-sm text-(--text-sub) mb-3">nodejs.org 에서 LTS 버전을 다운로드합니다. npm은 자동으로 함께 설치됩니다.</p>
+              <p className="text-base text-(--text-sub) mb-3">nodejs.org 에서 LTS 버전을 다운로드합니다. npm은 자동으로 함께 설치됩니다.</p>
               <a
                 href="https://nodejs.org"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-(--bg-primary) border border-(--border) text-sm hover:border-(--accent) transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-(--bg-primary) border border-(--border) text-base hover:border-(--accent) transition-colors"
               >
                 <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -480,7 +480,7 @@ $ pwd`}</CodeBlock>
             </div>
           )}
         </Card>
-        <h4 className="font-bold mb-3">설치 확인</h4>
+        <h4 className="text-lg font-bold mb-3">설치 확인</h4>
         <CodeBlock title="Terminal">{`$ node --version
 v20.x.x   ← 이렇게 버전이 나오면 성공!
 
@@ -494,15 +494,15 @@ $ npm --version
       {/* ── Slide 17: 03 Git – 왜 필요한가 ── */}
       <div data-slide-id="git">
         <SectionTitle num="03" title="Git 기본 개념" id="git" />
-        <h3 className="text-xl font-bold mb-4">Git이 필요한 이유</h3>
+        <h3 className="text-2xl font-bold mb-4">Git이 필요한 이유</h3>
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <Card>
-            <h4 className="font-bold text-lg mb-4">이런 경험 있으시죠?</h4>
+            <h4 className="font-bold text-xl mb-4">이런 경험 있으시죠?</h4>
             <div className="space-y-2">
               {FILE_VERSION_EXAMPLES.map((f) => (
                 <div
                   key={f}
-                  className="flex items-center gap-2 px-3 py-2 rounded bg-(--bg-primary) font-mono text-sm text-(--text-muted)"
+                  className="flex items-center gap-2 px-3 py-2 rounded bg-(--bg-primary) font-mono text-base text-(--text-muted)"
                 >
                   <svg className="w-4 h-4 shrink-0 text-(--text-muted)" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
@@ -514,14 +514,14 @@ $ npm --version
             </div>
           </Card>
           <Card>
-            <h4 className="font-bold text-lg mb-4 text-(--accent)">Git이 해결합니다!</h4>
+            <h4 className="font-bold text-xl mb-4 text-(--accent)">Git이 해결합니다!</h4>
             <div className="space-y-4">
               {GIT_BENEFITS.map((s) => (
                 <div key={s.title} className="flex gap-3">
                   <span className="text-(--accent) mt-0.5">✓</span>
                   <div>
-                    <p className="font-semibold">{s.title}</p>
-                    <p className="text-sm text-(--text-sub)">{s.desc}</p>
+                    <p className="text-lg font-semibold">{s.title}</p>
+                    <p className="text-base text-(--text-sub)">{s.desc}</p>
                   </div>
                 </div>
               ))}
@@ -535,15 +535,15 @@ $ npm --version
 
       {/* ── Slide 14: Git 핵심 개념 – Repository ── */}
       <div>
-        <h3 className="text-xl font-bold mb-1">핵심 개념 1 — Repository (저장소)</h3>
-        <p className="text-sm text-(--text-muted) mb-6">프로젝트의 모든 파일과 변경 이력이 저장되는 공간</p>
-        <p className="text-(--text-sub) mb-4">
-          하나의 프로젝트 폴더 = 하나의 Repository입니다. Git을 초기화하면 폴더 안에 숨김 폴더 <code className="px-1.5 py-0.5 rounded bg-(--bg-code) text-(--accent) text-sm">.git</code>이 생성되고, 이곳에 모든 이력이 저장됩니다.
+        <h3 className="text-2xl font-bold mb-1">핵심 개념 1 — Repository (저장소)</h3>
+        <p className="text-base text-(--text-muted) mb-6">프로젝트의 모든 파일과 변경 이력이 저장되는 공간</p>
+        <p className="text-lg text-(--text-sub) mb-4">
+          하나의 프로젝트 폴더 = 하나의 Repository입니다. Git을 초기화하면 폴더 안에 숨김 폴더 <code className="px-1.5 py-0.5 rounded bg-(--bg-code) text-(--accent) text-base">.git</code>이 생성되고, 이곳에 모든 이력이 저장됩니다.
         </p>
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <h4 className="font-bold mb-3">Local Repository</h4>
-            <p className="text-sm text-(--text-sub) mb-3">내 컴퓨터에 있는 저장소입니다. 아래 명령어로 현재 폴더를 Git 저장소로 초기화합니다.</p>
+            <h4 className="text-lg font-bold mb-3">Local Repository</h4>
+            <p className="text-base text-(--text-sub) mb-3">내 컴퓨터에 있는 저장소입니다. 아래 명령어로 현재 폴더를 Git 저장소로 초기화합니다.</p>
             <CodeBlock>{`$ git init`}</CodeBlock>
             <CodeBlock title="초기화 후 폴더 구조">{`my-project/
   ├── .git/        ← Git이 관리하는 숨김 폴더
@@ -552,16 +552,16 @@ $ npm --version
   └── README.md`}</CodeBlock>
           </div>
           <div>
-            <h4 className="font-bold mb-3">Remote Repository</h4>
-            <p className="text-sm text-(--text-sub) mb-3">GitHub 같은 온라인 서버에 있는 저장소입니다. 팀원들과 코드를 공유할 때 사용합니다.</p>
+            <h4 className="text-lg font-bold mb-3">Remote Repository</h4>
+            <p className="text-base text-(--text-sub) mb-3">GitHub 같은 온라인 서버에 있는 저장소입니다. 팀원들과 코드를 공유할 때 사용합니다.</p>
             <Card className="border-t-2 border-t-(--accent)">
               <div className="flex items-center gap-3">
                 <svg className="w-6 h-6 text-(--accent)" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z" />
                 </svg>
                 <div>
-                  <p className="font-semibold">GitHub</p>
-                  <p className="text-sm text-(--text-muted)">대표적인 Remote Repository 서비스</p>
+                  <p className="text-lg font-semibold">GitHub</p>
+                  <p className="text-base text-(--text-muted)">대표적인 Remote Repository 서비스</p>
                 </div>
               </div>
             </Card>
@@ -571,9 +571,9 @@ $ npm --version
 
       {/* ── Slide 15: Git 핵심 개념 – Commit ── */}
       <div>
-        <h3 className="text-xl font-bold mb-1">핵심 개념 2 — Commit (커밋)</h3>
-        <p className="text-sm text-(--text-muted) mb-6">변경사항을 저장하는 하나의 단위</p>
-        <p className="text-(--text-sub) mb-4">
+        <h3 className="text-2xl font-bold mb-1">핵심 개념 2 — Commit (커밋)</h3>
+        <p className="text-base text-(--text-muted) mb-6">변경사항을 저장하는 하나의 단위</p>
+        <p className="text-lg text-(--text-sub) mb-4">
           커밋은 &apos;이 시점의 코드 상태&apos;를 사진처럼 찍어 저장하는 행위입니다. 각 커밋에는 메시지를 남겨 무엇을 변경했는지 기록합니다.
         </p>
         <div className="flex items-center gap-2 overflow-x-auto py-6 mb-4">
@@ -581,9 +581,9 @@ $ npm --version
             <div key={c.hash} className="flex items-center shrink-0">
               <div className="flex flex-col items-center min-w-32">
                 <div className="w-5 h-5 rounded-full bg-(--accent)" />
-                <code className="text-xs text-(--accent) mt-2">{c.hash}</code>
-                <p className="text-sm font-medium mt-1 text-center">{c.msg}</p>
-                <p className="text-xs text-(--text-muted)">{c.time}</p>
+                <code className="text-sm text-(--accent) mt-2">{c.hash}</code>
+                <p className="text-base font-medium mt-1 text-center">{c.msg}</p>
+                <p className="text-sm text-(--text-muted)">{c.time}</p>
               </div>
               {i < COMMIT_TIMELINE.length - 1 && (
                 <div className="w-10 h-0.5 bg-(--accent) mx-1" />
@@ -601,9 +601,9 @@ $ git log --oneline                   # 커밋 이력 확인`}</CodeBlock>
 
       {/* ── Slide: 커밋 메시지 작성법 — Conventional Commits ── */}
       <div>
-        <h3 className="text-xl font-bold mb-1">커밋 메시지 작성법</h3>
-        <p className="text-sm text-(--text-muted) mb-6">Conventional Commits 컨벤션</p>
-        <p className="text-(--text-sub) mb-4 text-sm">
+        <h3 className="text-2xl font-bold mb-1">커밋 메시지 작성법</h3>
+        <p className="text-base text-(--text-muted) mb-6">Conventional Commits 컨벤션</p>
+        <p className="text-(--text-sub) mb-4 text-base">
           팀에서 커밋 메시지 형식을 통일하면 히스토리가 읽기 쉬워지고, 자동으로 CHANGELOG를 생성할 수도 있습니다.
           Conventional Commits는 가장 널리 쓰이는 커밋 메시지 규칙입니다.
         </p>
@@ -614,11 +614,11 @@ $ git commit -m "fix(auth): 토큰 만료 오류 수정"
 $ git commit -m "docs: README 업데이트"
 $ git commit -m "style: 코드 들여쓰기 정리"`}</CodeBlock>
         <div className="mt-4 rounded-lg border border-(--border) overflow-hidden mb-4">
-          <div className="px-4 py-2 bg-(--accent) text-white text-xs font-bold tracking-widest">TYPE</div>
+          <div className="px-4 py-2 bg-(--accent) text-white text-sm font-bold tracking-widest">TYPE</div>
           {COMMIT_TYPES.map((t, i) => (
             <div
               key={t.type}
-              className={`flex items-baseline gap-4 px-4 py-2.5 text-sm ${i % 2 === 0 ? "bg-(--bg-card)" : "bg-(--bg-primary)"}`}
+              className={`flex items-baseline gap-4 px-4 py-2.5 text-base ${i % 2 === 0 ? "bg-(--bg-card)" : "bg-(--bg-primary)"}`}
             >
               <code className={`font-mono font-bold w-20 shrink-0 ${t.color}`}>{t.type}</code>
               <span className="text-(--text-sub)">{t.desc}</span>
@@ -633,9 +633,9 @@ $ git commit -m "style: 코드 들여쓰기 정리"`}</CodeBlock>
 
       {/* ── Slide 16: Git 핵심 개념 – Branch ── */}
       <div>
-        <h3 className="text-xl font-bold mb-1">핵심 개념 3 — Branch (브랜치)</h3>
-        <p className="text-sm text-(--text-muted) mb-6">독립적인 작업 공간</p>
-        <p className="text-(--text-sub) mb-4">
+        <h3 className="text-2xl font-bold mb-1">핵심 개념 3 — Branch (브랜치)</h3>
+        <p className="text-base text-(--text-muted) mb-6">독립적인 작업 공간</p>
+        <p className="text-lg text-(--text-sub) mb-4">
           브랜치는 기존 코드에 영향을 주지 않고 새로운 기능을 개발할 수 있는 평행 작업 공간입니다. 완성되면 <strong>main</strong> 브랜치에 합칩니다(merge).
         </p>
         <Card className="py-8 px-6 mb-4">
@@ -665,8 +665,8 @@ $ git commit -m "style: 코드 들여쓰기 정리"`}</CodeBlock>
 
       {/* ── Slide: Git Flow ── */}
       <div>
-        <h3 className="text-xl font-bold mb-1">브랜치 전략 1 — Git Flow</h3>
-        <p className="text-sm text-(--text-muted) mb-4">역할별 브랜치를 엄격히 분리하는 전략. 명확한 배포 주기가 있는 중대형 프로젝트에 적합합니다.</p>
+        <h3 className="text-2xl font-bold mb-1">브랜치 전략 1 — Git Flow</h3>
+        <p className="text-base text-(--text-muted) mb-4">역할별 브랜치를 엄격히 분리하는 전략. 명확한 배포 주기가 있는 중대형 프로젝트에 적합합니다.</p>
         <Card className="py-6 px-2 mb-4 overflow-x-auto">
           <svg viewBox="0 0 700 230" className="w-full h-auto min-w-130">
             {/* ── labels ── */}
@@ -718,10 +718,10 @@ $ git commit -m "style: 코드 들여쓰기 정리"`}</CodeBlock>
         <div className="space-y-2">
           {GIT_FLOW_BRANCHES.map((b) => (
             <div key={b.name} className={`flex items-start gap-3 px-4 py-2.5 rounded-lg bg-(--bg-card) ${b.color}`}>
-              <span className={`text-xs font-bold font-mono px-2 py-0.5 rounded shrink-0 mt-0.5 ${b.badge}`}>{b.name}</span>
+              <span className={`text-sm font-bold font-mono px-2 py-0.5 rounded shrink-0 mt-0.5 ${b.badge}`}>{b.name}</span>
               <div>
-                <p className="text-sm font-semibold">{b.role}</p>
-                <p className="text-xs text-(--text-muted) mt-0.5">{b.desc}</p>
+                <p className="text-base font-semibold">{b.role}</p>
+                <p className="text-sm text-(--text-muted) mt-0.5">{b.desc}</p>
               </div>
             </div>
           ))}
@@ -730,8 +730,8 @@ $ git commit -m "style: 코드 들여쓰기 정리"`}</CodeBlock>
 
       {/* ── Slide: GitHub Flow ── */}
       <div>
-        <h3 className="text-xl font-bold mb-1">브랜치 전략 2 — GitHub Flow</h3>
-        <p className="text-sm text-(--text-muted) mb-4">main + feature 브랜치만 사용하는 단순한 전략. 빠른 배포와 소규모 팀에 적합합니다.</p>
+        <h3 className="text-2xl font-bold mb-1">브랜치 전략 2 — GitHub Flow</h3>
+        <p className="text-base text-(--text-muted) mb-4">main + feature 브랜치만 사용하는 단순한 전략. 빠른 배포와 소규모 팀에 적합합니다.</p>
         <Card className="py-6 px-2 mb-4 overflow-x-auto">
           <svg viewBox="0 0 620 145" className="w-full h-auto min-w-115">
             {/* labels */}
@@ -759,13 +759,13 @@ $ git commit -m "style: 코드 들여쓰기 정리"`}</CodeBlock>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
           {GITHUB_FLOW_STEPS.map((s) => (
             <div key={s.num} className="rounded-lg border border-(--border) bg-(--bg-card) p-3">
-              <span className="w-5 h-5 rounded-full bg-(--accent) text-white text-xs font-bold inline-flex items-center justify-center mb-2">
+              <span className="w-5 h-5 rounded-full bg-(--accent) text-white text-sm font-bold inline-flex items-center justify-center mb-2">
                 {s.num}
               </span>
-              <p className="text-sm font-semibold leading-tight">{s.title}</p>
-              <p className="text-xs text-(--text-muted) mt-1">{s.desc}</p>
+              <p className="text-base font-semibold leading-tight">{s.title}</p>
+              <p className="text-sm text-(--text-muted) mt-1">{s.desc}</p>
               {s.cmd && (
-                <code className="block mt-2 text-xs font-mono text-(--accent) bg-(--bg-primary) px-2 py-1 rounded break-all">
+                <code className="block mt-2 text-sm font-mono text-(--accent) bg-(--bg-primary) px-2 py-1 rounded break-all">
                   {s.cmd.replace(/^\$ /, "")}
                 </code>
               )}
@@ -779,27 +779,27 @@ $ git commit -m "style: 코드 들여쓰기 정리"`}</CodeBlock>
 
       {/* ── Slide 17: Git 설치 및 초기 설정 ── */}
       <div>
-        <h3 className="text-xl font-bold mb-2">Git 설치 및 초기 설정</h3>
-        <p className="text-(--text-sub) mb-4 text-sm">
+        <h3 className="text-2xl font-bold mb-2">Git 설치 및 초기 설정</h3>
+        <p className="text-(--text-sub) mb-4 text-base">
           Git은 터미널에서 사용하는 도구입니다. 설치 후 사용자 정보를 등록해야 커밋에 작성자 정보가 남습니다.
         </p>
         <Card className="mb-4">
-          <h4 className="font-bold text-(--accent) mb-3">설치</h4>
+          <h4 className="text-lg font-bold text-(--accent) mb-3">설치</h4>
           <Tabs tabs={ENV_OS_TABS} activeTab={osTab} onTabChange={setOsTab} />
           {osTab === 0 && (
             <div>
-              <p className="text-sm text-(--text-sub) mb-3">Homebrew로 Git을 설치합니다. Node.js 설치 시 Homebrew가 이미 설치되어 있습니다.</p>
+              <p className="text-base text-(--text-sub) mb-3">Homebrew로 Git을 설치합니다. Node.js 설치 시 Homebrew가 이미 설치되어 있습니다.</p>
               <CodeBlock>{`$ brew install git`}</CodeBlock>
             </div>
           )}
           {osTab === 1 && (
             <div>
-              <p className="text-sm text-(--text-sub) mb-3">git-scm.com 에서 Windows 버전을 다운로드합니다. 설치 중 옵션은 기본값으로 유지하세요.</p>
+              <p className="text-base text-(--text-sub) mb-3">git-scm.com 에서 Windows 버전을 다운로드합니다. 설치 중 옵션은 기본값으로 유지하세요.</p>
               <a
                 href="https://git-scm.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-(--bg-primary) border border-(--border) text-sm hover:border-(--accent) transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-(--bg-primary) border border-(--border) text-base hover:border-(--accent) transition-colors"
               >
                 <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -825,20 +825,20 @@ $ git config --list`}</CodeBlock>
       {/* ── Slide 18: 04 GitHub 첫 Push – Git vs GitHub ── */}
       <div data-slide-id="github">
         <SectionTitle num="04" title="GitHub 첫 Push" id="github" />
-        <h3 className="text-xl font-bold mb-4">Git vs GitHub</h3>
-        <p className="text-(--text-sub) mb-6 text-sm">
+        <h3 className="text-2xl font-bold mb-4">Git vs GitHub</h3>
+        <p className="text-(--text-sub) mb-6 text-base">
           많이 혼동하는 개념이니 확실히 구분해두세요. Git은 <strong>도구</strong>고, GitHub는 그 도구를 활용하는 <strong>온라인 서비스</strong>입니다.
         </p>
         <div className="grid md:grid-cols-2 gap-4 mb-6">
           <Card className="border-t-2 border-t-(--accent)">
-            <p className="text-xs font-bold text-(--accent) tracking-widest mb-2">LOCAL TOOL</p>
+            <p className="text-sm font-bold text-(--accent) tracking-widest mb-2">LOCAL TOOL</p>
             <h4 className="text-2xl font-bold mb-2">Git</h4>
-            <p className="text-(--text-sub) text-sm">내 컴퓨터에서 버전을 관리하는 <strong className="text-foreground">도구</strong>. 인터넷 없이도 사용 가능합니다.</p>
+            <p className="text-(--text-sub) text-base">내 컴퓨터에서 버전을 관리하는 <strong className="text-foreground">도구</strong>. 인터넷 없이도 사용 가능합니다.</p>
           </Card>
           <Card className="border-t-2 border-t-violet-500">
-            <p className="text-xs font-bold text-violet-500 tracking-widest mb-2">ONLINE SERVICE</p>
+            <p className="text-sm font-bold text-violet-500 tracking-widest mb-2">ONLINE SERVICE</p>
             <h4 className="text-2xl font-bold mb-2">GitHub</h4>
-            <p className="text-(--text-sub) text-sm">온라인에 코드를 올리고 공유하는 <strong className="text-foreground">서비스</strong>. 팀원들과 협업할 수 있습니다.</p>
+            <p className="text-(--text-sub) text-base">온라인에 코드를 올리고 공유하는 <strong className="text-foreground">서비스</strong>. 팀원들과 협업할 수 있습니다.</p>
           </Card>
         </div>
         <Callout type="info">
@@ -848,8 +848,8 @@ $ git config --list`}</CodeBlock>
 
       {/* ── Slide 19: GitHub 회원가입 ── */}
       <div>
-        <h3 className="text-xl font-bold mb-2">GitHub 회원가입</h3>
-        <p className="text-(--text-sub) mb-6 text-sm">
+        <h3 className="text-2xl font-bold mb-2">GitHub 회원가입</h3>
+        <p className="text-(--text-sub) mb-6 text-base">
           GitHub를 사용하려면 계정이 필요합니다. 이미 계정이 있다면 이 단계는 건너뛰세요.
         </p>
         <Card className="mb-4">
@@ -858,7 +858,7 @@ $ git config --list`}</CodeBlock>
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-(--bg-primary) border border-(--border) text-sm hover:border-(--accent) transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-(--bg-primary) border border-(--border) text-base hover:border-(--accent) transition-colors"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z" />
@@ -879,26 +879,26 @@ $ git config --list`}</CodeBlock>
 
       {/* ── Slide 20: GitHub CLI 설치 + 인증 ── */}
       <div>
-        <h3 className="text-xl font-bold mb-2">GitHub CLI — gh</h3>
-        <p className="text-(--text-sub) mb-4 text-sm">
+        <h3 className="text-2xl font-bold mb-2">GitHub CLI — gh</h3>
+        <p className="text-(--text-sub) mb-4 text-base">
           GitHub CLI는 터미널에서 GitHub 인증, 레포 생성, PR 등을 처리할 수 있는 공식 도구입니다.
-          설치 후 <code className="px-1.5 py-0.5 rounded bg-(--bg-code) text-(--accent) text-sm">gh auth login</code>으로 내 계정을 연결하면
-          이후 <code className="px-1.5 py-0.5 rounded bg-(--bg-code) text-(--accent) text-sm">git push</code>도 별도 비밀번호 없이 동작합니다.
+          설치 후 <code className="px-1.5 py-0.5 rounded bg-(--bg-code) text-(--accent) text-base">gh auth login</code>으로 내 계정을 연결하면
+          이후 <code className="px-1.5 py-0.5 rounded bg-(--bg-code) text-(--accent) text-base">git push</code>도 별도 비밀번호 없이 동작합니다.
         </p>
         <Card className="mb-4">
-          <h4 className="font-bold text-(--accent) mb-3">설치</h4>
+          <h4 className="text-lg font-bold text-(--accent) mb-3">설치</h4>
           <Tabs tabs={ENV_OS_TABS} activeTab={osTab} onTabChange={setOsTab} />
           {osTab === 0 && (
             <CodeBlock>{`$ brew install gh`}</CodeBlock>
           )}
           {osTab === 1 && (
             <div>
-              <p className="text-sm text-(--text-sub) mb-3">공식 사이트에서 Windows Installer를 다운로드합니다.</p>
+              <p className="text-base text-(--text-sub) mb-3">공식 사이트에서 Windows Installer를 다운로드합니다.</p>
               <a
                 href="https://cli.github.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-(--bg-primary) border border-(--border) text-sm hover:border-(--accent) transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-(--bg-primary) border border-(--border) text-base hover:border-(--accent) transition-colors"
               >
                 <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -910,9 +910,9 @@ $ git config --list`}</CodeBlock>
             </div>
           )}
         </Card>
-        <h4 className="font-bold mb-3">로그인 (최초 1회)</h4>
+        <h4 className="text-lg font-bold mb-3">로그인 (최초 1회)</h4>
         <CodeBlock title="Terminal">{`$ gh auth login`}</CodeBlock>
-        <p className="text-sm text-(--text-sub) mt-4 mb-3">실행하면 아래 순서로 선택지가 나타납니다.</p>
+        <p className="text-base text-(--text-sub) mt-4 mb-3">실행하면 아래 순서로 선택지가 나타납니다.</p>
         <div className="space-y-2 mb-4">
           {GH_CLI_AUTH_STEPS.map((s) => (
             <StepItem key={s.num} num={s.num} title={s.title} />
@@ -926,8 +926,8 @@ $ git config --list`}</CodeBlock>
 
       {/* ── Slide 22: GitHub 레포지토리 생성 ── */}
       <div>
-        <h3 className="text-xl font-bold mb-2">GitHub 레포지토리 생성</h3>
-        <p className="text-(--text-sub) mb-4 text-sm">
+        <h3 className="text-2xl font-bold mb-2">GitHub 레포지토리 생성</h3>
+        <p className="text-(--text-sub) mb-4 text-base">
           로컬에서 직접 파일을 올릴 것이기 때문에 <strong className="text-foreground">아무것도 없는 빈 레포지토리</strong>를 만들어야 합니다.
         </p>
         <Card className="mb-4">
@@ -944,18 +944,18 @@ $ git config --list`}</CodeBlock>
 
       {/* ── Slide 실습: README.md 올리기 ── */}
       <div>
-        <h3 className="text-xl font-bold mb-2">실습: README.md 올리기</h3>
-        <p className="text-(--text-sub) mb-6 text-sm">
-          터미널에서 아래 명령어를 순서대로 입력합니다. 마지막 <code className="px-1.5 py-0.5 rounded bg-(--bg-code) text-(--accent) text-sm">git push</code>가 성공하면 GitHub에서 README.md가 보입니다.
+        <h3 className="text-2xl font-bold mb-2">실습: README.md 올리기</h3>
+        <p className="text-(--text-sub) mb-6 text-base">
+          터미널에서 아래 명령어를 순서대로 입력합니다. 마지막 <code className="px-1.5 py-0.5 rounded bg-(--bg-code) text-(--accent) text-base">git push</code>가 성공하면 GitHub에서 README.md가 보입니다.
         </p>
         <div className="space-y-3 mb-6">
           {FIRST_PUSH_STEPS.map((s, i) => (
             <div key={i} className="rounded-lg border border-(--border) overflow-hidden">
               <div className="flex items-center gap-3 px-4 py-2.5 bg-(--bg-card)">
-                <span className="w-5 h-5 rounded-full bg-(--accent) text-white text-xs font-bold flex items-center justify-center shrink-0">
+                <span className="w-5 h-5 rounded-full bg-(--accent) text-white text-sm font-bold flex items-center justify-center shrink-0">
                   {i + 1}
                 </span>
-                <span className="text-sm font-medium">{s.desc}</span>
+                <span className="text-base font-medium">{s.desc}</span>
               </div>
               <CodeBlock>{s.cmd}</CodeBlock>
             </div>
@@ -969,20 +969,20 @@ $ git config --list`}</CodeBlock>
 
       {/* ── Slide 21: Git 워크플로우 ── */}
       <div>
-        <h3 className="text-xl font-bold mb-2">Git 워크플로우</h3>
-        <p className="text-(--text-sub) mb-6 text-sm">
+        <h3 className="text-2xl font-bold mb-2">Git 워크플로우</h3>
+        <p className="text-(--text-sub) mb-6 text-base">
           코드를 수정하고 GitHub에 올리기까지의 전체 흐름입니다. 이 세 단계를 반복하는 것이 일반적인 Git 사용 패턴입니다.
         </p>
         <div className="grid md:grid-cols-3 gap-4 mb-2">
           {GIT_WORKFLOW_ZONES.map((z, i) => (
             <Card key={z.title} className="text-center border-t-2 border-t-(--accent)">
-              <h4 className="font-bold">{z.title}</h4>
-              <p className="text-sm text-(--text-muted)">{z.sub}</p>
-              {i < 2 && <div className="md:hidden text-(--accent) text-lg mt-2">↓</div>}
+              <h4 className="text-lg font-bold">{z.title}</h4>
+              <p className="text-base text-(--text-muted)">{z.sub}</p>
+              {i < 2 && <div className="md:hidden text-(--accent) text-xl mt-2">↓</div>}
             </Card>
           ))}
         </div>
-        <div className="hidden md:flex justify-around mb-6 text-sm font-mono text-(--accent)">
+        <div className="hidden md:flex justify-around mb-6 text-base font-mono text-(--accent)">
           <span>git add →</span>
           <span>git commit →</span>
           <span>git push</span>
@@ -1011,17 +1011,17 @@ $ git push origin main`}</CodeBlock>
           </div>
 
           <div className="p-5 rounded-xl bg-(--bg-primary) border border-(--border)">
-            <p className="text-xs font-bold text-(--accent) tracking-widest mb-2">NEXT WEEK</p>
-            <p className="text-xl font-bold mb-1">
+            <p className="text-sm font-bold text-(--accent) tracking-widest mb-2">NEXT WEEK</p>
+            <p className="text-2xl font-bold mb-1">
               npm과 Next.js로 진짜 프로젝트를 시작합니다!
             </p>
-            <p className="text-sm text-(--text-muted)">
+            <p className="text-base text-(--text-muted)">
               npm 기본 사용법 · Next.js 프로젝트 생성 · 기본 페이지 &amp; 라우팅
             </p>
           </div>
         </div>
 
-        <footer className="text-center py-12 text-sm text-(--text-muted) border-t border-(--border) mt-8">
+        <footer className="text-center py-12 text-base text-(--text-muted) border-t border-(--border) mt-8">
           <p>{SITE_NAME} 스터디</p>
         </footer>
       </div>
