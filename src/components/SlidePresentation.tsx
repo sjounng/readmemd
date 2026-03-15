@@ -28,6 +28,134 @@ const SLIDE_CLASS: Record<NavDir, string> = {
 const SlideContext = createContext<{ goToSlideById: (id: string) => void }>({ goToSlideById: () => {} });
 export function useSlideNavigation() { return useContext(SlideContext); }
 
+/* ── 3D Carousel Dots ── */
+function CarouselDots({
+  total,
+  current,
+  onSelect,
+}: {
+  total: number;
+  current: number;
+  onSelect: (index: number) => void;
+}) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  const RADIUS = 300;
+  const DOT_SIZE = 7;
+  const ACTIVE_WIDTH = 22;
+  const CONTAINER_W = 420;
+  const DOT_ANGLE = 0.11; // radians between each dot on the arc
+
+  // drag state
+  const dragRef = useRef<{ startX: number; startOffset: number; dragging: boolean } | null>(null);
+  const [dragOffset, setDragOffset] = useState(0); // in dot-units
+
+  // each dot's angle = (i - current + dragOffset) * DOT_ANGLE
+  // current dot is always at angle 0 (front center)
+  const effectiveCenter = current - dragOffset;
+
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    dragRef.current = { startX: e.clientX, startOffset: dragOffset, dragging: false };
+  }, [dragOffset]);
+
+  const handlePointerMove = useCallback((e: React.PointerEvent) => {
+    if (!dragRef.current) return;
+    const dx = e.clientX - dragRef.current.startX;
+    if (Math.abs(dx) > 3) dragRef.current.dragging = true;
+    // map px to dot-units
+    const dDots = dx / (DOT_ANGLE * RADIUS);
+    let next = dragRef.current.startOffset + dDots;
+    // clamp so effective center stays within [0, total-1]
+    const center = current - next;
+    if (center < 0) next = current;
+    else if (center > total - 1) next = current - (total - 1);
+    setDragOffset(next);
+  }, [current, total]);
+
+  const handlePointerUp = useCallback(() => {
+    if (!dragRef.current) return;
+    const wasDrag = dragRef.current.dragging;
+    dragRef.current = null;
+
+    if (wasDrag) {
+      const snapped = Math.round(effectiveCenter);
+      const clamped = Math.max(0, Math.min(total - 1, snapped));
+      setDragOffset(0);
+      if (clamped !== current) onSelect(clamped);
+    } else {
+      setDragOffset(0);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [effectiveCenter, total, current, onSelect]);
+
+  // reset drag offset when current changes externally
+  useEffect(() => { setDragOffset(0); }, [current]);
+
+  if (!mounted) {
+    return <div className="hidden md:flex items-center justify-center" style={{ width: CONTAINER_W, height: 24 }} />;
+  }
+
+  return (
+    <div
+      className="hidden md:flex items-center justify-center overflow-hidden select-none"
+      style={{ width: CONTAINER_W, height: 24, perspective: 800, cursor: "grab" }}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerLeave={handlePointerUp}
+    >
+      <div
+        className="relative flex items-center justify-center"
+        style={{
+          transformStyle: "preserve-3d",
+          width: CONTAINER_W,
+          height: 24,
+        }}
+      >
+        {Array.from({ length: total }, (_, i) => {
+          // angle on the arc: 0 = front center, positive = right, negative = left
+          const arcAngle = (i - effectiveCenter) * DOT_ANGLE;
+          const x = Math.sin(arcAngle) * RADIUS;
+          const z = Math.cos(arcAngle) * RADIUS;
+          const normZ = (z + RADIUS) / (2 * RADIUS); // 0 (back) → 1 (front)
+
+          // hide dots that go behind the curve (past ±90°)
+          if (Math.abs(arcAngle) > Math.PI / 2) return null;
+
+          const scale = 0.3 + 0.7 * normZ;
+          const opacity = Math.pow(normZ, 1.5);
+          const isCurrent = i === current;
+
+          return (
+            <button
+              key={i}
+              onClick={(e) => {
+                if (dragRef.current?.dragging) { e.preventDefault(); return; }
+                onSelect(i);
+              }}
+              className="absolute rounded-full"
+              style={{
+                width: isCurrent ? ACTIVE_WIDTH : DOT_SIZE,
+                height: DOT_SIZE,
+                left: "50%",
+                transform: `translateX(calc(-50% + ${x}px)) translateZ(${z}px) scale(${scale})`,
+                opacity: isCurrent ? 1 : opacity,
+                backgroundColor: isCurrent
+                  ? "var(--accent)"
+                  : `color-mix(in srgb, var(--text-muted) ${Math.round(opacity * 100)}%, transparent)`,
+                zIndex: Math.round(normZ * 100),
+                transition: dragRef.current ? "none" : "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                pointerEvents: normZ > 0.4 ? "auto" : "none",
+              }}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 /* ── Component ── */
 export default function SlidePresentation({ children }: { children: ReactNode }) {
   const slides = Children.toArray(children);
@@ -167,7 +295,7 @@ export default function SlidePresentation({ children }: { children: ReactNode })
         <div className="flex-1 flex items-center justify-center">
           <div
             key={current}
-            className={`${SLIDE_CLASS[slideDir]} w-full max-w-5xl mx-auto px-4 md:px-6 pt-20 md:pt-24 pb-16 md:pb-12`}
+            className={`${SLIDE_CLASS[slideDir]} w-full max-w-[1600px] mx-auto px-8 md:px-16 pt-20 md:pt-24 pb-16 md:pb-12`}
           >
             {slides[current]}
           </div>
@@ -175,7 +303,7 @@ export default function SlidePresentation({ children }: { children: ReactNode })
 
         {/* Bottom bar */}
         <div className="fixed bottom-0 left-0 right-0 z-50 backdrop-blur-sm border-t border-(--border)">
-          <div className="max-w-5xl mx-auto px-4 md:px-6 py-3 flex items-center justify-between">
+          <div className="max-w-7xl mx-auto px-6 md:px-10 py-3 flex items-center justify-between">
 
             {/* Prev */}
             <button
@@ -192,20 +320,11 @@ export default function SlidePresentation({ children }: { children: ReactNode })
 
             {/* Indicator */}
             <div className="flex items-center gap-3">
-              {/* Dots — desktop only */}
-              <div className="hidden md:flex gap-1.5">
-                {slides.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => goTo(i, i > current ? "right" : "left")}
-                    className={`rounded-full transition-all duration-300 ${
-                      i === current
-                        ? "w-6 h-2 bg-(--accent)"
-                        : "w-2 h-2 bg-(--text-muted) hover:bg-(--text-sub)"
-                    }`}
-                  />
-                ))}
-              </div>
+              <CarouselDots
+                total={total}
+                current={current}
+                onSelect={(i) => goTo(i, i > current ? "right" : "left")}
+              />
               {/* Number — always visible */}
               <span className="text-xs text-(--text-muted) font-mono">
                 {current + 1} / {total}
