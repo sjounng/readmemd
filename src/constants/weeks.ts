@@ -16,8 +16,8 @@ export const weeks: WeekMeta[] = [
   },
   {
     num: "02",
-    title: "npm과 Next.js 시작하기",
-    desc: "npm 사용법 / Next.js 프로젝트 생성 / 페이지 & 라우팅",
+    title: "Next.js 시작하기",
+    desc: "Next.js를 위한 개념 / Next.js 프로젝트 생성 / 페이지 & 라우팅",
     available: true,
     tags: ["npm", "Next.js"],
   },

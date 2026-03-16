@@ -6,6 +6,7 @@ import {
   useCallback,
   useRef,
   useMemo,
+  useSyncExternalStore,
   Children,
   isValidElement,
   createContext,
@@ -38,8 +39,7 @@ function CarouselDots({
   current: number;
   onSelect: (index: number) => void;
 }) {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
+  const mounted = useSyncExternalStore(() => () => {}, () => true, () => false);
   const RADIUS = 300;
   const DOT_SIZE = 7;
   const ACTIVE_WIDTH = 22;
@@ -49,6 +49,7 @@ function CarouselDots({
   // drag state
   const dragRef = useRef<{ startX: number; startOffset: number; dragging: boolean } | null>(null);
   const [dragOffset, setDragOffset] = useState(0); // in dot-units
+  const [isDragging, setIsDragging] = useState(false);
 
   // each dot's angle = (i - current + dragOffset) * DOT_ANGLE
   // current dot is always at angle 0 (front center)
@@ -57,6 +58,7 @@ function CarouselDots({
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
     dragRef.current = { startX: e.clientX, startOffset: dragOffset, dragging: false };
+    setIsDragging(true);
   }, [dragOffset]);
 
   const handlePointerMove = useCallback((e: React.PointerEvent) => {
@@ -77,6 +79,7 @@ function CarouselDots({
     if (!dragRef.current) return;
     const wasDrag = dragRef.current.dragging;
     dragRef.current = null;
+    setIsDragging(false);
 
     if (wasDrag) {
       const snapped = Math.round(effectiveCenter);
@@ -86,11 +89,14 @@ function CarouselDots({
     } else {
       setDragOffset(0);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effectiveCenter, total, current, onSelect]);
 
   // reset drag offset when current changes externally
-  useEffect(() => { setDragOffset(0); }, [current]);
+  const [trackedCurrent, setTrackedCurrent] = useState(current);
+  if (trackedCurrent !== current) {
+    setTrackedCurrent(current);
+    if (dragOffset !== 0) setDragOffset(0);
+  }
 
   if (!mounted) {
     return <div className="hidden md:flex items-center justify-center" style={{ width: CONTAINER_W, height: 24 }} />;
@@ -131,7 +137,7 @@ function CarouselDots({
             <button
               key={i}
               onClick={(e) => {
-                if (dragRef.current?.dragging) { e.preventDefault(); return; }
+                if (isDragging) { e.preventDefault(); return; }
                 onSelect(i);
               }}
               className="absolute rounded-full"
@@ -145,7 +151,7 @@ function CarouselDots({
                   ? "var(--accent)"
                   : `color-mix(in srgb, var(--text-muted) ${Math.round(opacity * 100)}%, transparent)`,
                 zIndex: Math.round(normZ * 100),
-                transition: dragRef.current ? "none" : "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                transition: isDragging ? "none" : "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                 pointerEvents: normZ > 0.4 ? "auto" : "none",
               }}
             />
@@ -260,9 +266,9 @@ export default function SlidePresentation({ children }: { children: ReactNode })
       touchStart.current = null;
       const threshold = 50;
       if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > threshold) {
-        dx < 0 ? next("right") : prev("left");
+        if (dx < 0) { next("right"); } else { prev("left"); }
       } else if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > threshold) {
-        dy < 0 ? next("down") : prev("up");
+        if (dy < 0) { next("down"); } else { prev("up"); }
       }
     }
     window.addEventListener("touchstart", onTouchStart, { passive: true });

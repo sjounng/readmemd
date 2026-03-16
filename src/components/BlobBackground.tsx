@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 
 interface Blob {
@@ -45,26 +45,42 @@ function generateBlobs(): Blob[] {
   });
 }
 
-// 모듈 레벨: SPA 탐색 간 유지, 새로고침마다 초기화
-let cachedBlobs: Blob[] | null = null;
+// 모듈 레벨 외부 스토어: SPA 탐색 간 유지, 새로고침마다 초기화
+const EMPTY: Blob[] = [];
+let cachedBlobs: Blob[] = EMPTY;
+let lastPathname: string | null = null;
+const listeners = new Set<() => void>();
+
+function subscribe(cb: () => void) {
+  listeners.add(cb);
+  return () => { listeners.delete(cb); };
+}
+
+function getSnapshot() {
+  return cachedBlobs;
+}
+
+function updateBlobs(blobs: Blob[]) {
+  cachedBlobs = blobs;
+  listeners.forEach((cb) => cb());
+}
 
 export default function BlobBackground() {
-  const [blobs, setBlobs] = useState<Blob[]>(cachedBlobs ?? []);
   const pathname = usePathname();
+  const blobs = useSyncExternalStore(subscribe, getSnapshot, () => EMPTY);
 
   useEffect(() => {
-    // 메인 페이지에 올 때마다 새로 생성
-    if (pathname === "/") {
-      const next = generateBlobs();
-      cachedBlobs = next;
-      setBlobs(next);
-    } else if (cachedBlobs === null) {
-      // 주차 페이지로 직접 진입 시 초기 생성
-      const next = generateBlobs();
-      cachedBlobs = next;
-      setBlobs(next);
+    const prevPathname = lastPathname;
+    lastPathname = pathname;
+
+    if (pathname === "/" && prevPathname !== pathname) {
+      // 메인 페이지에 올 때마다 새로 생성
+      updateBlobs(generateBlobs());
+    } else if (cachedBlobs === EMPTY) {
+      // 최초 진입 시 생성
+      updateBlobs(generateBlobs());
     }
-    // week 페이지로 이동 시엔 기존 캐시 유지 → 아무것도 안 함
+    // week 페이지로 이동 시엔 기존 캐시 유지
   }, [pathname]);
 
   return (

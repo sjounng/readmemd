@@ -1,8 +1,14 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 
 type Theme = "light" | "dark";
+
+function getInitialTheme(): Theme {
+  if (typeof document === "undefined") return "light";
+  const attr = document.documentElement.getAttribute("data-theme");
+  return attr === "dark" || attr === "light" ? attr : "light";
+}
 
 const ThemeContext = createContext<{ theme: Theme; toggle: () => void }>({
   theme: "light",
@@ -14,12 +20,7 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
-
-  useEffect(() => {
-    const attr = document.documentElement.getAttribute("data-theme") as Theme | null;
-    if (attr === "dark" || attr === "light") setTheme(attr);
-  }, []);
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   const toggle = () => {
     const next: Theme = theme === "dark" ? "light" : "dark";

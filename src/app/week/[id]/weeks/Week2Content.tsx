@@ -865,9 +865,9 @@ export default function Week2Content() {
       <div>
         <WeekHero
           weekNum={2}
-          title="npm과 Next.js"
+          title="Next.js"
           subtitle="시작하기"
-          description="npm의 개념을 배우고, create-next-app으로 첫 Next.js 프로젝트를 만들어봅니다."
+          description="Next.js에 대해 배우고, create-next-app으로 첫 Next.js 프로젝트를 만들어봅니다."
         />
         <div className="flex flex-wrap gap-2 mt-8">
           {WEEK2_TAGS.map((tag) => (
