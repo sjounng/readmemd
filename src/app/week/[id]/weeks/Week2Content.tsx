@@ -62,8 +62,8 @@ import {
 function ChapterTitle({ num, title }: { num: string; title: string }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh]">
-      <span className="text-8xl md:text-9xl font-extrabold text-(--accent) font-mono mb-6">{num}</span>
-      <h2 className="text-5xl md:text-7xl font-bold text-center">{title}</h2>
+      <span className="text-4xl md:text-9xl font-extrabold text-(--accent) font-mono mb-6">{num}</span>
+      <h2 className="text-2xl md:text-7xl font-bold text-center">{title}</h2>
     </div>
   );
 }
@@ -71,18 +71,18 @@ function ChapterTitle({ num, title }: { num: string; title: string }) {
 /* ── 라이브 프리뷰 브라우저 프레임 ── */
 function LivePreview({ children, url = "localhost:3000" }: { children: React.ReactNode; url?: string }) {
   return (
-    <div className="rounded-xl overflow-hidden border border-gray-300 bg-white flex flex-col h-full">
-      <div className="bg-gray-100 border-b border-gray-200 px-3 py-2 flex items-center gap-2 shrink-0">
+    <div className="rounded-xl overflow-hidden border border-gray-300 bg-white flex flex-col h-full max-w-full">
+      <div className="bg-gray-100 border-b border-gray-200 px-2 md:px-3 py-1.5 md:py-2 flex items-center gap-2 shrink-0">
         <div className="flex gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+          <span className="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-[#ff5f57]" />
+          <span className="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-[#febc2e]" />
+          <span className="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-[#28c840]" />
         </div>
-        <div className="flex-1 ml-2 bg-white rounded-md border border-gray-200 px-3 py-0.5">
-          <span className="text-gray-400 text-xs font-mono">{url}</span>
+        <div className="flex-1 ml-1 md:ml-2 bg-white rounded-md border border-gray-200 px-2 md:px-3 py-0.5 min-w-0">
+          <span className="text-gray-400 text-[10px] md:text-xs font-mono truncate block">{url}</span>
         </div>
       </div>
-      <div className="flex-1 p-5 overflow-auto">{children}</div>
+      <div className="flex-1 p-3 md:p-5 overflow-auto">{children}</div>
     </div>
   );
 }
@@ -95,15 +95,15 @@ function CodeWithPreview({ code, children, title, previewUrl }: {
   previewUrl?: string;
 }) {
   return (
-    <div className="grid md:grid-cols-2 gap-6 h-full">
-      <div className="flex flex-col min-h-0">
-        {title && <p className="text-xl font-semibold text-(--text-muted) mb-2">{title}</p>}
+    <div className="grid md:grid-cols-2 gap-4 md:gap-6 h-full">
+      <div className="flex flex-col min-h-0 min-w-0">
+        {title && <p className="text-sm md:text-xl font-semibold text-(--text-muted) mb-2">{title}</p>}
         <div className="flex-1 min-h-0 overflow-auto">
           <CodeBlock>{code}</CodeBlock>
         </div>
       </div>
-      <div className="flex flex-col min-h-0">
-        <p className="text-xl font-semibold text-(--accent) mb-2">실행 결과</p>
+      <div className="flex flex-col min-h-0 min-w-0">
+        <p className="text-sm md:text-xl font-semibold text-(--accent) mb-2">실행 결과</p>
         <div className="flex-1 min-h-0">
           <LivePreview url={previewUrl}>{children}</LivePreview>
         </div>
@@ -300,7 +300,7 @@ export default function RootLayout({
     <div>
       {/* Hero 섹션 */}
       <section className="text-center py-20 border-b">
-        <h1 className="text-5xl font-bold mb-4">
+        <h1 className="text-xl md:text-5xl font-bold mb-4">
           안녕하세요
         </h1>
         <p className="text-gray-500 mb-6">
@@ -314,7 +314,7 @@ export default function RootLayout({
 
       {/* 카드 섹션 */}
       <section className="py-16 px-6">
-        <h2 className="text-2xl font-bold mb-8">
+        <h2 className="text-base md:text-2xl font-bold mb-8">
           Main Content
         </h2>
         <div className="grid grid-cols-3 gap-4">
@@ -428,7 +428,7 @@ import { posts } from "@/data/posts";
 export default function PostsPage() {
   return (
     <div className="max-w-3xl mx-auto py-16 px-6">
-      <h1 className="text-4xl font-bold mb-8">
+      <h1 className="text-lg md:text-4xl font-bold mb-8">
         목록
       </h1>
       <div className="space-y-4">
@@ -439,7 +439,7 @@ export default function PostsPage() {
             className="block border rounded-lg p-6
               hover:bg-gray-50 transition-colors"
           >
-            <h2 className="text-xl font-semibold
+            <h2 className="text-sm md:text-xl font-semibold
               mb-2">
               {post.title}
             </h2>
@@ -473,7 +473,7 @@ export default async function PostPage({
     return (
       <div className="max-w-3xl mx-auto py-16
         px-6 text-center">
-        <h1 className="text-2xl font-bold mb-4">
+        <h1 className="text-base md:text-2xl font-bold mb-4">
           글을 찾을 수 없습니다
         </h1>
         <Link href="/posts"
@@ -491,7 +491,7 @@ export default async function PostPage({
           hover:text-black mb-6 inline-block">
         ← 목록으로
       </Link>
-      <h1 className="text-4xl font-bold mb-4">
+      <h1 className="text-lg md:text-4xl font-bold mb-4">
         {post.title}
       </h1>
       <p className="text-gray-500 mb-8">
@@ -878,7 +878,7 @@ export default function Week2Content() {
 
       {/* ── 2. 목차 ── */}
       <div>
-        <h2 className="text-5xl md:text-6xl font-bold mb-10">목차</h2>
+        <h2 className="text-2xl md:text-6xl font-bold mb-10">목차</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {WEEK2_TOC.map((item) => (
             <a
@@ -886,8 +886,8 @@ export default function Week2Content() {
               href={item.href}
               className="group flex items-center gap-4 p-5 rounded-xl bg-(--bg-card) border border-(--border) hover:border-(--accent) transition-colors"
             >
-              <span className="text-4xl font-bold text-(--accent) font-mono">{item.num}</span>
-              <span className="text-xl font-medium group-hover:text-(--accent) transition-colors">
+              <span className="text-lg md:text-4xl font-bold text-(--accent) font-mono">{item.num}</span>
+              <span className="text-sm md:text-xl font-medium group-hover:text-(--accent) transition-colors">
                 {item.title}
               </span>
             </a>
@@ -903,8 +903,8 @@ export default function Week2Content() {
       {/* ── 01. Node.js란? ── */}
       <div>
         <Card className="mb-8">
-          <h3 className="text-4xl font-bold text-(--accent) mb-3">{NODEJS_CONCEPT.title}</h3>
-          <p className="text-2xl text-(--text-sub)">{NODEJS_CONCEPT.desc}</p>
+          <h3 className="text-lg md:text-4xl font-bold text-(--accent) mb-3">{NODEJS_CONCEPT.title}</h3>
+          <p className="text-base md:text-2xl text-(--text-sub)">{NODEJS_CONCEPT.desc}</p>
         </Card>
         <CodeWithPreview
           code={`// 원래 JavaScript는 브라우저에서만 동작
@@ -928,12 +928,12 @@ $ node hello.js
 
       {/* ── 01. Node.js가 왜 필요한가? ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-8">Node.js가 왜 필요한가?</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-8">Node.js가 왜 필요한가?</h3>
         <div className="grid md:grid-cols-3 gap-4">
           {NODEJS_WHY.map((item) => (
             <Card key={item.label} className={`border-t-2 ${item.color}`}>
-              <p className="text-2xl font-bold mb-2">{item.label}</p>
-              <p className="text-xl text-(--text-sub)">{item.desc}</p>
+              <p className="text-base md:text-2xl font-bold mb-2">{item.label}</p>
+              <p className="text-sm md:text-xl text-(--text-sub)">{item.desc}</p>
             </Card>
           ))}
         </div>
@@ -941,7 +941,7 @@ $ node hello.js
 
       {/* ── 01. Node.js → npm → 개발 흐름 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-6">개발 환경의 전체 흐름</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-6">개발 환경의 전체 흐름</h3>
         <div className="grid md:grid-cols-2 gap-6">
           <div>
             <CodeBlock>{NODEJS_FLOW}</CodeBlock>
@@ -952,10 +952,10 @@ $ node hello.js
             </Callout>
             <div className="rounded-xl overflow-hidden border border-(--border) divide-y divide-(--border)">
               {NODEJS_CHECK_COMMANDS.map((row) => (
-                <div key={row.cmd} className="flex items-center gap-4 px-5 py-3 bg-(--surface)">
-                  <code className="font-mono text-xl text-(--accent) flex-1">{row.cmd}</code>
-                  <span className="text-xl text-(--text-sub)">{row.desc}</span>
-                  <code className="font-mono text-xl text-(--text-muted)">{row.result}</code>
+                <div key={row.cmd} className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 px-4 md:px-5 py-3 bg-(--surface)">
+                  <code className="font-mono text-sm md:text-xl text-(--accent) md:flex-1">{row.cmd}</code>
+                  <span className="text-xs md:text-xl text-(--text-sub)">{row.desc}</span>
+                  <code className="font-mono text-xs md:text-xl text-(--text-muted)">{row.result}</code>
                 </div>
               ))}
             </div>
@@ -966,15 +966,15 @@ $ node hello.js
       {/* ── 01. npm이란? ── */}
       <div>
         <Card className="mb-8">
-          <h3 className="text-4xl font-bold text-(--accent) mb-3">{NPM_CONCEPT.title}</h3>
-          <p className="text-2xl text-(--text-sub)">{NPM_CONCEPT.desc}</p>
+          <h3 className="text-lg md:text-4xl font-bold text-(--accent) mb-3">{NPM_CONCEPT.title}</h3>
+          <p className="text-base md:text-2xl text-(--text-sub)">{NPM_CONCEPT.desc}</p>
         </Card>
         <div className="grid md:grid-cols-3 gap-4">
           {NPM_METAPHOR.map((item) => (
             <Card key={item.role} className={`border-t-2 ${item.color}`}>
               <p className="text-xl text-(--text-muted) mb-1">{item.role}</p>
-              <p className="text-2xl font-bold mb-2">{item.metaphor}</p>
-              <p className="text-xl text-(--text-sub)">{item.desc}</p>
+              <p className="text-base md:text-2xl font-bold mb-2">{item.metaphor}</p>
+              <p className="text-sm md:text-xl text-(--text-sub)">{item.desc}</p>
             </Card>
           ))}
         </div>
@@ -982,12 +982,12 @@ $ node hello.js
 
       {/* ── 01. npm 자주 쓰는 명령어 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-6">npm 자주 쓰는 명령어</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-6">npm 자주 쓰는 명령어</h3>
         <div className="rounded-xl overflow-hidden border border-(--border) divide-y divide-(--border)">
           {NPM_COMMANDS.map((row) => (
-            <div key={row.cmd} className="flex items-center gap-4 px-5 py-4 bg-(--surface)">
-              <code className="font-mono text-xl text-(--accent) w-56 shrink-0">{row.cmd}</code>
-              <span className="text-xl text-(--text-sub) flex-1">{row.desc}</span>
+            <div key={row.cmd} className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 px-4 md:px-5 py-3 md:py-4 bg-(--surface)">
+              <code className="font-mono text-sm md:text-xl text-(--accent) md:w-56 md:shrink-0">{row.cmd}</code>
+              <span className="text-xs md:text-xl text-(--text-sub) flex-1">{row.desc}</span>
               <code className="font-mono text-xl text-(--text-muted) hidden md:block">{row.ex}</code>
             </div>
           ))}
@@ -996,7 +996,7 @@ $ node hello.js
 
       {/* ── 01. 패키지 매니저 비교 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-6">패키지 매니저 비교</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-6">패키지 매니저 비교</h3>
         <Callout type="tip" className="mb-6">
           npm, pnpm, yarn은 모두 같은 저장소에서 패키지를 가져옵니다.{" "}
           <strong>명령어만 조금 다를 뿐</strong> 역할은 동일합니다.
@@ -1005,13 +1005,13 @@ $ node hello.js
           {PACKAGE_MANAGERS.map((pm) => (
             <Card key={pm.name} className={`border-t-2 ${pm.border} flex flex-col gap-3`}>
               <div className="flex items-center justify-between">
-                <span className="text-2xl font-bold">{pm.name}</span>
+                <span className="text-base md:text-2xl font-bold">{pm.name}</span>
                 <span className={`text-base font-semibold px-2.5 py-0.5 rounded-full ${pm.badgeColor}`}>
                   {pm.badge}
                 </span>
               </div>
-              <p className="text-xl text-(--text-muted)">{pm.full}</p>
-              <p className="text-xl text-(--text-sub)">{pm.desc}</p>
+              <p className="text-sm md:text-xl text-(--text-muted)">{pm.full}</p>
+              <p className="text-sm md:text-xl text-(--text-sub)">{pm.desc}</p>
             </Card>
           ))}
         </div>
@@ -1019,27 +1019,31 @@ $ node hello.js
 
       {/* ── 01. 명령어 비교 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-6">패키지 매니저 명령어 비교</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-6">패키지 매니저 명령어 비교</h3>
         <div className="rounded-xl overflow-hidden border border-(--border) divide-y divide-(--border)">
-          <div className="grid grid-cols-4 gap-4 px-5 py-3 bg-(--surface-hover) text-xl font-semibold text-(--text-muted)">
-            <span>작업</span>
-            <span>npm</span>
-            <span>pnpm</span>
-            <span>yarn</span>
-          </div>
-          {[
-            { action: "개발 서버 실행", npm: "npm run dev",        pnpm: "pnpm dev",        yarn: "yarn dev" },
-            { action: "패키지 설치",    npm: "npm install react",  pnpm: "pnpm add react",  yarn: "yarn add react" },
-            { action: "전체 설치",      npm: "npm install",        pnpm: "pnpm install",    yarn: "yarn" },
-            { action: "패키지 제거",    npm: "npm uninstall react",pnpm: "pnpm remove react",yarn: "yarn remove react" },
-          ].map((row) => (
-            <div key={row.action} className="grid grid-cols-4 gap-4 px-5 py-4 bg-(--surface) items-center">
-              <span className="text-xl text-(--text-sub)">{row.action}</span>
-              <code className="font-mono text-xl text-(--text-muted)">{row.npm}</code>
-              <code className="font-mono text-base text-violet-400">{row.pnpm}</code>
-              <code className="font-mono text-base text-sky-400">{row.yarn}</code>
+          <div className="overflow-x-auto">
+            <div className="min-w-[500px]">
+              <div className="grid grid-cols-4 gap-4 px-5 py-3 bg-(--surface-hover) text-sm md:text-xl font-semibold text-(--text-muted)">
+                <span>작업</span>
+                <span>npm</span>
+                <span>pnpm</span>
+                <span>yarn</span>
+              </div>
+              {[
+                { action: "개발 서버 실행", npm: "npm run dev",        pnpm: "pnpm dev",        yarn: "yarn dev" },
+                { action: "패키지 설치",    npm: "npm install react",  pnpm: "pnpm add react",  yarn: "yarn add react" },
+                { action: "전체 설치",      npm: "npm install",        pnpm: "pnpm install",    yarn: "yarn" },
+                { action: "패키지 제거",    npm: "npm uninstall react",pnpm: "pnpm remove react",yarn: "yarn remove react" },
+              ].map((row) => (
+                <div key={row.action} className="grid grid-cols-4 gap-4 px-5 py-4 bg-(--surface) items-center">
+                  <span className="text-sm md:text-xl text-(--text-sub)">{row.action}</span>
+                  <code className="font-mono text-xs md:text-xl text-(--text-muted)">{row.npm}</code>
+                  <code className="font-mono text-xs md:text-base text-violet-400">{row.pnpm}</code>
+                  <code className="font-mono text-xs md:text-base text-sky-400">{row.yarn}</code>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
 
@@ -1051,36 +1055,36 @@ $ node hello.js
       {/* ── 02. TypeScript 기초 (내용) ── */}
       <div>
         <Card className="mb-6">
-          <p className="text-xl text-(--text-sub)">
+          <p className="text-sm md:text-xl text-(--text-sub)">
             TypeScript는 JavaScript에 <strong className="text-(--accent)">타입(Type)</strong>을 추가한 언어입니다.
             코드를 실행하기 전에 오류를 잡아줘서 더 안전하고 예측 가능한 코드를 작성할 수 있습니다.
           </p>
         </Card>
 
-        <h3 className="text-2xl font-semibold mb-4">JS vs TS 비교</h3>
+        <h3 className="text-base md:text-2xl font-semibold mb-4">JS vs TS 비교</h3>
         <div className="grid md:grid-cols-2 gap-4 mb-6">
           <div>
-            <p className="text-xl font-semibold text-(--text-muted) mb-2">JavaScript</p>
+            <p className="text-sm md:text-xl font-semibold text-(--text-muted) mb-2">JavaScript</p>
             <CodeBlock>{TS_JS_COMPARE.js}</CodeBlock>
           </div>
           <div>
-            <p className="text-xl font-semibold text-(--accent) mb-2">TypeScript</p>
+            <p className="text-sm md:text-xl font-semibold text-(--accent) mb-2">TypeScript</p>
             <CodeBlock>{TS_JS_COMPARE.ts}</CodeBlock>
           </div>
         </div>
 
-        <h3 className="text-2xl font-semibold mb-3">기본 타입</h3>
+        <h3 className="text-base md:text-2xl font-semibold mb-3">기본 타입</h3>
         <div className="rounded-xl overflow-hidden border border-(--border) divide-y divide-(--border) mb-6">
           {TS_BASIC_TYPES.map((row) => (
-            <div key={row.type} className="flex items-center gap-4 px-4 py-3 bg-(--surface)">
-              <code className="font-mono text-xl text-(--accent) w-24 shrink-0">{row.type}</code>
-              <code className="font-mono text-sm text-(--text-sub) flex-1">{row.example}</code>
+            <div key={row.type} className="flex items-center gap-3 md:gap-4 px-3 md:px-4 py-3 bg-(--surface)">
+              <code className="font-mono text-sm md:text-xl text-(--accent) w-16 md:w-24 shrink-0">{row.type}</code>
+              <code className="font-mono text-xs md:text-sm text-(--text-sub) flex-1">{row.example}</code>
               <span className="text-sm text-(--text-muted) hidden md:block shrink-0">{row.desc}</span>
             </div>
           ))}
         </div>
 
-        <h3 className="text-2xl font-semibold mb-3">interface — 객체 타입 정의</h3>
+        <h3 className="text-base md:text-2xl font-semibold mb-3">interface — 객체 타입 정의</h3>
         <CodeBlock>{TS_INTERFACE_EXAMPLE}</CodeBlock>
       </div>
 
@@ -1092,14 +1096,14 @@ $ node hello.js
       {/* ── 03. React: 소개 ── */}
       <div>
         <Card className="mb-8">
-          <h3 className="text-4xl font-bold text-(--accent) mb-3">{REACT_CONCEPT.title}</h3>
-          <p className="text-2xl text-(--text-sub)">{REACT_CONCEPT.desc}</p>
+          <h3 className="text-lg md:text-4xl font-bold text-(--accent) mb-3">{REACT_CONCEPT.title}</h3>
+          <p className="text-base md:text-2xl text-(--text-sub)">{REACT_CONCEPT.desc}</p>
         </Card>
         <div className="grid md:grid-cols-3 gap-4">
           {REACT_WHY_POINTS.map((item) => (
             <Card key={item.label} className={`border-t-2 ${item.color}`}>
-              <p className="text-2xl font-bold mb-2">{item.label}</p>
-              <p className="text-xl text-(--text-sub)">{item.desc}</p>
+              <p className="text-base md:text-2xl font-bold mb-2">{item.label}</p>
+              <p className="text-sm md:text-xl text-(--text-sub)">{item.desc}</p>
             </Card>
           ))}
         </div>
@@ -1107,14 +1111,14 @@ $ node hello.js
 
       {/* ── 03. React: 전통 방식 vs React ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-6">전통 방식 vs React</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-6">전통 방식 vs React</h3>
         <div className="grid md:grid-cols-2 gap-4 mb-6">
           <div>
-            <p className="text-xl font-semibold text-(--text-muted) mb-2">기존 방식 (HTML + JS)</p>
+            <p className="text-sm md:text-xl font-semibold text-(--text-muted) mb-2">기존 방식 (HTML + JS)</p>
             <CodeBlock>{REACT_WHY_PROBLEM}</CodeBlock>
           </div>
           <div>
-            <p className="text-xl font-semibold text-(--accent) mb-2">React 방식</p>
+            <p className="text-sm md:text-xl font-semibold text-(--accent) mb-2">React 방식</p>
             <CodeBlock>{REACT_WHY_SOLUTION}</CodeBlock>
           </div>
         </div>
@@ -1125,12 +1129,12 @@ $ node hello.js
 
       {/* ── 03. React: 컴포넌트란? ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-8">컴포넌트란?</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-8">컴포넌트란?</h3>
         <div className="grid md:grid-cols-3 gap-4">
           {COMPONENT_METAPHOR.map((item) => (
             <Card key={item.label} className={`border-t-2 ${item.color}`}>
-              <p className="text-2xl font-bold mb-2">{item.label}</p>
-              <p className="text-xl text-(--text-sub)">{item.desc}</p>
+              <p className="text-base md:text-2xl font-bold mb-2">{item.label}</p>
+              <p className="text-sm md:text-xl text-(--text-sub)">{item.desc}</p>
             </Card>
           ))}
         </div>
@@ -1138,13 +1142,13 @@ $ node hello.js
 
       {/* ── 03. React: 컴포넌트 기본 구조 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-6">컴포넌트의 기본 구조</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-6">컴포넌트의 기본 구조</h3>
         <CodeBlock>{COMPONENT_STRUCTURE}</CodeBlock>
       </div>
 
       {/* ── 03. React: 컴포넌트 조합 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-4">컴포넌트 조합으로 페이지 만들기</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-4">컴포넌트 조합으로 페이지 만들기</h3>
         <CodeWithPreview code={COMPONENT_COMPOSITION}>
           <div className="text-black text-sm flex flex-col h-full">
             <nav className="border-b border-gray-200 px-4 py-2 font-bold text-base">네비게이션 바</nav>
@@ -1159,13 +1163,13 @@ $ node hello.js
 
       {/* ── 03. React: JSX 기본 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-4">JSX란?</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-4">JSX란?</h3>
         <Callout type="tip" className="mb-4">
           JSX는 JavaScript 안에서 HTML처럼 UI를 작성하는 문법입니다.
         </Callout>
         <CodeWithPreview code={JSX_EXAMPLE}>
           <div className="text-black p-4">
-            <h1 className="text-2xl font-bold mb-2">안녕하세요!</h1>
+            <h1 className="text-base md:text-2xl font-bold mb-2">안녕하세요!</h1>
             <p className="text-gray-600">React 컴포넌트입니다.</p>
           </div>
         </CodeWithPreview>
@@ -1173,7 +1177,7 @@ $ node hello.js
 
       {/* ── 03. React: JSX 표현식 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-4">JSX 안에서 { } 사용하기</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-4">JSX 안에서 { } 사용하기</h3>
         <CodeWithPreview code={JSX_EXPRESSION_EXAMPLES}>
           <div className="text-black">
             <p className="text-base mb-1">이름: Alice</p>
@@ -1190,7 +1194,7 @@ $ node hello.js
 
       {/* ── 03. React: JSX 규칙 1-2 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-6">JSX 규칙 (1/2)</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-6">JSX 규칙 (1/2)</h3>
         <div className="space-y-5">
           {JSX_RULES.slice(0, 2).map((rule, i) => (
             <Card key={rule.rule} className="border-l-4 border-l-(--accent)">
@@ -1198,16 +1202,16 @@ $ node hello.js
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-(--accent)/10 text-(--accent) text-lg font-bold shrink-0">
                   {i + 1}
                 </span>
-                <p className="text-2xl font-bold">{rule.rule}</p>
+                <p className="text-base md:text-2xl font-bold">{rule.rule}</p>
               </div>
-              <p className="text-xl text-(--text-sub) mb-3">{rule.desc}</p>
+              <p className="text-sm md:text-xl text-(--text-sub) mb-3">{rule.desc}</p>
               <div className="grid md:grid-cols-2 gap-3">
                 <div>
-                  <p className="text-xl font-semibold text-red-400 mb-1">X 잘못된 코드</p>
+                  <p className="text-sm md:text-xl font-semibold text-red-400 mb-1">X 잘못된 코드</p>
                   <CodeBlock>{rule.bad}</CodeBlock>
                 </div>
                 <div>
-                  <p className="text-xl font-semibold text-(--accent) mb-1">O 올바른 코드</p>
+                  <p className="text-sm md:text-xl font-semibold text-(--accent) mb-1">O 올바른 코드</p>
                   <CodeBlock>{rule.good}</CodeBlock>
                 </div>
               </div>
@@ -1218,7 +1222,7 @@ $ node hello.js
 
       {/* ── 03. React: JSX 규칙 3-4 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-6">JSX 규칙 (2/2)</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-6">JSX 규칙 (2/2)</h3>
         <div className="space-y-5">
           {JSX_RULES.slice(2, 4).map((rule, i) => (
             <Card key={rule.rule} className="border-l-4 border-l-(--accent)">
@@ -1226,16 +1230,16 @@ $ node hello.js
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-(--accent)/10 text-(--accent) text-lg font-bold shrink-0">
                   {i + 3}
                 </span>
-                <p className="text-2xl font-bold">{rule.rule}</p>
+                <p className="text-base md:text-2xl font-bold">{rule.rule}</p>
               </div>
-              <p className="text-xl text-(--text-sub) mb-3">{rule.desc}</p>
+              <p className="text-sm md:text-xl text-(--text-sub) mb-3">{rule.desc}</p>
               <div className="grid md:grid-cols-2 gap-3">
                 <div>
-                  <p className="text-xl font-semibold text-red-400 mb-1">X 잘못된 코드</p>
+                  <p className="text-sm md:text-xl font-semibold text-red-400 mb-1">X 잘못된 코드</p>
                   <CodeBlock>{rule.bad}</CodeBlock>
                 </div>
                 <div>
-                  <p className="text-xl font-semibold text-(--accent) mb-1">O 올바른 코드</p>
+                  <p className="text-sm md:text-xl font-semibold text-(--accent) mb-1">O 올바른 코드</p>
                   <CodeBlock>{rule.good}</CodeBlock>
                 </div>
               </div>
@@ -1246,12 +1250,12 @@ $ node hello.js
 
       {/* ── 03. React: Props 개념 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-8">Props — 데이터 전달</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-8">Props — 데이터 전달</h3>
         <div className="grid md:grid-cols-3 gap-4">
           {PROPS_ANALOGY.map((item) => (
             <Card key={item.label} className={`border-t-2 ${item.color}`}>
-              <p className="text-2xl font-bold mb-2">{item.label}</p>
-              <p className="text-xl text-(--text-sub)">{item.desc}</p>
+              <p className="text-base md:text-2xl font-bold mb-2">{item.label}</p>
+              <p className="text-sm md:text-xl text-(--text-sub)">{item.desc}</p>
             </Card>
           ))}
         </div>
@@ -1259,8 +1263,8 @@ $ node hello.js
 
       {/* ── 03. React: Props Step 1 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-4">Props 단계별 이해 (1/2)</h3>
-        <p className="text-xl text-(--text-sub) mb-3">비슷한 카드 3개를 만들려면 같은 HTML을 3번 복붙해야 합니다.</p>
+        <h3 className="text-xl md:text-5xl font-bold mb-4">Props 단계별 이해 (1/2)</h3>
+        <p className="text-sm md:text-xl text-(--text-sub) mb-3">비슷한 카드 3개를 만들려면 같은 HTML을 3번 복붙해야 합니다.</p>
         <CodeWithPreview code={PROPS_STEP_BY_STEP.step1}>
           <div className="text-black space-y-3">
             {[
@@ -1279,7 +1283,7 @@ $ node hello.js
 
       {/* ── 03. React: Props Step 2-3 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-4">Props 단계별 이해 (2/2)</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-4">Props 단계별 이해 (2/2)</h3>
         <CodeWithPreview code={PROPS_STEP_BY_STEP.step2 + "\n\n" + PROPS_STEP_BY_STEP.step3}>
           <div className="text-black space-y-3">
             <p className="text-xs text-gray-400 mb-2">같은 결과, 깔끔한 코드</p>
@@ -1299,31 +1303,33 @@ $ node hello.js
 
       {/* ── 03. React: State 개념 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-6">State — 상태 관리</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-6">State — 상태 관리</h3>
         <Callout type="info" className="mb-6">
           State는 컴포넌트가 &quot;기억&quot;하는 데이터입니다.
           <code className="mx-1">useState</code>로 선언한 값이 바뀌면 React가 자동으로 화면을 다시 그립니다.
         </Callout>
-        <h4 className="text-2xl font-semibold mb-4">useState 문법</h4>
+        <h4 className="text-base md:text-2xl font-semibold mb-4">useState 문법</h4>
         <CodeBlock>{STATE_SYNTAX}</CodeBlock>
       </div>
 
       {/* ── 03. React: State 다양한 타입 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-6">다양한 타입의 State</h3>
-        <div className="rounded-xl overflow-hidden border border-(--border) divide-y divide-(--border) mb-6">
-          <div className="grid grid-cols-3 px-4 py-3 bg-(--surface-hover) text-xl font-semibold text-(--text-muted)">
-            <span>타입</span>
-            <span>선언</span>
-            <span>업데이트</span>
-          </div>
-          {STATE_EXAMPLES.map((row) => (
-            <div key={row.name} className="grid grid-cols-3 items-center px-4 py-3 bg-(--surface)">
-              <span className="text-xl font-semibold text-(--accent)">{row.name}</span>
-              <code className="font-mono text-sm text-(--text-sub)">{row.code}</code>
-              <code className="font-mono text-sm text-(--text-muted)">{row.update}</code>
+        <h3 className="text-xl md:text-5xl font-bold mb-6">다양한 타입의 State</h3>
+        <div className="rounded-xl border border-(--border) divide-y divide-(--border) mb-6 overflow-x-auto">
+          <div className="min-w-[400px]">
+            <div className="grid grid-cols-3 px-4 py-3 bg-(--surface-hover) text-xs md:text-xl font-semibold text-(--text-muted)">
+              <span>타입</span>
+              <span>선언</span>
+              <span>업데이트</span>
             </div>
-          ))}
+            {STATE_EXAMPLES.map((row) => (
+              <div key={row.name} className="grid grid-cols-3 items-center px-4 py-3 bg-(--surface)">
+                <span className="text-xs md:text-xl font-semibold text-(--accent)">{row.name}</span>
+                <code className="font-mono text-xs md:text-sm text-(--text-sub)">{row.code}</code>
+                <code className="font-mono text-xs md:text-sm text-(--text-muted)">{row.update}</code>
+              </div>
+            ))}
+          </div>
         </div>
         <Callout type="warn">
           State를 사용하려면 파일 맨 위에 <code>&quot;use client&quot;;</code>를 반드시 추가해야 합니다!
@@ -1333,7 +1339,7 @@ $ node hello.js
 
       {/* ── 03. React: State 예제 - 카운터 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-4">State 예제: 카운터</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-4">State 예제: 카운터</h3>
         <Callout type="tip" className="mb-4">오른쪽 버튼을 직접 클릭해보세요!</Callout>
         <CodeWithPreview code={STATE_EXAMPLE}>
           <CounterDemo />
@@ -1342,7 +1348,7 @@ $ node hello.js
 
       {/* ── 03. React: State 예제 - 토글 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-4">State 예제: 토글</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-4">State 예제: 토글</h3>
         <Callout type="tip" className="mb-4">버튼을 클릭하면 상태가 반전됩니다!</Callout>
         <CodeWithPreview code={STATE_TOGGLE_EXAMPLE}>
           <ToggleDemo />
@@ -1356,18 +1362,18 @@ $ node hello.js
 
       {/* ── 04. CSS란 무엇인가? ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-6">먼저, CSS란?</h3>
-        <p className="text-2xl text-(--text-sub) mb-6">
+        <h3 className="text-xl md:text-5xl font-bold mb-6">먼저, CSS란?</h3>
+        <p className="text-base md:text-2xl text-(--text-sub) mb-6">
           웹페이지는 <strong>HTML</strong>(구조)과 <strong>CSS</strong>(스타일) 두 가지로 이루어집니다.
           HTML이 건물의 뼈대라면, CSS는 인테리어입니다.
         </p>
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <p className="text-xl font-semibold text-(--text-muted) mb-2">HTML = 구조</p>
+            <p className="text-sm md:text-xl font-semibold text-(--text-muted) mb-2">HTML = 구조</p>
             <CodeBlock>{CSS_WHAT_IS.html}</CodeBlock>
           </div>
           <div>
-            <p className="text-xl font-semibold text-(--accent) mb-2">CSS = 스타일</p>
+            <p className="text-sm md:text-xl font-semibold text-(--accent) mb-2">CSS = 스타일</p>
             <CodeBlock>{CSS_WHAT_IS.css}</CodeBlock>
           </div>
         </div>
@@ -1375,12 +1381,12 @@ $ node hello.js
 
       {/* ── 04. 기존 CSS의 불편한 점 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-8">기존 CSS 방식의 불편한 점</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-8">기존 CSS 방식의 불편한 점</h3>
         <div className="grid md:grid-cols-3 gap-4">
           {CSS_PROBLEMS.map((item) => (
             <Card key={item.problem} className={`border-t-2 ${item.color}`}>
-              <p className="text-2xl font-bold mb-2">{item.problem}</p>
-              <p className="text-xl text-(--text-sub)">{item.desc}</p>
+              <p className="text-base md:text-2xl font-bold mb-2">{item.problem}</p>
+              <p className="text-sm md:text-xl text-(--text-sub)">{item.desc}</p>
             </Card>
           ))}
         </div>
@@ -1388,8 +1394,8 @@ $ node hello.js
 
       {/* ── 04. Tailwind CSS 소개 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-4">Tailwind CSS란?</h3>
-        <p className="text-2xl text-(--text-sub) mb-4">
+        <h3 className="text-xl md:text-5xl font-bold mb-4">Tailwind CSS란?</h3>
+        <p className="text-base md:text-2xl text-(--text-sub) mb-4">
           CSS 파일을 따로 만들지 않고, <strong>클래스 이름만으로</strong> 스타일을 바로 적용합니다.
         </p>
         <CodeWithPreview code={TAILWIND_VS_CSS.tailwind} title="Tailwind 코드">
@@ -1403,12 +1409,12 @@ $ node hello.js
 
       {/* ── 04. Tailwind 장점 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-8">Tailwind의 장점</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-8">Tailwind의 장점</h3>
         <div className="grid md:grid-cols-3 gap-4">
           {TAILWIND_BENEFITS.map((item) => (
             <Card key={item.label} className={`border-t-2 ${item.color}`}>
-              <p className="text-2xl font-bold mb-2">{item.label}</p>
-              <p className="text-xl text-(--text-sub)">{item.desc}</p>
+              <p className="text-base md:text-2xl font-bold mb-2">{item.label}</p>
+              <p className="text-sm md:text-xl text-(--text-sub)">{item.desc}</p>
             </Card>
           ))}
         </div>
@@ -1416,7 +1422,7 @@ $ node hello.js
 
       {/* ── 04. Flex 레이아웃 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-4">Flex — 가로/세로 배치</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-4">Flex — 가로/세로 배치</h3>
         <CodeWithPreview code={TAILWIND_LAYOUT_FLEX}>
           <div className="text-black space-y-6">
             <div>
@@ -1440,12 +1446,12 @@ $ node hello.js
 
       {/* ── 04. Flex 옵션 + Grid ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-6">Flex 옵션 정리</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-6">Flex 옵션 정리</h3>
         <div className="rounded-xl overflow-hidden border border-(--border) divide-y divide-(--border) mb-8">
           {TAILWIND_FLEX_OPTIONS.map((row) => (
-            <div key={row.cls} className="flex items-center gap-4 px-5 py-3 bg-(--surface)">
-              <code className="font-mono text-xl text-(--accent) w-48 shrink-0">{row.cls}</code>
-              <span className="text-xl text-(--text-sub)">{row.desc}</span>
+            <div key={row.cls} className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 px-4 md:px-5 py-3 bg-(--surface)">
+              <code className="font-mono text-sm md:text-xl text-(--accent) md:w-48 md:shrink-0">{row.cls}</code>
+              <span className="text-sm md:text-xl text-(--text-sub)">{row.desc}</span>
             </div>
           ))}
         </div>
@@ -1453,13 +1459,13 @@ $ node hello.js
 
       {/* ── 04. Grid 레이아웃 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-4">Grid — 격자 배치</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-4">Grid — 격자 배치</h3>
         <CodeWithPreview code={TAILWIND_LAYOUT_GRID}>
           <div className="text-black">
             <p className="text-xs text-gray-400 mb-3 font-mono">grid grid-cols-3 gap-4</p>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-3 gap-2 md:gap-3">
               {[1, 2, 3, 4, 5, 6].map((n) => (
-                <div key={n} className="bg-emerald-100 border border-emerald-300 rounded-lg p-4 text-center font-bold text-emerald-700 text-lg">
+                <div key={n} className="bg-emerald-100 border border-emerald-300 rounded-lg p-2 md:p-4 text-center font-bold text-emerald-700 text-sm md:text-lg">
                   {n}
                 </div>
               ))}
@@ -1470,30 +1476,30 @@ $ node hello.js
 
       {/* ── 04. Padding & Margin 개념 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-6">Padding & Margin</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-6">Padding & Margin</h3>
         <div className="grid md:grid-cols-2 gap-6">
           <Card className="border-t-2 border-t-(--accent)">
-            <p className="text-2xl font-bold mb-2">Padding (안쪽 여백)</p>
-            <p className="text-xl text-(--text-sub) mb-4">상자 안쪽에 빈 공간을 만듭니다.</p>
+            <p className="text-base md:text-2xl font-bold mb-2">Padding (안쪽 여백)</p>
+            <p className="text-sm md:text-xl text-(--text-sub) mb-4">상자 안쪽에 빈 공간을 만듭니다.</p>
             <div className="bg-(--surface-hover) rounded-lg p-4">
               <div className="border-2 border-dashed border-(--accent)/50 rounded p-8 text-center">
                 <div className="bg-(--accent)/10 rounded p-4">
-                  <span className="text-xl font-mono">내용</span>
+                  <span className="text-sm md:text-xl font-mono">내용</span>
                 </div>
               </div>
             </div>
           </Card>
           <Card className="border-t-2 border-t-violet-500">
-            <p className="text-2xl font-bold mb-2">Margin (바깥 여백)</p>
-            <p className="text-xl text-(--text-sub) mb-4">상자 바깥에 빈 공간을 만듭니다.</p>
+            <p className="text-base md:text-2xl font-bold mb-2">Margin (바깥 여백)</p>
+            <p className="text-sm md:text-xl text-(--text-sub) mb-4">상자 바깥에 빈 공간을 만듭니다.</p>
             <div className="bg-(--surface-hover) rounded-lg p-4">
               <div className="bg-violet-500/10 rounded p-4 mb-3">
                 <div className="border-2 border-dashed border-violet-500/50 rounded p-4 text-center">
-                  <span className="text-xl font-mono">상자 1 (mb-3)</span>
+                  <span className="text-sm md:text-xl font-mono">상자 1 (mb-3)</span>
                 </div>
               </div>
               <div className="border-2 border-dashed border-violet-500/50 rounded p-4 text-center">
-                <span className="text-xl font-mono">상자 2</span>
+                <span className="text-sm md:text-xl font-mono">상자 2</span>
               </div>
             </div>
           </Card>
@@ -1502,35 +1508,39 @@ $ node hello.js
 
       {/* ── 04. 간격 클래스 정리 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-6">간격 클래스 정리</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-6">간격 클래스 정리</h3>
         <div className="rounded-xl overflow-hidden border border-(--border) divide-y divide-(--border)">
-          <div className="grid grid-cols-3 px-5 py-3 bg-(--surface-hover) text-xl font-semibold text-(--text-muted)">
-            <span>클래스</span>
-            <span>CSS 속성</span>
-            <span>방향</span>
-          </div>
-          {TAILWIND_SPACING_DIAGRAM.map((row) => (
-            <div key={row.cls} className="grid grid-cols-3 items-center px-5 py-3 bg-(--surface)">
-              <code className="font-mono text-xl text-(--accent)">{row.cls}</code>
-              <span className="text-xl text-(--text-sub)">{row.meaning}</span>
-              <span className="text-xl text-(--text-muted)">{row.direction}</span>
+          <div className="overflow-x-auto">
+            <div className="min-w-[400px]">
+              <div className="grid grid-cols-3 px-5 py-3 bg-(--surface-hover) text-sm md:text-xl font-semibold text-(--text-muted)">
+                <span>클래스</span>
+                <span>CSS 속성</span>
+                <span>방향</span>
+              </div>
+              {TAILWIND_SPACING_DIAGRAM.map((row) => (
+                <div key={row.cls} className="grid grid-cols-3 items-center px-5 py-3 bg-(--surface)">
+                  <code className="font-mono text-sm md:text-xl text-(--accent)">{row.cls}</code>
+                  <span className="text-sm md:text-xl text-(--text-sub)">{row.meaning}</span>
+                  <span className="text-sm md:text-xl text-(--text-muted)">{row.direction}</span>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
 
       {/* ── 04. 숫자 체계 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-6">Tailwind 숫자 체계</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-6">Tailwind 숫자 체계</h3>
         <Callout type="tip" className="mb-6">
           Tailwind의 숫자는 <strong>4 = 16px = 1rem</strong>이 기준입니다.
           <code className="ml-1">p-4</code>는 패딩 16px, <code>p-8</code>은 32px입니다.
         </Callout>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-2 md:gap-3">
           {TAILWIND_SIZE_SCALE.map((s) => (
-            <div key={s.num} className="flex flex-col items-center px-5 py-3 rounded-xl bg-(--surface) border border-(--border) min-w-20">
-              <code className="font-mono text-2xl text-(--accent) font-bold">{s.num}</code>
-              <span className="text-xl text-(--text-muted) mt-1">{s.px}</span>
+            <div key={s.num} className="flex flex-col items-center px-3 md:px-5 py-2 md:py-3 rounded-xl bg-(--surface) border border-(--border) min-w-14 md:min-w-20">
+              <code className="font-mono text-base md:text-2xl text-(--accent) font-bold">{s.num}</code>
+              <span className="text-xs md:text-xl text-(--text-muted) mt-1">{s.px}</span>
             </div>
           ))}
         </div>
@@ -1538,27 +1548,31 @@ $ node hello.js
 
       {/* ── 04. 자주 쓰는 클래스 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-6">자주 쓰는 클래스</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-6">자주 쓰는 클래스</h3>
         <div className="rounded-xl overflow-hidden border border-(--border) divide-y divide-(--border)">
-          <div className="grid grid-cols-3 px-5 py-3 bg-(--surface-hover) text-xl font-semibold text-(--text-muted)">
-            <span>클래스</span>
-            <span>의미</span>
-            <span>분류</span>
-          </div>
-          {TAILWIND_CLASSES.map((row) => (
-            <div key={row.cls} className="grid grid-cols-3 items-center px-5 py-3 bg-(--surface)">
-              <code className="font-mono text-xl text-(--accent)">{row.cls}</code>
-              <span className="text-xl text-(--text-sub)">{row.desc}</span>
-              <span className="text-xl text-(--text-muted)">{row.category}</span>
+          <div className="overflow-x-auto">
+            <div className="min-w-[400px]">
+              <div className="grid grid-cols-3 px-5 py-3 bg-(--surface-hover) text-sm md:text-xl font-semibold text-(--text-muted)">
+                <span>클래스</span>
+                <span>의미</span>
+                <span>분류</span>
+              </div>
+              {TAILWIND_CLASSES.map((row) => (
+                <div key={row.cls} className="grid grid-cols-3 items-center px-5 py-3 bg-(--surface)">
+                  <code className="font-mono text-sm md:text-xl text-(--accent)">{row.cls}</code>
+                  <span className="text-sm md:text-xl text-(--text-sub)">{row.desc}</span>
+                  <span className="text-sm md:text-xl text-(--text-muted)">{row.category}</span>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
 
       {/* ── 04. 반응형 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-4">반응형 디자인</h3>
-        <p className="text-2xl text-(--text-sub) mb-4">
+        <h3 className="text-xl md:text-5xl font-bold mb-4">반응형 디자인</h3>
+        <p className="text-base md:text-2xl text-(--text-sub) mb-4">
           접두사를 붙이면 특정 화면 크기 이상에서만 스타일이 적용됩니다.
         </p>
         <CodeWithPreview code={TAILWIND_RESPONSIVE_EXAMPLE}>
@@ -1573,10 +1587,10 @@ $ node hello.js
             </div>
             <div>
               <p className="text-xs text-gray-400 mb-2">데스크톱 (3열)</p>
-              <div className="grid grid-cols-3 gap-2">
-                <div className="bg-blue-100 border border-blue-300 rounded p-2 text-center text-sm font-bold text-blue-700">1</div>
-                <div className="bg-blue-100 border border-blue-300 rounded p-2 text-center text-sm font-bold text-blue-700">2</div>
-                <div className="bg-blue-100 border border-blue-300 rounded p-2 text-center text-sm font-bold text-blue-700">3</div>
+              <div className="grid grid-cols-3 gap-1 md:gap-2">
+                <div className="bg-blue-100 border border-blue-300 rounded p-1 md:p-2 text-center text-xs md:text-sm font-bold text-blue-700">1</div>
+                <div className="bg-blue-100 border border-blue-300 rounded p-1 md:p-2 text-center text-xs md:text-sm font-bold text-blue-700">2</div>
+                <div className="bg-blue-100 border border-blue-300 rounded p-1 md:p-2 text-center text-xs md:text-sm font-bold text-blue-700">3</div>
               </div>
             </div>
           </div>
@@ -1585,15 +1599,15 @@ $ node hello.js
 
       {/* ── 04. 상태 변형 ── */}
       <div>
-        <h3 className="text-5xl font-bold mb-6">상태 변형</h3>
-        <p className="text-2xl text-(--text-sub) mb-6">
+        <h3 className="text-xl md:text-5xl font-bold mb-6">상태 변형</h3>
+        <p className="text-base md:text-2xl text-(--text-sub) mb-6">
           콜론(:) 앞에 상태를 적으면 특정 조건에서만 스타일이 적용됩니다.
         </p>
         <div className="rounded-xl overflow-hidden border border-(--border) divide-y divide-(--border) mb-6">
           {TAILWIND_STATE_EXAMPLES.map((row) => (
-            <div key={row.cls} className="flex items-center gap-4 px-5 py-4 bg-(--surface)">
-              <code className="font-mono text-xl text-(--accent) w-56 shrink-0">{row.cls}</code>
-              <span className="text-2xl text-(--text-sub)">{row.desc}</span>
+            <div key={row.cls} className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 px-5 py-4 bg-(--surface)">
+              <code className="font-mono text-sm md:text-xl text-(--accent) md:w-56 md:shrink-0">{row.cls}</code>
+              <span className="text-sm md:text-2xl text-(--text-sub)">{row.desc}</span>
             </div>
           ))}
         </div>
@@ -1609,7 +1623,7 @@ $ node hello.js
 
       {/* ── 05. 생성 순서 ── */}
       <div>
-        <h3 className="text-4xl font-bold mb-6">생성 순서</h3>
+        <h3 className="text-lg md:text-4xl font-bold mb-6">생성 순서</h3>
         <Callout type="tip" className="mb-6">
           <strong>npx</strong>는 npm에 포함된 실행 도구입니다. 패키지를 설치하지 않고 바로 실행할 수 있습니다.
         </Callout>
@@ -1620,7 +1634,7 @@ $ node hello.js
                 <CodeBlock className="mt-2">{step.cmd}</CodeBlock>
               )}
               {step.desc && (
-                <p className="text-xl text-(--text-sub) mt-1">{step.desc}</p>
+                <p className="text-sm md:text-xl text-(--text-sub) mt-1">{step.desc}</p>
               )}
             </StepItem>
           ))}
@@ -1634,12 +1648,12 @@ $ node hello.js
 
       {/* ── 05. 설정 질문 답변 가이드 ── */}
       <div>
-        <h3 className="text-4xl font-bold mb-6">설정 질문 답변 가이드</h3>
+        <h3 className="text-lg md:text-4xl font-bold mb-6">설정 질문 답변 가이드</h3>
         <div className="rounded-xl overflow-hidden border border-(--border) divide-y divide-(--border)">
           {CREATE_OPTIONS.map((opt) => (
             <div key={opt.question} className="flex items-center gap-4 px-4 py-3 bg-(--surface)">
-              <span className="text-xl text-(--text-sub) flex-1">{opt.question}</span>
-              <span className="text-xl font-semibold text-(--accent) shrink-0">{opt.answer}</span>
+              <span className="text-sm md:text-xl text-(--text-sub) flex-1">{opt.question}</span>
+              <span className="text-sm md:text-xl font-semibold text-(--accent) shrink-0">{opt.answer}</span>
             </div>
           ))}
         </div>
@@ -1647,7 +1661,7 @@ $ node hello.js
 
       {/* ── 05. 생성할 폴더 구조 ── */}
       <div>
-        <h3 className="text-4xl font-bold mb-6">생성할 폴더 구조</h3>
+        <h3 className="text-lg md:text-4xl font-bold mb-6">생성할 폴더 구조</h3>
         <CodeBlock>{NEXTAPP_FOLDER_STRUCTURE}</CodeBlock>
       </div>
 
@@ -1658,30 +1672,26 @@ $ node hello.js
 
       {/* ── 06. 완성 화면 미리보기 ── */}
       <div>
-        <h3 className="text-4xl font-bold mb-6">우리가 만들 페이지</h3>
-        <p className="text-xl text-(--text-sub) mb-6">
+        <h3 className="text-lg md:text-4xl font-bold mb-6">우리가 만들 페이지</h3>
+        <p className="text-sm md:text-xl text-(--text-sub) mb-6">
           이런 구조의 페이지를 만들어봅니다. 각 영역을 채우는 건 <strong className="text-(--accent)">과제</strong>입니다.
         </p>
         <div className="border-2 border-black rounded-lg overflow-hidden bg-white max-w-2xl mx-auto">
-          <div className="border-b-2 border-black px-6 py-4 grid grid-cols-3 items-center">
-            <span className="text-black font-bold text-lg">Navbar</span>
-            <div className="flex gap-6 justify-center">
-              <span className="text-black/50 text-sm">메인</span>
-            </div>
-            <div className="flex justify-end">
-              <span className="text-black/50 text-sm border border-black/30 rounded px-3 py-1">로그인</span>
-            </div>
+          <div className="border-b-2 border-black px-3 md:px-6 py-3 md:py-4 flex items-center justify-between">
+            <span className="text-black font-bold text-sm md:text-lg">Navbar</span>
+            <span className="text-black/50 text-xs md:text-sm">메인</span>
+            <span className="text-black/50 text-xs md:text-sm border border-black/30 rounded px-2 md:px-3 py-1">로그인</span>
           </div>
-          <div className="border-b-2 border-black px-6 py-12 text-center">
-            <span className="text-black font-bold text-xl">Hero 섹션</span>
-            <p className="text-black/40 text-sm mt-2">제목, 소개 문구, CTA 버튼</p>
+          <div className="border-b-2 border-black px-3 md:px-6 py-8 md:py-12 text-center">
+            <span className="text-black font-bold text-base md:text-xl">Hero 섹션</span>
+            <p className="text-black/40 text-xs md:text-sm mt-2">제목, 소개 문구, CTA 버튼</p>
           </div>
-          <div className="border-b-2 border-black px-6 py-10">
-            <span className="text-black font-bold text-lg">Main Content</span>
-            <div className="grid grid-cols-3 gap-3 mt-4">
-              <div className="border border-black/30 rounded p-4 text-center"><span className="text-black/40 text-sm">카드 1</span></div>
-              <div className="border border-black/30 rounded p-4 text-center"><span className="text-black/40 text-sm">카드 2</span></div>
-              <div className="border border-black/30 rounded p-4 text-center"><span className="text-black/40 text-sm">카드 3</span></div>
+          <div className="border-b-2 border-black px-3 md:px-6 py-6 md:py-10">
+            <span className="text-black font-bold text-sm md:text-lg">Main Content</span>
+            <div className="grid grid-cols-3 gap-2 md:gap-3 mt-4">
+              <div className="border border-black/30 rounded p-2 md:p-4 text-center"><span className="text-black/40 text-xs md:text-sm">카드 1</span></div>
+              <div className="border border-black/30 rounded p-2 md:p-4 text-center"><span className="text-black/40 text-xs md:text-sm">카드 2</span></div>
+              <div className="border border-black/30 rounded p-2 md:p-4 text-center"><span className="text-black/40 text-xs md:text-sm">카드 3</span></div>
             </div>
           </div>
           <div className="px-6 py-4 text-center">
@@ -1693,8 +1703,8 @@ $ node hello.js
 
       {/* ── 06. 인터랙티브 VS Code 에디터 ── */}
       <div>
-        <h3 className="text-4xl font-bold mb-2">파일 구조 & 코드</h3>
-        <p className="text-xl text-(--text-sub) mb-4">
+        <h3 className="text-lg md:text-4xl font-bold mb-2">파일 구조 & 코드</h3>
+        <p className="text-sm md:text-xl text-(--text-sub) mb-4">
           왼쪽 파일을 클릭해서 각 파일의 코드를 확인하세요.
         </p>
         <VSCodeEditor
@@ -1713,8 +1723,8 @@ $ node hello.js
 
       {/* ── 06. 목록 페이지 — 화면 미리보기 ── */}
       <div>
-        <h3 className="text-4xl font-bold mb-6">목록 페이지 (/posts)</h3>
-        <p className="text-xl text-(--text-sub) mb-6">
+        <h3 className="text-lg md:text-4xl font-bold mb-6">목록 페이지 (/posts)</h3>
+        <p className="text-sm md:text-xl text-(--text-sub) mb-6">
           Navbar에서 &quot;목록&quot;을 클릭하면 이 페이지로 이동합니다.
           <code className="ml-1">app/posts/page.tsx</code> 파일을 만들면 됩니다.
         </p>
@@ -1725,18 +1735,16 @@ $ node hello.js
             <span className="text-black/40 text-xs font-mono ml-2">localhost:3000/posts</span>
           </div>
           {/* Navbar */}
-          <div className="border-b-2 border-black px-6 py-4 grid grid-cols-3 items-center">
-            <span className="text-black font-bold text-lg">Navbar</span>
-            <div className="flex gap-6 justify-center">
-              <span className="text-black/50 text-sm">메인</span>
-              <span className="text-black font-semibold text-sm underline underline-offset-4">목록</span>
+          <div className="border-b-2 border-black px-3 md:px-6 py-3 md:py-4 flex items-center justify-between">
+            <span className="text-black font-bold text-sm md:text-lg">Navbar</span>
+            <div className="flex gap-3 md:gap-6">
+              <span className="text-black/50 text-xs md:text-sm">메인</span>
+              <span className="text-black font-semibold text-xs md:text-sm underline underline-offset-4">목록</span>
             </div>
-            <div className="flex justify-end">
-              <span className="text-black/50 text-sm border border-black/30 rounded px-3 py-1">로그인</span>
-            </div>
+            <span className="text-black/50 text-xs md:text-sm border border-black/30 rounded px-2 md:px-3 py-1">로그인</span>
           </div>
           {/* 목록 콘텐츠 */}
-          <div className="px-8 py-8">
+          <div className="px-4 md:px-8 py-6 md:py-8">
             <span className="text-black font-bold text-xl block mb-6">목록</span>
             <div className="space-y-3">
               <div className="border border-black/30 rounded-lg p-5">
@@ -1762,8 +1770,8 @@ $ node hello.js
 
       {/* ── 06. 목록 페이지 — 파일 구조 & 코드 ── */}
       <div>
-        <h3 className="text-4xl font-bold mb-2">파일 구조 & 코드</h3>
-        <p className="text-xl text-(--text-sub) mb-4">
+        <h3 className="text-lg md:text-4xl font-bold mb-2">파일 구조 & 코드</h3>
+        <p className="text-sm md:text-xl text-(--text-sub) mb-4">
           <code>data/posts.ts</code>에 데이터를 분리하고, <code>posts/page.tsx</code>에서 가져와 씁니다.
         </p>
         <VSCodeEditor
@@ -1779,8 +1787,8 @@ $ node hello.js
 
       {/* ── 06. 상세 페이지 — 화면 미리보기 ── */}
       <div>
-        <h3 className="text-4xl font-bold mb-6">상세 페이지 (/posts/1)</h3>
-        <p className="text-xl text-(--text-sub) mb-6">
+        <h3 className="text-lg md:text-4xl font-bold mb-6">상세 페이지 (/posts/1)</h3>
+        <p className="text-sm md:text-xl text-(--text-sub) mb-6">
           목록에서 글을 클릭하면 해당 글의 상세 페이지로 이동합니다.
           <code className="ml-1">app/posts/[id]/page.tsx</code>가 이 URL을 담당합니다.
         </p>
@@ -1791,20 +1799,18 @@ $ node hello.js
             <span className="text-black/40 text-xs font-mono ml-2">localhost:3000/posts/1</span>
           </div>
           {/* Navbar */}
-          <div className="border-b-2 border-black px-6 py-4 grid grid-cols-3 items-center">
-            <span className="text-black font-bold text-lg">Navbar</span>
-            <div className="flex gap-6 justify-center">
-              <span className="text-black/50 text-sm">메인</span>
-              <span className="text-black/50 text-sm">목록</span>
+          <div className="border-b-2 border-black px-3 md:px-6 py-3 md:py-4 flex items-center justify-between">
+            <span className="text-black font-bold text-sm md:text-lg">Navbar</span>
+            <div className="flex gap-3 md:gap-6">
+              <span className="text-black/50 text-xs md:text-sm">메인</span>
+              <span className="text-black/50 text-xs md:text-sm">목록</span>
             </div>
-            <div className="flex justify-end">
-              <span className="text-black/50 text-sm border border-black/30 rounded px-3 py-1">로그인</span>
-            </div>
+            <span className="text-black/50 text-xs md:text-sm border border-black/30 rounded px-2 md:px-3 py-1">로그인</span>
           </div>
           {/* 상세 콘텐츠 */}
-          <div className="px-8 py-8">
+          <div className="px-4 md:px-8 py-6 md:py-8">
             <span className="text-black/50 text-sm block mb-6">← 목록으로</span>
-            <h1 className="text-black text-2xl font-bold mb-3">첫 번째 글</h1>
+            <h1 className="text-black text-base md:text-2xl font-bold mb-3">첫 번째 글</h1>
             <p className="text-black/50 text-sm mb-6">Next.js를 시작했습니다.</p>
             <div className="border-t border-black/10 pt-6">
               <p className="text-black/70 text-sm leading-relaxed">
@@ -1821,8 +1827,8 @@ $ node hello.js
 
       {/* ── 06. 상세 페이지 — 파일 구조 & 코드 ── */}
       <div>
-        <h3 className="text-4xl font-bold mb-2">파일 구조 & 코드</h3>
-        <p className="text-xl text-(--text-sub) mb-4">
+        <h3 className="text-lg md:text-4xl font-bold mb-2">파일 구조 & 코드</h3>
+        <p className="text-sm md:text-xl text-(--text-sub) mb-4">
           <code>[id]</code> 폴더 안의 <code>page.tsx</code>가 동적 라우트를 처리합니다. URL의 id 값으로 해당 글을 찾습니다.
         </p>
         <VSCodeEditor
@@ -1836,31 +1842,33 @@ $ node hello.js
 
       {/* ── 06. 과제 ── */}
       <div>
-        <h3 className="text-4xl font-bold mb-6">과제</h3>
+        <h3 className="text-lg md:text-4xl font-bold mb-6">과제</h3>
         <Callout type="warn" className="mb-6">
           와이어프레임을 참고해서 <code>page.tsx</code>의 Hero 섹션, 카드 영역 등을 자유롭게 채워보세요.
           Tailwind CSS 클래스를 활용해 스타일링합니다.
         </Callout>
 
-        <h3 className="text-2xl font-semibold mb-4">페이지 추가 = 폴더 추가</h3>
+        <h3 className="text-base md:text-2xl font-semibold mb-4">페이지 추가 = 폴더 추가</h3>
         <Callout type="tip" className="mb-6">
           Next.js App Router는 <strong>폴더 구조 = URL 구조</strong>입니다.{" "}
           <code>page.tsx</code> 파일을 만들면 그 폴더 경로가 곧 URL이 됩니다.
         </Callout>
 
-        <div className="rounded-xl overflow-hidden border border-(--border) divide-y divide-(--border)">
-          <div className="flex gap-4 px-4 py-2 bg-(--surface-hover) text-sm font-semibold text-(--text-muted)">
-            <span className="w-64 shrink-0">파일 경로</span>
-            <span className="w-36 shrink-0">URL</span>
-            <span>설명</span>
-          </div>
-          {ROUTING_EXAMPLES.map((row) => (
-            <div key={row.file} className="flex items-center gap-4 px-4 py-3 bg-(--surface)">
-              <code className="font-mono text-xl text-(--accent) w-64 shrink-0">{row.file}</code>
-              <code className="font-mono text-base w-36 shrink-0">{row.url}</code>
-              <span className="text-xl text-(--text-sub)">{row.desc}</span>
+        <div className="rounded-xl overflow-x-auto border border-(--border) divide-y divide-(--border)">
+          <div className="min-w-[500px]">
+            <div className="flex gap-4 px-4 py-2 bg-(--surface-hover) text-sm font-semibold text-(--text-muted)">
+              <span className="w-48 md:w-64 shrink-0">파일 경로</span>
+              <span className="w-28 md:w-36 shrink-0">URL</span>
+              <span>설명</span>
             </div>
-          ))}
+            {ROUTING_EXAMPLES.map((row) => (
+              <div key={row.file} className="flex items-center gap-4 px-4 py-3 bg-(--surface)">
+                <code className="font-mono text-xs md:text-xl text-(--accent) w-48 md:w-64 shrink-0">{row.file}</code>
+                <code className="font-mono text-xs md:text-base w-28 md:w-36 shrink-0">{row.url}</code>
+                <span className="text-sm md:text-xl text-(--text-sub)">{row.desc}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -1876,7 +1884,7 @@ $ node hello.js
               <span className="flex items-center justify-center w-8 h-8 rounded-full bg-(--accent)/10 text-(--accent) text-base font-bold shrink-0">
                 {i + 1}
               </span>
-              <span className="text-xl font-medium">{item}</span>
+              <span className="text-sm md:text-xl font-medium">{item}</span>
             </div>
           ))}
         </div>

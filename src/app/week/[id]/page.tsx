@@ -22,7 +22,7 @@ export default function WeekPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-6xl font-extrabold text-(--accent) mb-4">404</h1>
+          <h1 className="text-3xl md:text-6xl font-extrabold text-(--accent) mb-4">404</h1>
           <p className="text-xl text-(--text-sub)">
             {weekId}주차 콘텐츠가 아직 준비되지 않았습니다.
           </p>

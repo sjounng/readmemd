@@ -18,7 +18,7 @@ export default function WeekHero({
 }) {
   return (
     <section className="pt-28 pb-12">
-      <h1 className="text-5xl md:text-6xl font-extrabold leading-tight mb-4">
+      <h1 className="text-3xl md:text-6xl font-extrabold leading-tight mb-4">
         {title}
         {subtitle && (
           <>
@@ -27,7 +27,7 @@ export default function WeekHero({
           </>
         )}
       </h1>
-      <p className="text-xl text-(--text-sub) max-w-2xl mb-8">{description}</p>
+      <p className="text-sm md:text-xl text-(--text-sub) max-w-2xl mb-8">{description}</p>
 
       {tocItems && tocItems.length > 0 && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">

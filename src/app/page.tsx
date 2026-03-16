@@ -8,8 +8,8 @@ export default function Home() {
     <div className="relative min-h-screen overflow-hidden">
 
       {/* Hero */}
-      <main className="relative z-10 flex flex-col px-8 md:px-16 pt-28 md:pt-32">
-        <h1 className="text-6xl md:text-8xl font-extrabold tracking-tight leading-none mb-4">
+      <main className="relative z-10 flex flex-col px-4 md:px-16 pt-28 md:pt-32">
+        <h1 className="text-4xl md:text-8xl font-extrabold tracking-tight leading-none mb-4">
           README<span className="text-(--accent)">.</span>md
         </h1>
 
@@ -30,7 +30,7 @@ export default function Home() {
         <section className="max-w-3xl">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-1 h-8 bg-(--accent) rounded-full" />
-            <h2 className="text-3xl md:text-4xl font-extrabold">목차</h2>
+            <h2 className="text-xl md:text-4xl font-extrabold">목차</h2>
           </div>
 
           <div className="space-y-4 max-h-120 overflow-y-auto py-2 pr-2">
@@ -41,7 +41,7 @@ export default function Home() {
                     href={`/week/${parseInt(week.num)}`}
                     className="flex items-center gap-6 p-5 rounded-xl bg-(--bg-card) border border-(--border) card-hover"
                   >
-                    <span className="text-3xl md:text-4xl font-extrabold text-(--accent) font-mono min-w-15">
+                    <span className="text-xl md:text-4xl font-extrabold text-(--accent) font-mono min-w-15">
                       {week.num}
                     </span>
                     <div className="flex-1">
@@ -65,7 +65,7 @@ export default function Home() {
                   </Link>
                 ) : (
                   <div className="flex items-center gap-6 p-5 rounded-xl bg-(--bg-card) border border-(--border) opacity-40 cursor-not-allowed">
-                    <span className="text-3xl md:text-4xl font-extrabold text-(--text-muted) font-mono min-w-15">
+                    <span className="text-xl md:text-4xl font-extrabold text-(--text-muted) font-mono min-w-15">
                       {week.num}
                     </span>
                     <div className="flex-1">

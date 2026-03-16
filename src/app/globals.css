@@ -69,9 +69,16 @@ code, pre, kbd, samp, .font-mono {
   border: 1px solid var(--border);
   border-radius: 12px;
   font-family: var(--font-mono), monospace;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   overflow: hidden;
   margin-bottom: 1rem;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .code-block {
+    font-size: 0.875rem;
+  }
 }
 
 /* Card hover effect */

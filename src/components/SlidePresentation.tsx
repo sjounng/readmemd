@@ -301,7 +301,7 @@ export default function SlidePresentation({ children }: { children: ReactNode })
         <div className="flex-1 flex items-center justify-center">
           <div
             key={current}
-            className={`${SLIDE_CLASS[slideDir]} w-full max-w-400 mx-auto px-8 md:px-16 pt-20 md:pt-24 pb-16 md:pb-12`}
+            className={`${SLIDE_CLASS[slideDir]} w-full max-w-400 mx-auto px-4 md:px-16 pt-20 md:pt-24 pb-16 md:pb-12 overflow-hidden`}
           >
             {slides[current]}
           </div>

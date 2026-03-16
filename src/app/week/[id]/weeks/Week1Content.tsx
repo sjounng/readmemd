@@ -117,7 +117,7 @@ export default function Week1Content() {
         <h3 className="text-2xl font-bold mb-4">강의 소개</h3>
         <Card className="mb-6">
           <h4 className="text-2xl font-bold text-(--accent) mb-3">{STUDY_INFO.title}</h4>
-          <p className="text-lg text-(--text-sub) mb-6">{STUDY_INFO.goal}</p>
+          <p className="text-sm md:text-lg text-(--text-sub) mb-6">{STUDY_INFO.goal}</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="flex items-start gap-3">
               <svg className="w-5 h-5 text-(--accent) shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -262,8 +262,8 @@ export default function Week1Content() {
               {tech.role}
             </span>
           </div>
-          <h3 className={`text-3xl font-extrabold mb-1 ${tech.accentText}`}>{tech.name}</h3>
-          <p className="text-lg text-(--text-sub) mb-6">{tech.tagline}</p>
+          <h3 className={`text-2xl md:text-3xl font-extrabold mb-1 ${tech.accentText}`}>{tech.name}</h3>
+          <p className="text-sm md:text-lg text-(--text-sub) mb-6">{tech.tagline}</p>
 
           <div className="grid md:grid-cols-3 gap-4 mb-6">
             {tech.features.map((f) => (
@@ -537,7 +537,7 @@ $ npm --version
       <div>
         <h3 className="text-2xl font-bold mb-1">핵심 개념 1 — Repository (저장소)</h3>
         <p className="text-base text-(--text-muted) mb-6">프로젝트의 모든 파일과 변경 이력이 저장되는 공간</p>
-        <p className="text-lg text-(--text-sub) mb-4">
+        <p className="text-sm md:text-lg text-(--text-sub) mb-4">
           하나의 프로젝트 폴더 = 하나의 Repository입니다. Git을 초기화하면 폴더 안에 숨김 폴더 <code className="px-1.5 py-0.5 rounded bg-(--bg-code) text-(--accent) text-base">.git</code>이 생성되고, 이곳에 모든 이력이 저장됩니다.
         </p>
         <div className="grid md:grid-cols-2 gap-6">
@@ -573,7 +573,7 @@ $ npm --version
       <div>
         <h3 className="text-2xl font-bold mb-1">핵심 개념 2 — Commit (커밋)</h3>
         <p className="text-base text-(--text-muted) mb-6">변경사항을 저장하는 하나의 단위</p>
-        <p className="text-lg text-(--text-sub) mb-4">
+        <p className="text-sm md:text-lg text-(--text-sub) mb-4">
           커밋은 &apos;이 시점의 코드 상태&apos;를 사진처럼 찍어 저장하는 행위입니다. 각 커밋에는 메시지를 남겨 무엇을 변경했는지 기록합니다.
         </p>
         <div className="flex items-center gap-2 overflow-x-auto py-6 mb-4">
@@ -635,7 +635,7 @@ $ git commit -m "style: 코드 들여쓰기 정리"`}</CodeBlock>
       <div>
         <h3 className="text-2xl font-bold mb-1">핵심 개념 3 — Branch (브랜치)</h3>
         <p className="text-base text-(--text-muted) mb-6">독립적인 작업 공간</p>
-        <p className="text-lg text-(--text-sub) mb-4">
+        <p className="text-sm md:text-lg text-(--text-sub) mb-4">
           브랜치는 기존 코드에 영향을 주지 않고 새로운 기능을 개발할 수 있는 평행 작업 공간입니다. 완성되면 <strong>main</strong> 브랜치에 합칩니다(merge).
         </p>
         <Card className="py-8 px-6 mb-4">
