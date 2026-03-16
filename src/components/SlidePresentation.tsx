@@ -48,6 +48,7 @@ function CarouselDots({
 
   // drag state
   const dragRef = useRef<{ startX: number; startOffset: number; dragging: boolean } | null>(null);
+  const wasDragRef = useRef(false);
   const [dragOffset, setDragOffset] = useState(0); // in dot-units
   const [isDragging, setIsDragging] = useState(false);
 
@@ -78,18 +79,17 @@ function CarouselDots({
   const handlePointerUp = useCallback(() => {
     if (!dragRef.current) return;
     const wasDrag = dragRef.current.dragging;
+    wasDragRef.current = wasDrag;
     dragRef.current = null;
     setIsDragging(false);
 
     if (wasDrag) {
+      // snap to nearest dot position but don't change page
       const snapped = Math.round(effectiveCenter);
       const clamped = Math.max(0, Math.min(total - 1, snapped));
-      setDragOffset(0);
-      if (clamped !== current) onSelect(clamped);
-    } else {
-      setDragOffset(0);
+      setDragOffset(current - clamped);
     }
-  }, [effectiveCenter, total, current, onSelect]);
+  }, [effectiveCenter, total, current]);
 
   // reset drag offset when current changes externally
   const [trackedCurrent, setTrackedCurrent] = useState(current);
@@ -137,7 +137,7 @@ function CarouselDots({
             <button
               key={i}
               onClick={(e) => {
-                if (isDragging) { e.preventDefault(); return; }
+                if (wasDragRef.current) { e.preventDefault(); wasDragRef.current = false; return; }
                 onSelect(i);
               }}
               className="absolute rounded-full"
@@ -301,7 +301,7 @@ export default function SlidePresentation({ children }: { children: ReactNode })
         <div className="flex-1 flex items-center justify-center">
           <div
             key={current}
-            className={`${SLIDE_CLASS[slideDir]} w-full max-w-[1600px] mx-auto px-8 md:px-16 pt-20 md:pt-24 pb-16 md:pb-12`}
+            className={`${SLIDE_CLASS[slideDir]} w-full max-w-400 mx-auto px-8 md:px-16 pt-20 md:pt-24 pb-16 md:pb-12`}
           >
             {slides[current]}
           </div>

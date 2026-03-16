@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import { SITE_NAME } from "@/constants/site";
 import { useTheme } from "@/components/ThemeProvider";
@@ -20,6 +20,7 @@ export default function Navbar({
   navItems?: NavItem[];
 }) {
   const { theme, toggle } = useTheme();
+  const mounted = useSyncExternalStore(() => () => {}, () => true, () => false);
   const pathname = usePathname();
   const isMain = pathname === "/";
   const [showHint, setShowHint] = useState(false);
@@ -86,8 +87,8 @@ export default function Navbar({
               aria-label="테마 전환"
               className="text-(--text-muted) hover:text-(--accent) transition-colors cursor-pointer"
             >
-              {theme === "dark" ? (
-                /* Sun */
+              {(!mounted || theme === "dark") ? (
+                /* Sun (also default on server to avoid hydration mismatch) */
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="5" />
                   <line x1="12" y1="1" x2="12" y2="3" />
