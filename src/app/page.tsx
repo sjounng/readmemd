@@ -37,32 +37,48 @@ export default function Home() {
             {weeks.map((week) => (
               <div key={week.num} className="group">
                 {week.available ? (
-                  <Link
-                    href={`/week/${parseInt(week.num)}`}
-                    className="flex items-center gap-6 p-5 rounded-xl bg-(--bg-card) border border-(--border) card-hover"
-                  >
-                    <span className="text-xl md:text-4xl font-extrabold text-(--accent) font-mono min-w-15">
-                      {week.num}
-                    </span>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-bold mb-1">{week.title}</h3>
-                      <p className="text-sm text-(--text-muted)">
-                        {week.desc}
-                      </p>
-                      {week.tags && (
-                        <div className="flex flex-wrap gap-1.5 mt-2">
-                          {week.tags.map((tag) => (
-                            <span key={tag} className="px-2 py-0.5 text-xs rounded-full border border-(--border) text-(--text-muted)">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                    <span className="text-(--text-muted) group-hover:text-(--accent) transition-colors text-xl">
-                      →
-                    </span>
-                  </Link>
+                  <div className="relative">
+                    <Link
+                      href={`/week/${parseInt(week.num)}`}
+                      className="flex items-center gap-6 p-5 rounded-xl bg-(--bg-card) border border-(--border) card-hover"
+                    >
+                      <span className="text-xl md:text-4xl font-extrabold text-(--accent) font-mono min-w-15">
+                        {week.num}
+                      </span>
+                      <div className="flex-1">
+                        <h3 className="text-lg font-bold mb-1">{week.title}</h3>
+                        <p className="text-sm text-(--text-muted)">
+                          {week.desc}
+                        </p>
+                        {week.tags && (
+                          <div className="flex flex-wrap gap-1.5 mt-2">
+                            {week.tags.map((tag) => (
+                              <span key={tag} className="px-2 py-0.5 text-xs rounded-full border border-(--border) text-(--text-muted)">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      <span className="text-(--text-muted) group-hover:text-(--accent) transition-colors text-xl">
+                        →
+                      </span>
+                    </Link>
+                    {week.extras && (
+                      <div className="absolute right-0 top-full mt-1 z-20 hidden group-hover:flex flex-col gap-1">
+                        {week.extras.map((extra) => (
+                          <Link
+                            key={extra.href}
+                            href={extra.href}
+                            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-(--bg-card) border border-(--border) text-sm text-(--text-sub) hover:text-(--accent) hover:border-(--accent) transition-colors shadow-lg whitespace-nowrap"
+                          >
+                            {extra.label}
+                            <span className="text-xs">→</span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ) : (
                   <div className="flex items-center gap-6 p-5 rounded-xl bg-(--bg-card) border border-(--border) opacity-40 cursor-not-allowed">
                     <span className="text-xl md:text-4xl font-extrabold text-(--text-muted) font-mono min-w-15">

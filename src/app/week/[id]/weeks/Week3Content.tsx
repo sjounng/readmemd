@@ -29,6 +29,10 @@ import {
   LIST_PAGE_CODE,
   DETAIL_PAGE_CODE,
   LIST_DETAIL_PATTERN_STEPS,
+  ASYNC_AWAIT_CONCEPT,
+  ASYNC_AWAIT_ANALOGY,
+  ASYNC_AWAIT_CODE,
+  ASYNC_AWAIT_RULES,
   FETCHING_CONCEPT,
   SERVER_FETCH_CODE,
   LOADING_CODE,
@@ -707,6 +711,44 @@ export default function Week3Content() {
           ══════════════════════════════════════════ */}
       <div data-slide-id="fetching">
         <ChapterTitle num="04" title="데이터 Fetching 패턴" />
+      </div>
+
+      {/* ── 04. async/await 개념 ── */}
+      <div>
+        <Card className="mb-8">
+          <h3 className="text-lg md:text-4xl font-bold text-(--accent) mb-3">{ASYNC_AWAIT_CONCEPT.title}</h3>
+          <p className="text-base md:text-2xl text-(--text-sub)">{ASYNC_AWAIT_CONCEPT.desc}</p>
+        </Card>
+        <h4 className="text-lg md:text-3xl font-bold mb-4">동기 vs 비동기</h4>
+        <div className="grid md:grid-cols-2 gap-4 mb-8">
+          {ASYNC_AWAIT_ANALOGY.map((item) => (
+            <Card key={item.type} className={`border-t-2 ${item.color}`}>
+              <p className="text-base md:text-2xl font-bold mb-2">{item.type}</p>
+              <p className="text-sm md:text-xl text-(--text-sub) mb-1">{item.desc}</p>
+              <p className="text-sm md:text-xl text-(--text-muted)">{item.result}</p>
+            </Card>
+          ))}
+        </div>
+        <HighlightedCode code={ASYNC_AWAIT_CODE} />
+      </div>
+
+      {/* ── 04. async/await 규칙 ── */}
+      <div>
+        <h3 className="text-xl md:text-5xl font-bold mb-6">async/await 핵심 규칙</h3>
+        <div className="space-y-3">
+          {ASYNC_AWAIT_RULES.map((item) => (
+            <div key={item.rule} className="flex items-start gap-4 p-4 rounded-xl bg-(--surface) border border-(--border)">
+              <svg className="w-5 h-5 text-(--accent) shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm md:text-xl font-semibold mb-2">{item.rule}</p>
+                <code className="text-xs md:text-sm font-mono text-(--accent) bg-(--surface-hover) px-2 py-1 rounded block overflow-x-auto">{item.code}</code>
+              </div>
+            </div>
+          ))}
+        </div>
+        <Callout type="tip" className="mt-6">
+          이 다음 섹션에서 Server Component의 async/await 방식과 Client Component의 useEffect 방식을 각각 실습합니다.
+        </Callout>
       </div>
 
       {/* ── 04. 개념 ── */}

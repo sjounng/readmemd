@@ -1,9 +1,15 @@
+export interface WeekExtra {
+  label: string;
+  href: string;
+}
+
 export interface WeekMeta {
   num: string;
   title: string;
   desc: string;
   available: boolean;
   tags?: string[];
+  extras?: WeekExtra[];
 }
 
 export const weeks: WeekMeta[] = [
@@ -20,6 +26,9 @@ export const weeks: WeekMeta[] = [
     desc: "Next.js를 위한 개념 / Next.js 프로젝트 생성 / 페이지 & 라우팅",
     available: true,
     tags: ["npm", "Next.js"],
+    extras: [
+      { label: "추가 내용", href: "/week/2-extra" },
+    ],
   },
   {
     num: "03",

@@ -326,6 +326,40 @@ export const LIST_DETAIL_PATTERN_STEPS = [
   { num: 5, title: "데이터 찾기", desc: "id에 해당하는 데이터를 찾아 화면에 표시합니다", code: "const item = items.find(i => i.id === Number(id));" },
 ];
 
+/* ── Section 4: async/await 개념 ── */
+
+export const ASYNC_AWAIT_CONCEPT = {
+  title: "async / await란?",
+  desc: "JavaScript에서 시간이 걸리는 작업(API 호출, 파일 읽기 등)을 처리하는 문법입니다. async는 \"이 함수는 비동기 함수\"라는 선언이고, await는 \"결과가 올 때까지 기다려\"라는 뜻입니다.",
+};
+
+export const ASYNC_AWAIT_ANALOGY = [
+  { type: "동기 (Synchronous)", desc: "작업을 순서대로 하나씩 실행하는 방식", result: "앞의 작업이 끝나야 다음 작업을 시작한다", color: "border-t-red-500" },
+  { type: "비동기 (Asynchronous)", desc: "작업을 기다리지 않고 다음 작업을 먼저 실행하는 방식", result: "결과가 준비되면 그때 받아서 처리한다", color: "border-t-(--accent)" },
+];
+
+export const ASYNC_AWAIT_CODE = `// async — 이 함수 안에서 await를 쓸 거라고 선언
+async function getData() {
+  // await — "이 작업 끝날 때까지 기다려"
+  const res = await fetch(
+    "https://api.example.com/users"
+  );
+  const data = await res.json();
+  return data;
+}
+
+// 사용 예시 (Server Component)
+export default async function UsersPage() {
+  const data = await getData();
+  return <div>{data.length}명의 사용자</div>;
+}`;
+
+export const ASYNC_AWAIT_RULES = [
+  { rule: "await는 async 함수 안에서만 사용 가능", code: "async function fn() { await ... }" },
+  { rule: "Server Component는 컴포넌트 자체를 async로 선언 가능", code: "export default async function Page() { ... }" },
+  { rule: "Client Component는 async 컴포넌트 불가 → useEffect 안에서 사용", code: "useEffect(() => { async function load() { await ... } load(); }, [])" },
+];
+
 /* ── Section 4: 데이터 Fetching 패턴 ── */
 
 export const FETCHING_CONCEPT = {
