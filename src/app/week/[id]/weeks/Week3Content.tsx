@@ -46,6 +46,8 @@ import {
   CONDITIONAL_FULL_PATTERN_CODE,
   AI_PROMPT_TIPS,
   WEEK3_SUMMARY,
+  DYNAMIC_ROUTE_STRUCTURE,
+  COMMON_MISTAKES,
 } from "@/constants/week3";
 
 /* ── 구문 강조 ── */
@@ -617,6 +619,35 @@ export default function Week3Content() {
         </div>
       </div>
 
+      {/* ── 03. 동적 라우팅 구조 ── */}
+      <div>
+        <h3 className="text-xl md:text-5xl font-bold mb-4">동적 라우팅: [id] 폴더</h3>
+        <Callout type="info" className="mb-6">
+          Next.js에서 <code>[id]</code>는 실제 폴더 이름입니다. 대괄호로 감싸면 URL의 해당 부분이 변수가 됩니다.
+          <code>/products/1</code>, <code>/products/2</code> 등 어떤 값이든 매칭됩니다.
+        </Callout>
+        <div className="rounded-xl bg-(--surface) border border-(--border) p-6">
+          {DYNAMIC_ROUTE_STRUCTURE.map((item) => (
+            <div key={item.file + item.indent} className="flex items-center gap-2 py-1.5" style={{ paddingLeft: `${item.indent * 1.5}rem` }}>
+              {item.type === "folder" ? (
+                <svg className="w-5 h-5 text-yellow-500 shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V8a2 2 0 00-2-2h-8l-2-2z" /></svg>
+              ) : (
+                <svg className="w-5 h-5 text-(--text-muted) shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
+              )}
+              <code className={`font-mono text-sm md:text-xl ${item.highlight ? "text-yellow-400 font-bold" : "text-(--text-sub)"}`}>
+                {item.file}
+              </code>
+              {item.highlight && (
+                <span className="text-xs md:text-sm text-yellow-400 bg-yellow-500/10 px-2 py-0.5 rounded">URL의 변수 부분</span>
+              )}
+              {item.desc && (
+                <span className={`text-xs md:text-sm ${item.color || "text-(--text-muted)"}`}>{item.desc}</span>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* ── 03. 패턴 단계 ── */}
       <div>
         <h3 className="text-xl md:text-5xl font-bold mb-6">패턴 5단계</h3>
@@ -794,7 +825,11 @@ export default function Week3Content() {
 
       {/* ── 05. 폼 패턴 4단계 ── */}
       <div>
-        <h3 className="text-xl md:text-5xl font-bold mb-6">폼 패턴 4단계</h3>
+        <h3 className="text-xl md:text-5xl font-bold mb-4">폼 패턴 4단계</h3>
+        <Callout type="warn" className="mb-6">
+          HTML의 <code>&lt;form&gt;</code>은 제출 시 기본적으로 페이지를 새로고침합니다.
+          React에서는 이를 막고 JavaScript로 처리하기 위해 <code>e.preventDefault()</code>를 반드시 호출해야 합니다.
+        </Callout>
         <div className="space-y-3">
           {FORM_PATTERN_STEPS.map((step) => (
             <div key={step.num} className="flex items-start gap-4 p-4 rounded-xl bg-(--surface) border border-(--border)">
@@ -862,6 +897,10 @@ export default function Week3Content() {
       {/* ── 06. 4가지 상태 데모 ── */}
       <div>
         <h3 className="text-xl md:text-5xl font-bold mb-4">실전: 4가지 상태 처리</h3>
+        <Callout type="info" className="mb-4">
+          이 예제는 <strong>Client Component</strong>에서 <code>useEffect</code>로 데이터를 가져옵니다.
+          Server Component의 <code>async/await</code> 방식과 달리, 클라이언트에서 fetch할 때는 로딩·에러 상태를 직접 <code>useState</code>로 관리해야 합니다.
+        </Callout>
         <Callout type="tip" className="mb-4">버튼을 눌러 각 상태를 확인해보세요!</Callout>
         <CodeWithPreview code={CONDITIONAL_FULL_PATTERN_CODE} previewUrl="localhost:3000/posts">
           <FourStatesDemo />
@@ -896,6 +935,33 @@ export default function Week3Content() {
               </div>
               <p className="text-xs md:text-sm text-(--text-muted)">{tip.why}</p>
             </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════
+          흔한 실수 & 디버깅
+          ══════════════════════════════════════════ */}
+      <div>
+        <ChapterTitle num="Debug" title="흔한 실수 & 해결법" />
+      </div>
+
+      <div>
+        <h3 className="text-xl md:text-5xl font-bold mb-6">자주 만나는 에러 TOP 5</h3>
+        <Callout type="warn" className="mb-6">
+          AI가 생성한 코드에서도 이런 실수가 자주 발생합니다. 에러가 나면 아래 목록부터 확인하세요.
+        </Callout>
+        <div className="space-y-3">
+          {COMMON_MISTAKES.map((item) => (
+            <div key={item.mistake} className="p-4 rounded-xl bg-(--surface) border border-(--border)">
+              <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                <p className="text-sm md:text-xl font-bold text-red-400 md:w-56 shrink-0">{item.mistake}</p>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs md:text-sm text-(--text-muted) mb-1">{item.symptom}</p>
+                  <p className="text-xs md:text-sm text-(--accent) font-medium">{item.fix}</p>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>

@@ -218,6 +218,13 @@ export const LAYOUT_NESTING_VISUAL = [
   { label: "Page", desc: "실제 내용", color: "border-sky-500" },
 ];
 
+export const DYNAMIC_ROUTE_STRUCTURE = [
+  { file: "app/products/", type: "folder", indent: 0 },
+  { file: "page.tsx", type: "file", indent: 1, desc: "/products → 목록 페이지", color: "text-(--accent)" },
+  { file: "[id]/", type: "folder", indent: 1, highlight: true },
+  { file: "page.tsx", type: "file", indent: 2, desc: "/products/1, /products/2 ... → 상세 페이지", color: "text-violet-400" },
+];
+
 /* ── Section 3: 리스트 → 상세 패턴 ── */
 
 export const LIST_DETAIL_CONCEPT = {
@@ -340,6 +347,12 @@ export default async function UsersPage() {
   const res = await fetch(
     "https://jsonplaceholder.typicode.com/users"
   );
+
+  // 응답 실패 시 에러를 던지면 error.tsx가 자동 표시
+  if (!res.ok) {
+    throw new Error("데이터를 불러오지 못했습니다");
+  }
+
   const users: User[] = await res.json();
 
   return (
@@ -647,6 +660,34 @@ export const AI_PROMPT_TIPS = [
     bad: "데이터 보여줘",
     good: "로딩 중/에러/빈 데이터/정상 4가지 상태를 구분해서 렌더링해줘",
     why: "모든 상태를 고려한 완성도 높은 코드 요청",
+  },
+];
+
+export const COMMON_MISTAKES = [
+  {
+    mistake: '"use client" 빠뜨림',
+    symptom: "useState, onClick 등 사용 시 에러 발생",
+    fix: '파일 맨 위에 "use client" 추가',
+  },
+  {
+    mistake: "key prop 누락",
+    symptom: "map()으로 리스트 렌더링 시 콘솔 경고",
+    fix: "map() 안의 최상위 요소에 key={고유값} 추가",
+  },
+  {
+    mistake: "Client Component에 async 사용",
+    symptom: '"use client" 파일에서 async function 에러',
+    fix: "데이터 fetch는 Server Component에서 하거나 useEffect 사용",
+  },
+  {
+    mistake: "e.preventDefault() 누락",
+    symptom: "폼 제출 시 페이지가 새로고침됨",
+    fix: "onSubmit 핸들러 첫 줄에 e.preventDefault() 추가",
+  },
+  {
+    mistake: "import 경로 오타",
+    symptom: "Module not found 에러",
+    fix: "@/ 경로와 파일명 대소문자 확인",
   },
 ];
 
