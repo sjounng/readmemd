@@ -33,6 +33,9 @@ import {
   ASYNC_AWAIT_ANALOGY,
   ASYNC_AWAIT_CODE,
   ASYNC_AWAIT_RULES,
+  FETCH_CONCEPT,
+  FETCH_STEPS,
+  FETCH_EXAMPLE_CODE,
   FETCHING_CONCEPT,
   SERVER_FETCH_CODE,
   LOADING_CODE,
@@ -634,15 +637,15 @@ export default function Week3Content() {
           {DYNAMIC_ROUTE_STRUCTURE.map((item) => (
             <div key={item.file + item.indent} className="flex items-center gap-2 py-1.5" style={{ paddingLeft: `${item.indent * 1.5}rem` }}>
               {item.type === "folder" ? (
-                <svg className="w-5 h-5 text-yellow-500 shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V8a2 2 0 00-2-2h-8l-2-2z" /></svg>
+                <svg className="w-5 h-5 text-violet-400 shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V8a2 2 0 00-2-2h-8l-2-2z" /></svg>
               ) : (
                 <svg className="w-5 h-5 text-(--text-muted) shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
               )}
-              <code className={`font-mono text-sm md:text-xl ${item.highlight ? "text-yellow-400 font-bold" : "text-(--text-sub)"}`}>
+              <code className={`font-mono text-sm md:text-xl ${item.highlight ? "text-violet-400 font-bold" : "text-(--text-sub)"}`}>
                 {item.file}
               </code>
               {item.highlight && (
-                <span className="text-xs md:text-sm text-yellow-400 bg-yellow-500/10 px-2 py-0.5 rounded">URL의 변수 부분</span>
+                <span className="text-xs md:text-sm text-violet-400 bg-violet-500/10 px-2 py-0.5 rounded">URL의 변수 부분</span>
               )}
               {item.desc && (
                 <span className={`text-xs md:text-sm ${item.color || "text-(--text-muted)"}`}>{item.desc}</span>
@@ -749,6 +752,30 @@ export default function Week3Content() {
         <Callout type="tip" className="mt-6">
           이 다음 섹션에서 Server Component의 async/await 방식과 Client Component의 useEffect 방식을 각각 실습합니다.
         </Callout>
+      </div>
+
+      {/* ── 04. fetch란? ── */}
+      <div>
+        <Card className="mb-8">
+          <h3 className="text-lg md:text-4xl font-bold text-(--accent) mb-3">{FETCH_CONCEPT.title}</h3>
+          <p className="text-base md:text-2xl text-(--text-sub)">{FETCH_CONCEPT.desc}</p>
+        </Card>
+        <h4 className="text-lg md:text-3xl font-bold mb-4">fetch는 2단계로 동작한다</h4>
+        <div className="space-y-3 mb-8">
+          {FETCH_STEPS.map((step) => (
+            <div key={step.num} className="flex items-start gap-4 p-4 rounded-xl bg-(--surface) border border-(--border)">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-(--accent)/10 text-(--accent) text-base font-bold shrink-0">
+                {step.num}
+              </span>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm md:text-xl font-semibold mb-1">{step.title}</p>
+                <p className="text-xs md:text-sm text-(--text-sub) mb-2">{step.desc}</p>
+                <code className="text-xs md:text-sm font-mono text-(--accent) bg-(--surface-hover) px-2 py-1 rounded block overflow-x-auto">{step.code}</code>
+              </div>
+            </div>
+          ))}
+        </div>
+        <HighlightedCode code={FETCH_EXAMPLE_CODE} />
       </div>
 
       {/* ── 04. 개념 ── */}

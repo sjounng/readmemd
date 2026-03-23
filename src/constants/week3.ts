@@ -360,6 +360,30 @@ export const ASYNC_AWAIT_RULES = [
   { rule: "Client Component는 async 컴포넌트 불가 → useEffect 안에서 사용", code: "useEffect(() => { async function load() { await ... } load(); }, [])" },
 ];
 
+/* ── Section 4: fetch 개념 ── */
+
+export const FETCH_CONCEPT = {
+  title: "fetch란?",
+  desc: "JavaScript에서 서버(API)에 데이터를 요청하는 내장 함수입니다. URL을 주면 그 주소에서 데이터를 가져옵니다.",
+};
+
+export const FETCH_STEPS = [
+  { num: "1", title: "fetch(URL)", desc: "서버에 요청을 보낸다", code: 'const res = await fetch("https://api.example.com/users");' },
+  { num: "2", title: "res.json()", desc: "응답을 사용할 수 있는 데이터(JSON)로 변환한다", code: "const data = await res.json();" },
+];
+
+export const FETCH_EXAMPLE_CODE = `// 1단계: 서버에 요청을 보낸다
+const res = await fetch(
+  "https://api.example.com/users"
+);
+
+// 2단계: 응답을 JSON 데이터로 변환한다
+const data = await res.json();
+
+// 이제 data를 사용할 수 있다
+console.log(data);
+// [{ id: 1, name: "Kim" }, { id: 2, name: "Lee" }, ...]`;
+
 /* ── Section 4: 데이터 Fetching 패턴 ── */
 
 export const FETCHING_CONCEPT = {
