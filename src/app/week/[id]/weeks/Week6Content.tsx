@@ -379,15 +379,18 @@ const AUTH_TREE: TreeNode[] = [
           {
             name: "dto",
             children: [
-              { name: "signup.dto.ts", path: "signupDto" },
               { name: "login.dto.ts", path: "loginDto" },
+              { name: "signup.dto.ts", path: "signupDto" },
             ],
           },
+          { name: "auth.controller.spec.ts" },
           { name: "auth.controller.ts", path: "authController" },
           { name: "auth.module.ts", path: "authModule" },
+          { name: "auth.service.spec.ts" },
           { name: "auth.service.ts", path: "authService" },
         ],
       },
+      { name: "app.controller.spec.ts" },
       { name: "app.controller.ts" },
       { name: "app.module.ts", path: "appModule" },
       { name: "app.service.ts" },
@@ -822,6 +825,15 @@ export default function Week6Content() {
         <Callout type="info" className="mt-6">
           Next.js의 app/ 폴더와 비슷하게, NestJS의 핵심 코드는 src/ 안에 있습니다. main.ts가 서버의 시작점입니다.
         </Callout>
+        <div className="mt-4 p-4 rounded-xl bg-(--surface) border border-(--border)">
+          <p className="text-sm md:text-base font-bold mb-1">
+            <code className="text-(--accent) font-mono">.spec.ts</code> 파일이란?
+          </p>
+          <p className="text-sm text-(--text-sub)">
+            NestJS가 자동으로 만들어주는 테스트 파일입니다. 코드가 의도한 대로 동작하는지 검증하는 용도인데,
+            지금 단계에서는 건드리지 않아도 됩니다. &quot;Cannot find name &#39;describe&#39;&quot; 같은 에러가 보여도 서버 실행에는 영향 없습니다.
+          </p>
+        </div>
       </div>
 
       {/* 오늘 만들 것 */}

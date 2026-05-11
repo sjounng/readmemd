@@ -317,11 +317,11 @@ export const NESTJS_SETUP_STEPS = [
 
 export const NESTJS_FOLDER_STRUCTURE = `my-backend-app/
 ├── src/
-│   ├── app.controller.ts   ← 요청을 받는 곳
-│   ├── app.controller.spec.ts
-│   ├── app.module.ts       ← 모듈 등록 (앱의 설계도)
-│   ├── app.service.ts      ← 비즈니스 로직
-│   └── main.ts             ← 서버 시작점
+│   ├── app.controller.ts        ← 요청을 받는 곳
+│   ├── app.controller.spec.ts   ← 테스트 파일 (자동 생성)
+│   ├── app.module.ts            ← 모듈 등록 (앱의 설계도)
+│   ├── app.service.ts           ← 비즈니스 로직
+│   └── main.ts                  ← 서버 시작점
 ├── package.json
 └── tsconfig.json`;
 
