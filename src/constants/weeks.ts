@@ -51,7 +51,13 @@ export const weeks: WeekMeta[] = [
     available: true,
     tags: ["Task Breakdown", "Workflow", "Code Review", "Problem Solving"],
   },
-  { num: "06", title: "Coming soon", desc: "", available: false },
+  {
+    num: "06",
+    title: "백엔드 개발 입문",
+    desc: "백엔드란? / API & REST API / Nest.js 프로젝트 생성 / Controller & Service / 첫 API 만들기 & 테스트",
+    available: true,
+    tags: ["Backend", "API", "REST", "NestJS"],
+  },
   { num: "07", title: "Coming soon", desc: "", available: false },
   { num: "08", title: "Coming soon", desc: "", available: false },
 ];
