@@ -394,7 +394,7 @@ export class ItemsController {
 
 export const SERVICE_EXPLANATION = {
   title: "Service: 실제 일 처리 담당",
-  desc: "Service는 비즈니스 로직을 담당합니다. 지금은 메모리 배열을 DB처럼 사용하지만, 나중에 실제 DB로 교체하면 됩니다.",
+  desc: "Service는 비즈니스 로직을 담당합니다. 데이터 검증, 규칙 적용, 저장까지 실제 처리를 모두 여기서 합니다.",
   code: `import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -631,17 +631,17 @@ export const AUTH_FILE_CONTENTS: Record<string, { filename: string; code: string
     filename: "dto/signup.dto.ts",
     desc: "회원가입 요청의 body 형태를 정의합니다. 이메일, 비밀번호, 이름을 받습니다.",
     code: `export class SignupDto {
-  email: string;
-  password: string;
-  name: string;
+  email!: string;
+  password!: string;
+  name!: string;
 }`,
   },
   loginDto: {
     filename: "dto/login.dto.ts",
     desc: "로그인 요청의 body 형태를 정의합니다. 이메일과 비밀번호만 받습니다.",
     code: `export class LoginDto {
-  email: string;
-  password: string;
+  email!: string;
+  password!: string;
 }`,
   },
   authService: {

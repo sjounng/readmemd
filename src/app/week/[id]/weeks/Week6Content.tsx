@@ -388,7 +388,10 @@ const AUTH_TREE: TreeNode[] = [
           { name: "auth.service.ts", path: "authService" },
         ],
       },
+      { name: "app.controller.ts" },
       { name: "app.module.ts", path: "appModule" },
+      { name: "app.service.ts" },
+      { name: "main.ts" },
     ],
   },
 ];
@@ -765,7 +768,7 @@ export default function Week6Content() {
           {[
             { label: "데이터 검증", desc: "이메일 중복인지, 비밀번호가 맞는지 확인합니다" },
             { label: "비즈니스 규칙", desc: "\"같은 이메일로 두 번 가입할 수 없다\" 같은 규칙을 적용합니다" },
-            { label: "데이터 저장·조회", desc: "DB(또는 메모리 배열)에서 데이터를 읽고 씁니다" },
+            { label: "데이터 저장·조회", desc: "데이터를 읽고 저장합니다" },
             { label: "결과 반환", desc: "처리 결과를 Controller에게 돌려줍니다. 직접 응답하지 않습니다" },
           ].map((row, i) => (
             <div key={i} className="flex items-start gap-4 p-4 rounded-xl bg-(--surface) border border-(--border)">
