@@ -58,6 +58,12 @@ export const weeks: WeekMeta[] = [
     available: true,
     tags: ["Backend", "API", "REST", "NestJS"],
   },
-  { num: "07", title: "Coming soon", desc: "", available: false },
+  {
+    num: "07",
+    title: "실제 DB 연동 & JWT 인증",
+    desc: "PostgreSQL로 데이터 영구 저장 / TypeORM Entity & Repository / bcrypt 암호화 / JWT 발급 & Guard",
+    available: true,
+    tags: ["PostgreSQL", "TypeORM", "bcrypt", "JWT"],
+  },
   { num: "08", title: "Coming soon", desc: "", available: false },
 ];
