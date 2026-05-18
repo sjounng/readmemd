@@ -2,6 +2,42 @@
 
 import { useState } from "react";
 
+const HIGHLIGHT_RULES: [RegExp, string][] = [
+  [/\/\/.*/, "#6a9955"],
+  [/"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`/, "#ce9178"],
+  [/\b(import|export|from|default|as|async|await|throw|return)\b/, "#c586c0"],
+  [/\b(const|let|var|function|if|else|new|typeof|true|false|null|undefined)\b/, "#569cd6"],
+  [/\b(interface|type|extends|readonly|private|public|class|constructor)\b/, "#569cd6"],
+  [/\b(string|number|boolean|void|any|Promise|Record|Array)\b/, "#4ec9b0"],
+  [/\b(Injectable|Controller|Module|Post|Get|Body|Req|UseGuards|Entity|Column|PrimaryGeneratedColumn|CreateDateColumn|UpdateDateColumn|InjectRepository|CanActivate|ExecutionContext|JwtService|Repository)\b/, "#4ec9b0"],
+  [/\b\d+\b/, "#b5cea8"],
+  [/[{}()\[\]]/, "#ffd700"],
+  [/@\w+/, "#dcdcaa"],
+];
+
+function highlightLine(line: string): { text: string; color: string }[] {
+  const tokens: { text: string; color: string }[] = [];
+  let remaining = line;
+  while (remaining.length > 0) {
+    let earliest = { index: remaining.length, length: 0, color: "" };
+    for (const [re, color] of HIGHLIGHT_RULES) {
+      const m = remaining.match(re);
+      if (m && m.index !== undefined && m.index < earliest.index) {
+        earliest = { index: m.index, length: m[0].length, color };
+      }
+    }
+    if (earliest.color) {
+      if (earliest.index > 0) tokens.push({ text: remaining.slice(0, earliest.index), color: "#d4d4d4" });
+      tokens.push({ text: remaining.slice(earliest.index, earliest.index + earliest.length), color: earliest.color });
+      remaining = remaining.slice(earliest.index + earliest.length);
+    } else {
+      tokens.push({ text: remaining, color: "#d4d4d4" });
+      break;
+    }
+  }
+  return tokens;
+}
+
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
 
@@ -66,7 +102,13 @@ export default function CodeBlock({
         <div className="p-4 overflow-x-auto pr-8">
           {lines.map((line, i) => (
             <div key={i} className="min-h-6 flex items-center">
-              <span className="whitespace-pre">{line || "\u00A0"}</span>
+              <span className="whitespace-pre">
+                {line
+                  ? highlightLine(line).map((t, j) => (
+                      <span key={j} style={{ color: t.color }}>{t.text}</span>
+                    ))
+                  : "\u00A0"}
+              </span>
             </div>
           ))}
         </div>
