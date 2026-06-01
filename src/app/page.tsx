@@ -3,6 +3,11 @@ import { Tag } from "@/components";
 import { MENTOR_NAME, MAIN_TAGS } from "@/constants/site";
 import { weeks } from "@/constants/weeks";
 
+function weekHref(week: (typeof weeks)[number]) {
+  if (week.slug) return `/week/${week.slug}`;
+  return `/week/${parseInt(week.num)}`;
+}
+
 export default function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -39,21 +44,39 @@ export default function Home() {
                 {week.available ? (
                   <div className="relative">
                     <Link
-                      href={`/week/${parseInt(week.num)}`}
-                      className="flex items-center gap-6 p-5 rounded-xl bg-(--bg-card) border border-(--border) card-hover"
+                      href={weekHref(week)}
+                      className={
+                        week.type === "event"
+                          ? "flex items-center gap-6 p-5 rounded-xl bg-(--bg-card) border border-(--accent) card-hover"
+                          : "flex items-center gap-6 p-5 rounded-xl bg-(--bg-card) border border-(--border) card-hover"
+                      }
                     >
                       <span className="text-xl md:text-4xl font-extrabold text-(--accent) font-mono min-w-15">
                         {week.num}
                       </span>
                       <div className="flex-1">
-                        <h3 className="text-lg font-bold mb-1">{week.title}</h3>
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="text-lg font-bold">{week.title}</h3>
+                          {week.type === "event" && (
+                            <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-(--accent) text-white">
+                              EVENT
+                            </span>
+                          )}
+                        </div>
                         <p className="text-sm text-(--text-muted)">
                           {week.desc}
                         </p>
                         {week.tags && (
                           <div className="flex flex-wrap gap-1.5 mt-2">
                             {week.tags.map((tag) => (
-                              <span key={tag} className="px-2 py-0.5 text-xs rounded-full border border-(--border) text-(--text-muted)">
+                              <span
+                                key={tag}
+                                className={
+                                  week.type === "event"
+                                    ? "px-2 py-0.5 text-xs rounded-full border border-(--accent) text-(--accent)"
+                                    : "px-2 py-0.5 text-xs rounded-full border border-(--border) text-(--text-muted)"
+                                }
+                              >
                                 {tag}
                               </span>
                             ))}

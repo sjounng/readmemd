@@ -10,6 +10,8 @@ export interface WeekMeta {
   available: boolean;
   tags?: string[];
   extras?: WeekExtra[];
+  slug?: string;
+  type?: "event";
 }
 
 export const weeks: WeekMeta[] = [
@@ -71,5 +73,14 @@ export const weeks: WeekMeta[] = [
     desc: "완성된 프론트엔드 클론 / API 명세 파악 / CORS 설정 / Todo API 구현 / 로컬 연동 테스트",
     available: true,
     tags: ["실습", "CORS", "Todo API", "Frontend Integration"],
+  },
+  {
+    num: "HACK",
+    slug: "hackathon",
+    type: "event",
+    title: "해커톤",
+    desc: "6월 21일 (토) 오전 9시 — 팀을 구성하고 하루 동안 서비스를 만들어 봅니다.",
+    available: true,
+    tags: ["6월 21일", "팀 프로젝트", "해커톤"],
   },
 ];
