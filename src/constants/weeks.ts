@@ -65,5 +65,11 @@ export const weeks: WeekMeta[] = [
     available: true,
     tags: ["PostgreSQL", "TypeORM", "bcrypt", "JWT"],
   },
-  { num: "08", title: "Coming soon", desc: "", available: false },
+  {
+    num: "08",
+    title: "프론트엔드 연동 실습",
+    desc: "완성된 프론트엔드 클론 / API 명세 파악 / CORS 설정 / Todo API 구현 / 로컬 연동 테스트",
+    available: true,
+    tags: ["실습", "CORS", "Todo API", "Frontend Integration"],
+  },
 ];

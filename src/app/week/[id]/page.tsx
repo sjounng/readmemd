@@ -10,6 +10,7 @@ import Week4Content from "./weeks/Week4Content";
 import Week5Content from "./weeks/Week5Content";
 import Week6Content from "./weeks/Week6Content";
 import Week7Content from "./weeks/Week7Content";
+import Week8Content from "./weeks/Week8Content";
 
 /* ── 주차별 콘텐츠 매핑 ── */
 const weekContentMap: Record<string, React.ComponentType> = {
@@ -21,6 +22,7 @@ const weekContentMap: Record<string, React.ComponentType> = {
   "5": Week5Content,
   "6": Week6Content,
   "7": Week7Content,
+  "8": Week8Content,
 };
 
 export default function WeekPage() {
